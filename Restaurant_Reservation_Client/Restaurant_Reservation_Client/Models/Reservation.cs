@@ -23,7 +23,7 @@ namespace Reservation_Client.Models
 
 
         [Required]
-        public string? ArrivedTime { get; set; };
+        public string? ArrivedTime { get; set; }
 
 
         [Required(ErrorMessage = "訂位人數未輸入!")]
