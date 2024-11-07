@@ -1,7 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_API_Server\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B32016A0-09B2-4547-AA82-0563A94ACED7}|Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server.csproj|c:\\users\\hankh\\desktop\\project_reservation\\restaurant_reservation_api_server\\restaurant_reservation_api_server\\migrations\\20241107145130_reservationdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B32016A0-09B2-4547-AA82-0563A94ACED7}|Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server.csproj|solutionrelative:restaurant_reservation_api_server\\migrations\\20241107145130_reservationdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +14,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "20241107145130_ReservationDb.cs",
+              "DocumentMoniker": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server\\Migrations\\20241107145130_ReservationDb.cs",
+              "RelativeDocumentMoniker": "Restaurant_Reservation_API_Server\\Migrations\\20241107145130_ReservationDb.cs",
+              "ToolTip": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server\\Migrations\\20241107145130_ReservationDb.cs",
+              "RelativeToolTip": "Restaurant_Reservation_API_Server\\Migrations\\20241107145130_ReservationDb.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-07T14:51:31.046Z",
+              "EditorCaption": ""
             }
           ]
         }
