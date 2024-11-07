@@ -1,0 +1,41 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}|Restaurant_Reservation_Client\\Restaurant_Reservation_Client.csproj|c:\\users\\hankh\\desktop\\project_reservation\\restaurant_reservation_client\\restaurant_reservation_client\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}|Restaurant_Reservation_Client\\Restaurant_Reservation_Client.csproj|solutionrelative:restaurant_reservation_client\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Privacy.cshtml",
+              "DocumentMoniker": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\Restaurant_Reservation_Client\\Views\\Home\\Privacy.cshtml",
+              "RelativeDocumentMoniker": "Restaurant_Reservation_Client\\Views\\Home\\Privacy.cshtml",
+              "ToolTip": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\Restaurant_Reservation_Client\\Views\\Home\\Privacy.cshtml",
+              "RelativeToolTip": "Restaurant_Reservation_Client\\Views\\Home\\Privacy.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAA6AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-07T13:56:58.746Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
