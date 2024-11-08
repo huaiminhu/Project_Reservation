@@ -8,7 +8,7 @@ namespace Reservation_Client.Controllers
     public class ReservationController : Controller
     {
 
-        private string url = "https://localhost:7079/api/Reservation/";
+        private string url = "https://localhost:7077/api/Reservation/";
         private HttpClient client = new HttpClient();
         
         public IActionResult Index()

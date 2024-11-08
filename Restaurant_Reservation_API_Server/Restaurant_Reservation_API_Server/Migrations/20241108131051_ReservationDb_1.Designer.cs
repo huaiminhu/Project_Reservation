@@ -11,8 +11,8 @@ using Reservation_Server.Data;
 namespace Restaurant_Reservation_API_Server.Migrations
 {
     [DbContext(typeof(ReservationDbContext))]
-    [Migration("20241107145130_ReservationDb")]
-    partial class ReservationDb
+    [Migration("20241108131051_ReservationDb_1")]
+    partial class ReservationDb_1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

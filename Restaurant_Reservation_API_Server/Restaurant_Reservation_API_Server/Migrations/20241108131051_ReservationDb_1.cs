@@ -5,7 +5,7 @@
 namespace Restaurant_Reservation_API_Server.Migrations
 {
     /// <inheritdoc />
-    public partial class ReservationDb : Migration
+    public partial class ReservationDb_1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

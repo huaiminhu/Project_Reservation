@@ -9,7 +9,7 @@ namespace Reservation_Client.Controllers
     public class AccountController : Controller
     {
 
-        private string url = "https://localhost:7079/api/Account/";
+        private string url = "https://localhost:7077/api/Account/";
         private HttpClient client = new HttpClient();
 
         [HttpGet]
