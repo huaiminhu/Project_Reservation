@@ -10,5 +10,6 @@ namespace Reservation_Server.Repositories.Interfaces
         Task Create(Reservation reservation);
         Task Update(Reservation reservation);
         Task Delete(Reservation reservation);
+        Reservation? FindByPhone(string phone);
     }
 }

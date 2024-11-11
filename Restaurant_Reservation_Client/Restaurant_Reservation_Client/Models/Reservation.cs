@@ -4,7 +4,9 @@ namespace Reservation_Client.Models
 {
     public class Reservation
     {
-        
+
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "日期未輸入!")]
         [Display(Name = "請輸入訂位日期: ")]
         public string BookingDate { get; set; }
@@ -21,10 +23,7 @@ namespace Reservation_Client.Models
         [MinLength(8)]
         public string Phone { get; set; }
 
-
-        [Required]
-        public string? ArrivedTime { get; set; }
-
+        public string? ArrivedTime { get; set; } = null;
 
         [Required(ErrorMessage = "訂位人數未輸入!")]
         [Range(1, 40)]

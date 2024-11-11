@@ -43,5 +43,10 @@ namespace Reservation_Server.Repositories.Services
             _ctx.Reservations.Update(reservation);
             await _ctx.SaveChangesAsync();
         }
+
+        public Reservation? FindByPhone(string phone)
+        {
+            return _ctx.Reservations.FirstOrDefault(x => x.Phone == phone);
+        }
     }
 }

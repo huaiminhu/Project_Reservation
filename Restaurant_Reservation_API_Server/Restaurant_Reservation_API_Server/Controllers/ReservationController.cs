@@ -60,5 +60,14 @@ namespace Reservation_Server.Controllers
             await reservationRepository.Delete(data);
             return NoContent();
         }
+
+        [HttpPost]
+        [Route("FindResByPhone")]
+        public ActionResult<Reservation> FindByPhone(string phone)
+        {
+            var data = reservationRepository.FindByPhone(phone);
+            if(data == null) return NotFound();
+            return Ok(data);
+        }
     }
 }

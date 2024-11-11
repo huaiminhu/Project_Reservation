@@ -13,18 +13,6 @@ namespace Reservation_Client.Controllers
         private HttpClient client = new HttpClient();
 
         [HttpGet]
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        [HttpGet]
         public IActionResult LogIn()
         {
             return View();

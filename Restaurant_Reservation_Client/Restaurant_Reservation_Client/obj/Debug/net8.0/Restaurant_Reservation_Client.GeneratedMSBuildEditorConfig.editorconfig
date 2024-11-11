@@ -1,11 +1,19 @@
 is_global = true
 build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
 build_property.TargetPlatformMinVersion = 
 build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
 build_property.ProjectTypeGuids = 
 build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
 build_property.PlatformNeutralAssembly = 
 build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Restaurant_Reservation_Client
 build_property.RootNamespace = Restaurant_Reservation_Client
@@ -18,12 +26,24 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\hankh\Desktop\Project_Reservation\Restaurant_Reservation_Client\Restaurant_Reservation_Client
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/hankh/Desktop/Project_Reservation/Restaurant_Reservation_Client/Restaurant_Reservation_Client/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+[C:/Users/hankh/Desktop/Project_Reservation/Restaurant_Reservation_Client/Restaurant_Reservation_Client/Views/Account/LogIn.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dJbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/hankh/Desktop/Project_Reservation/Restaurant_Reservation_Client/Restaurant_Reservation_Client/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+[C:/Users/hankh/Desktop/Project_Reservation/Restaurant_Reservation_Client/Restaurant_Reservation_Client/Views/Reservation/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hankh/Desktop/Project_Reservation/Restaurant_Reservation_Client/Restaurant_Reservation_Client/Views/Reservation/MakeRes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cTWFrZVJlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hankh/Desktop/Project_Reservation/Restaurant_Reservation_Client/Restaurant_Reservation_Client/Views/Reservation/Search.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cU2VhcmNoLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/hankh/Desktop/Project_Reservation/Restaurant_Reservation_Client/Restaurant_Reservation_Client/Views/Reservation/Success.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVzZXJ2YXRpb25cU3VjY2Vzcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/hankh/Desktop/Project_Reservation/Restaurant_Reservation_Client/Restaurant_Reservation_Client/Views/Shared/Error.cshtml]

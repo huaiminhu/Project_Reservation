@@ -5,6 +5,8 @@ namespace Reservation_Client.Models
     public class Account
     {
 
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "員工姓名未輸入!")]
         [Display(Name = "員工姓名: ")]
         [MinLength(2)]

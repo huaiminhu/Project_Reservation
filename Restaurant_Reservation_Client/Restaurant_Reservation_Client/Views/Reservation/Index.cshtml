@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Reservation_Client.Models.Reservation>
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor accessor
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>線上訂位開放數: </h1><h1 id="onlineNum"></h1>
+
+<p>
+    <a asp-action="Search">訂位查詢</a>
+</p>
+<p>
+    <a asp-action="MakeRes">我要訂位</a>
+</p>
+@if (accessor.HttpContext.Session.GetString("UserSession")!=null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BookingDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustomerName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Phone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ArrivedTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SeatRequirement)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ChildSeat)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookingDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ArrivedTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SeatRequirement)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ChildSeat)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<script>
+    function GetOnlineNum() {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("RemainSeat")',
+            dataType: 'text',
+            success: function (response, status, xhr) {
+                $("#onlineNum").text(response);
+            },
+            error: function (req, status, error) {
+                $("#onlineNum").text(error);
+            }
+        });
+    }
+</script>
