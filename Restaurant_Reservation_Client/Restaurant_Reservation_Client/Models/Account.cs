@@ -24,12 +24,5 @@ namespace Reservation_Client.Models
         [MinLength(6)]
         [RegularExpression(@"^(?=.*\d)(?=.*[a-zA-Z])(?=.*\W).{6,15}$")]
         public string Password { get; set; }
-
-
-        [Required(ErrorMessage = "密碼確認未輸入!")]
-        [Compare("Password", ErrorMessage = "密碼確認未輸入!")]
-        [Display(Name = "密碼再次確認: ")]
-        [MinLength(6)]
-        public string ConfirmPassword { get; set; }
     }
 }

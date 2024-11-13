@@ -27,24 +27,8 @@ namespace Reservation_Client.Controllers
                         reservations = data;
                 }
             }
+            ViewBag.Seats = 40 - reservations.Count();
             return View(reservations);
-        }
-
-        public int RemainSeat()
-        {
-            List<Reservation> reservations = new List<Reservation>();
-            if (HttpContext.Session.GetString("UserSession") != null)
-            {
-                HttpResponseMessage response = client.GetAsync(url).Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    string result = response.Content.ReadAsStringAsync().Result;
-                    var data = JsonConvert.DeserializeObject<List<Reservation>>(result);
-                    if (data != null)
-                        reservations = data;
-                }
-            }
-            return 40 - reservations.Count();
         }
 
         [HttpGet]
@@ -103,5 +87,7 @@ namespace Reservation_Client.Controllers
             }
             return View(reservation);
         }
+
+        
     }
 }
