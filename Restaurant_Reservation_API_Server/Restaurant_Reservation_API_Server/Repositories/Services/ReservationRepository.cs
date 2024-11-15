@@ -38,9 +38,11 @@ namespace Reservation_Server.Repositories.Services
             return await _ctx.Reservations.FindAsync(id);
         }
 
-        public async Task Update(Reservation reservation)
+        public async Task Update(int id, string arrivedTime)
         {
-            _ctx.Reservations.Update(reservation);
+            var former = _ctx.Reservations.FirstOrDefault(x => x.Id == id);
+            if (former != null) 
+                former.ArrivedTime = arrivedTime;
             await _ctx.SaveChangesAsync();
         }
 

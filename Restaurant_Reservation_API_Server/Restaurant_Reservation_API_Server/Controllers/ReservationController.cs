@@ -19,7 +19,7 @@ namespace Reservation_Server.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> AllReservations()
+        public async Task<IActionResult> AllReservations()
         {
             var data = await reservationRepository.AllReservations();
             return Ok(data);
@@ -42,12 +42,12 @@ namespace Reservation_Server.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id)
+        public async Task<IActionResult> Update(int id, string arrivedTime)
         {
             var former = await reservationRepository.FindReservation(id);
             if(former == null)
                 return NotFound();
-            await reservationRepository.Update(former);
+            await reservationRepository.Update(id, arrivedTime);
             return NoContent();
         }
 

@@ -14,7 +14,7 @@ namespace Reservation_Server.Models
         
         public string Phone { get; set; }
         
-        public string ArrivedTime { get; set; }
+        public string? ArrivedTime { get; set; }
         
         public int SeatRequirement { get; set; }
         

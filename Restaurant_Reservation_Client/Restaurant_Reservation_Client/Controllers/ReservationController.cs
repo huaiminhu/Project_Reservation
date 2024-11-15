@@ -16,19 +16,20 @@ namespace Reservation_Client.Controllers
         public IActionResult Index()
         {
             List<Reservation> reservations = new List<Reservation>();
-            if (HttpContext.Session.GetString("UserSession") != null)
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            if (response.IsSuccessStatusCode)
             {
-                HttpResponseMessage response = client.GetAsync(url).Result;
-                if (response.IsSuccessStatusCode)
+                string result = response.Content.ReadAsStringAsync().Result;
+                var data = JsonConvert.DeserializeObject<List<Reservation>>(result);
+                if (data != null)
+                    reservations = data;
+                ViewBag.Seats = 40 - reservations.Count();
+                if (HttpContext.Session.GetString("UserSession") != null)
                 {
-                    string result = response.Content.ReadAsStringAsync().Result;
-                    var data = JsonConvert.DeserializeObject<List<Reservation>>(result);
-                    if (data != null)
-                        reservations = data;
+                    return View(reservations);
                 }
             }
-            ViewBag.Seats = 40 - reservations.Count();
-            return View(reservations);
+            return View();
         }
 
         [HttpGet]
@@ -68,15 +69,19 @@ namespace Reservation_Client.Controllers
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = client.PostAsync(url, content).Result;
                 if (response.IsSuccessStatusCode)
+                {
+                    HttpContext.Session.SetString("ReservationId", reservation.Id.ToString());
                     return RedirectToAction("Success");
+                }
             }
             return View();
         }
 
         [HttpGet]
-        public IActionResult Success(int id)
+        public IActionResult Success()
         {
             Reservation reservation = new Reservation();
+            var id = HttpContext.Session.GetString("ReservationId");
             HttpResponseMessage response = client.GetAsync(url + id).Result;
             if(response.IsSuccessStatusCode)
             {

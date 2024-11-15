@@ -8,7 +8,7 @@ namespace Reservation_Server.Repositories.Interfaces
         Task<IEnumerable<Reservation>> AllReservations();
         Task<Reservation?> FindReservation(int id);
         Task Create(Reservation reservation);
-        Task Update(Reservation reservation);
+        Task Update(int id, string arrivedTime);
         Task Delete(Reservation reservation);
         Reservation? FindByPhone(string phone);
     }
