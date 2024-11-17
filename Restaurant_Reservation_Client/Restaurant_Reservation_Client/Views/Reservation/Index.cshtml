@@ -7,7 +7,7 @@
 <div class="container text-center">
     <div class="row">
         <div class="col">
-            <h1>線上訂位開放數: @ViewBag.Seats 人</h1>
+            <h1>訂位開放數: @ViewBag.Seats 人</h1>
         </div>
     </div>
     <br />
@@ -27,7 +27,7 @@
         </div>
     </div>
     <br />
-    @if (accessor.HttpContext.Session.GetString("UserSession") != null)
+    @if (accessor.HttpContext.Session.GetString("UserSession") == null)
     {
         <table class="table">
             <thead>

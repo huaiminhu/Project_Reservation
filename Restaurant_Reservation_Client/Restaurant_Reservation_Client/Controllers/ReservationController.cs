@@ -22,11 +22,19 @@ namespace Reservation_Client.Controllers
                 string result = response.Content.ReadAsStringAsync().Result;
                 var data = JsonConvert.DeserializeObject<List<Reservation>>(result);
                 if (data != null)
-                    reservations = data;
-                ViewBag.Seats = 40 - reservations.Count();
-                if (HttpContext.Session.GetString("UserSession") != null)
                 {
-                    return View(reservations);
+                    reservations = data;
+                    int minus = 0;
+                    foreach (var p in reservations)
+                    {
+                        
+                    }
+                    ViewBag.Seats = 40 - reservations.Count();
+                    if (HttpContext.Session.GetString("UserSession") != null)
+                    {
+                        ViewBag.Seat = 60 - reservations.Count();
+                        return View(reservations);
+                    }
                 }
             }
             return View();
