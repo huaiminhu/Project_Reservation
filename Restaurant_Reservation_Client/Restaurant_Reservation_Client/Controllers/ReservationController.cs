@@ -27,12 +27,12 @@ namespace Reservation_Client.Controllers
                     int minus = 0;
                     foreach (var p in reservations)
                     {
-                        
+                        minus += p.SeatRequirement;
                     }
-                    ViewBag.Seats = 40 - reservations.Count();
-                    if (HttpContext.Session.GetString("UserSession") != null)
+                    ViewBag.Seats = 40 - minus;
+                    if (HttpContext.Session.GetString("UserSession") == null)
                     {
-                        ViewBag.Seat = 60 - reservations.Count();
+                        ViewBag.Seat = 60 - minus;
                         return View(reservations);
                     }
                 }
@@ -78,7 +78,10 @@ namespace Reservation_Client.Controllers
                 HttpResponseMessage response = client.PostAsync(url, content).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    HttpContext.Session.SetString("ReservationId", reservation.Id.ToString());
+                    string result = response.Content.ReadAsStringAsync().Result;
+                    var detail = JsonConvert.DeserializeObject<Reservation>(result);
+                    int num = detail.Id;
+                    HttpContext.Session.SetInt32("ReservationId", num);
                     return RedirectToAction("Success");
                 }
             }
@@ -88,8 +91,8 @@ namespace Reservation_Client.Controllers
         [HttpGet]
         public IActionResult Success()
         {
-            Reservation reservation = new Reservation();
-            var id = HttpContext.Session.GetString("ReservationId");
+            Reservation reservation = new();
+            var id = HttpContext.Session.GetInt32("ReservationId");
             HttpResponseMessage response = client.GetAsync(url + id).Result;
             if(response.IsSuccessStatusCode)
             {
@@ -101,6 +104,27 @@ namespace Reservation_Client.Controllers
             return View(reservation);
         }
 
-        
+        //[HttpGet]
+        //public IActionResult LogIn()
+        //{
+        //    return View();
+        //}
+
+        //[HttpPost]
+        //public IActionResult LogIn()
+        //{
+        //    return View();
+        //}
+
+        //public IActionResult LogOut()
+        //{
+        //    if (HttpContext.Session.GetString("UserSession") != null)
+        //    {
+        //        HttpContext.Session.Remove("UserSession");
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View();
+        //}
+
     }
 }

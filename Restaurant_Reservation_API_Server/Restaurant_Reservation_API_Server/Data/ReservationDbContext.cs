@@ -11,6 +11,5 @@ namespace Reservation_Server.Data
         }
 
         public DbSet<Reservation> Reservations { get; set; }
-        public DbSet<Account> Accounts { get; set; }
     }
 }
