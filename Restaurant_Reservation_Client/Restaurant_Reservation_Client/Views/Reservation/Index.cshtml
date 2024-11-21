@@ -11,24 +11,22 @@
         </div>
     </div>
     <br />
-    <div class="row">
-        <div class="col">
-            <p>
-                <a asp-action="Search" class="btn btn-info">訂位查詢</a>
-            </p>
+        <div class="row">
+            <div class="col">
+                <p>
+                    <a asp-action="MakeRes" class="btn btn-warning">我要訂位</a>
+                </p>
+            </div>
         </div>
-    </div>
     <br />
-    <div class="row">
-        <div class="col">
-            <p>
-                <a asp-action="MakeRes" class="btn btn-warning">我要訂位</a>
-            </p>
+        <div class="row">
+            <div class="col">
+                <p>
+                    <a asp-action="Search" class="btn btn-info">訂位修改/刪除</a>
+                </p>
+            </div>
         </div>
-    </div>
     <br />
-    @if (accessor.HttpContext.Session.GetString("UserSession") == null) //記得改肥來
-    {
         <table class="table">
             <thead>
                 <tr>
@@ -90,5 +88,4 @@
                 }
             </tbody>
         </table>
-    }
 </div>

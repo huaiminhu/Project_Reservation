@@ -22,18 +22,9 @@
                 @* <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between"> *@
                 <div class="d-flex">
                     <ul class="navbar-nav flex-grow-1">
-                        @if(accessor.HttpContext.Session.GetString("UserSession")!=null)
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark rounded bg-danger" asp-area="" asp-controller="Account" asp-action="LogOut">員工登出</a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark rounded border border-danger" asp-area="" asp-controller="Account" asp-action="LogIn">員工登入</a>
-                            </li>
-                        }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark rounded bg-danger" asp-area="" asp-controller="Reservation" asp-action=""></a>
+                        </li>
                     </ul>
                 </div>
             </div>

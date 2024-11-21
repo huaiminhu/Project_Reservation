@@ -29,15 +29,10 @@ namespace Reservation_Client.Controllers
                     {
                         minus += p.SeatRequirement;
                     }
-                    ViewBag.Seats = 40 - minus;
-                    if (HttpContext.Session.GetString("UserSession") == null)
-                    {
-                        ViewBag.Seat = 60 - minus;
-                        return View(reservations);
-                    }
+                    ViewBag.Seats = 80 - minus;
                 }
             }
-            return View();
+            return View(reservations);
         }
 
         [HttpGet]
@@ -103,28 +98,6 @@ namespace Reservation_Client.Controllers
             }
             return View(reservation);
         }
-
-        //[HttpGet]
-        //public IActionResult LogIn()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public IActionResult LogIn()
-        //{
-        //    return View();
-        //}
-
-        //public IActionResult LogOut()
-        //{
-        //    if (HttpContext.Session.GetString("UserSession") != null)
-        //    {
-        //        HttpContext.Session.Remove("UserSession");
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View();
-        //}
 
     }
 }
