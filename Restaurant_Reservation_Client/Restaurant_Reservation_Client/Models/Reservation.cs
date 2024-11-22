@@ -24,7 +24,7 @@ namespace Reservation_Client.Models
         public string Phone { get; set; }
 
         [Display(Name = "當日抵達時間")]
-        public string? ArrivedTime { get; set; } = null;
+        public string? ArrivedTime { get; set; };
 
         [Required(ErrorMessage = "訂位人數未輸入!")]
         [Range(1, 40)]

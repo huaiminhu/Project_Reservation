@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Restaurant_Reservation_API_Server.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace Reservation_Server.Models
 {
@@ -14,7 +15,7 @@ namespace Reservation_Server.Models
         
         public string Phone { get; set; }
         
-        public string? ArrivedTime { get; set; }
+        public ArrivedTime ArrivedTime { get; set; }
         
         public int SeatRequirement { get; set; }
         
