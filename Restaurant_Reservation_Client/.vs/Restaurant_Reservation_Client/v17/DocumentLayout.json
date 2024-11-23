@@ -50,8 +50,7 @@
               "RelativeToolTip": "Restaurant_Reservation_Client\\Views\\Reservation\\MakeRes.cshtml",
               "ViewState": "AQIAABUAAAAAAAAAAAAAAB8AAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-22T02:15:02.358Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-22T02:15:02.358Z"
             },
             {
               "$type": "Document",
@@ -85,7 +84,7 @@
               "RelativeDocumentMoniker": "Restaurant_Reservation_Client\\Models\\Reservation.cs",
               "ToolTip": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\Restaurant_Reservation_Client\\Models\\Reservation.cs",
               "RelativeToolTip": "Restaurant_Reservation_Client\\Models\\Reservation.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAAuwBoAAAAwAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABoAAAAwAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-20T07:23:44.731Z",
               "EditorCaption": ""

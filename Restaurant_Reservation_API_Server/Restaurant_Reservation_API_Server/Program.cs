@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using Reservation_Server.Data;
 using Reservation_Server.Repositories.Interfaces;
 using Reservation_Server.Repositories.Services;
+using Restaurant_Reservation_API_Server.Repositories.Interfaces;
+using Restaurant_Reservation_API_Server.Repositories.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ReservationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ReservationDbContext")));
 builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
+builder.Services.AddScoped<IArrivedTimeRepository, ArrivedTimeRepository>();
 
 var app = builder.Build();
 
