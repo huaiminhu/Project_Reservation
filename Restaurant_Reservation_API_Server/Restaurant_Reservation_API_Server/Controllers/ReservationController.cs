@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Reservation_Server.Data;
 using Reservation_Server.Models;
 using Reservation_Server.Repositories.Interfaces;
+using Restaurant_Reservation_API_Server.Models;
 
 namespace Reservation_Server.Controllers
 {
@@ -42,12 +43,12 @@ namespace Reservation_Server.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, string arrivedTime)
+        public async Task<IActionResult> Update(Reservation reservation)
         {
-            var former = await reservationRepository.FindReservation(id);
+            var former = await reservationRepository.FindReservation(reservation.Id);
             if(former == null)
                 return NotFound();
-            await reservationRepository.Update(id, arrivedTime);
+            await reservationRepository.Update(reservation);
             return NoContent();
         }
 

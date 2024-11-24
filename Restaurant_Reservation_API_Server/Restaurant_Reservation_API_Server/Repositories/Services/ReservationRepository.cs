@@ -2,6 +2,7 @@
 using Reservation_Server.Data;
 using Reservation_Server.Models;
 using Reservation_Server.Repositories.Interfaces;
+using Restaurant_Reservation_API_Server.Models;
 
 namespace Reservation_Server.Repositories.Services
 {
@@ -38,11 +39,18 @@ namespace Reservation_Server.Repositories.Services
             return await _ctx.Reservations.FindAsync(id);
         }
 
-        public async Task Update(int id, string arrivedTime)
+        public async Task Update(Reservation reservation)
         {
-            var former = _ctx.Reservations.FirstOrDefault(x => x.Id == id);
-            if (former != null) 
-                former.ArrivedTime = arrivedTime;
+            var former = _ctx.Reservations.FirstOrDefault(x => x.Id == reservation.Id);
+            if (former != null)
+            {
+                former.BookingDate = reservation.BookingDate;
+                former.CustomerName = reservation.CustomerName;
+                former.Phone = reservation.Phone;
+                former.ArrivedTime = reservation.ArrivedTime;
+                former.SeatRequirement = reservation.SeatRequirement;
+                former.ChildSeat = reservation.ChildSeat;
+            }
             await _ctx.SaveChangesAsync();
         }
 

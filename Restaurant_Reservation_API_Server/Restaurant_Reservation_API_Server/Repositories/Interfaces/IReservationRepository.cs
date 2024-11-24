@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Reservation_Server.Models;
+using Restaurant_Reservation_API_Server.Models;
 
 namespace Reservation_Server.Repositories.Interfaces
 {
@@ -8,7 +9,7 @@ namespace Reservation_Server.Repositories.Interfaces
         Task<IEnumerable<Reservation>> AllReservations();
         Task<Reservation?> FindReservation(int id);
         Task Create(Reservation reservation);
-        Task Update(int id, string arrivedTime);
+        Task Update(Reservation reservation);
         Task Delete(Reservation reservation);
         Reservation? FindByPhone(string phone);
     }
