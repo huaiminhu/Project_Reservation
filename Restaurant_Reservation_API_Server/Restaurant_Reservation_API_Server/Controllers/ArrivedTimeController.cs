@@ -16,7 +16,7 @@ namespace Restaurant_Reservation_API_Server.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AllReservations()
+        public async Task<IActionResult> PeriodChoices()
         {
             var data = await arrivedTimeRepository.AllArrivedTimes();
             return Ok(data);

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Reservation_Client.Models;
+using Restaurant_Reservation_Client.Controllers;
 using System.Security.Principal;
 using System.Text;
 
@@ -32,6 +33,7 @@ namespace Reservation_Client.Controllers
                     ViewBag.Seats = 80 - minus;
                 }
             }
+            var data = 
             return View(reservations);
         }
 
