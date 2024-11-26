@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Reservation_Client.Models;
 using Restaurant_Reservation_Client.Controllers;
+using Restaurant_Reservation_Client.Models;
 using System.Security.Principal;
 using System.Text;
 
@@ -10,31 +11,31 @@ namespace Reservation_Client.Controllers
     public class ReservationController : Controller
     {
 
-        private string url = "https://localhost:7077/api/Reservation/";
+        private string url1 = "https://localhost:7077/api/Reservation/";
+        private string url2 = "https://localhost:7077/api/ArrivedTime/";
         private HttpClient client = new HttpClient();
 
         [HttpGet]
         public IActionResult Index()
         {
-            List<Reservation> reservations = new List<Reservation>();
-            HttpResponseMessage response = client.GetAsync(url).Result;
+            List<ArrivedTime> arrivedTimes = new List<ArrivedTime>();
+            HttpResponseMessage response = client.GetAsync(url2).Result;
             if (response.IsSuccessStatusCode)
             {
                 string result = response.Content.ReadAsStringAsync().Result;
-                var data = JsonConvert.DeserializeObject<List<Reservation>>(result);
+                var data = JsonConvert.DeserializeObject<List<ArrivedTime>>(result);
                 if (data != null)
                 {
-                    reservations = data;
-                    int minus = 0;
-                    foreach (var p in reservations)
-                    {
-                        minus += p.SeatRequirement;
-                    }
-                    ViewBag.Seats = 80 - minus;
+                    arrivedTimes = data;
+                    //int minus = 0;
+                    //foreach (var p in reservations)
+                    //{
+                    //    minus += p.SeatRequirement;
+                    //}
+                    //ViewBag.Seats = 80 - minus;
                 }
             }
-            var data = 
-            return View(reservations);
+            return View(arrivedTimes);
         }
 
         [HttpGet]
@@ -48,7 +49,7 @@ namespace Reservation_Client.Controllers
         {
             Reservation reservation = new Reservation();
             StringContent content = new StringContent(phone, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = client.PostAsync(url + "FindResByPhone", content).Result;
+            HttpResponseMessage response = client.PostAsync(url1 + "FindResByPhone", content).Result;
             if (response.IsSuccessStatusCode)
             {
                 string result = response.Content.ReadAsStringAsync().Result;
@@ -72,7 +73,7 @@ namespace Reservation_Client.Controllers
             {
                 string data = JsonConvert.SerializeObject(reservation);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = client.PostAsync(url, content).Result;
+                HttpResponseMessage response = client.PostAsync(url1, content).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     string result = response.Content.ReadAsStringAsync().Result;
@@ -90,7 +91,7 @@ namespace Reservation_Client.Controllers
         {
             Reservation reservation = new();
             var id = HttpContext.Session.GetInt32("ReservationId");
-            HttpResponseMessage response = client.GetAsync(url + id).Result;
+            HttpResponseMessage response = client.GetAsync(url1 + id).Result;
             if(response.IsSuccessStatusCode)
             {
                 string result = response.Content.ReadAsStringAsync().Result;

@@ -54,8 +54,7 @@
               "RelativeToolTip": "Restaurant_Reservation_API_Server\\Repositories\\Interfaces\\IArrivedTimeRepository.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-25T12:01:59.148Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-25T12:01:59.148Z"
             },
             {
               "$type": "Document",
@@ -67,8 +66,7 @@
               "RelativeToolTip": "Restaurant_Reservation_API_Server\\Controllers\\ArrivedTimeController.cs",
               "ViewState": "AQIAAAkAAAAAAAAAAAAAABIAAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-25T11:59:25.773Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-25T11:59:25.773Z"
             },
             {
               "$type": "Document",
@@ -80,8 +78,7 @@
               "RelativeToolTip": "Restaurant_Reservation_API_Server\\Models\\ArrivedTime.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-25T11:57:05.981Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-25T11:57:05.981Z"
             },
             {
               "$type": "Document",
@@ -93,8 +90,7 @@
               "RelativeToolTip": "Restaurant_Reservation_API_Server\\Models\\Reservation.cs",
               "ViewState": "AQIAAAgAAAAAAAAAAAAuwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-24T12:41:37.431Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-24T12:41:37.431Z"
             },
             {
               "$type": "Document",
@@ -104,7 +100,7 @@
               "RelativeDocumentMoniker": "Restaurant_Reservation_API_Server\\Controllers\\ReservationController.cs",
               "ToolTip": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server\\Controllers\\ReservationController.cs",
               "RelativeToolTip": "Restaurant_Reservation_API_Server\\Controllers\\ReservationController.cs",
-              "ViewState": "AQIAABIAAAAAAAAAAAAAADIAAAA6AAAA",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAAAA0AAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-24T09:15:27.179Z",
               "EditorCaption": ""
@@ -119,8 +115,7 @@
               "RelativeToolTip": "Restaurant_Reservation_API_Server\\Repositories\\Interfaces\\IReservationRepository.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAAAsAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-24T09:15:00.612Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-24T09:15:00.612Z"
             },
             {
               "$type": "Document",
@@ -132,8 +127,7 @@
               "RelativeToolTip": "Restaurant_Reservation_API_Server\\Repositories\\Services\\ReservationRepository.cs",
               "ViewState": "AQIAACgAAAAAAAAAAAAkwDMAAAA5AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-24T09:12:33.9Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-24T09:12:33.9Z"
             }
           ]
         }
