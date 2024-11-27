@@ -12,21 +12,40 @@ namespace Reservation_Client.Controllers
     {
 
         private string url1 = "https://localhost:7077/api/Reservation/";
+        private HttpClient client1 = new HttpClient();
         private string url2 = "https://localhost:7077/api/ArrivedTime/";
-        private HttpClient client = new HttpClient();
+        private HttpClient client2 = new HttpClient();
 
         [HttpGet]
         public IActionResult Index()
         {
+            List<int> seats = new List<int>();
+            List<Reservation> reservations = new List<Reservation>();
+            HttpResponseMessage response1 = client1.GetAsync(url1).Result;
             List<ArrivedTime> arrivedTimes = new List<ArrivedTime>();
-            HttpResponseMessage response = client.GetAsync(url2).Result;
-            if (response.IsSuccessStatusCode)
+            HttpResponseMessage response2 = client2.GetAsync(url2).Result;
+            if (response1.IsSuccessStatusCode && response2.IsSuccessStatusCode)
             {
-                string result = response.Content.ReadAsStringAsync().Result;
-                var data = JsonConvert.DeserializeObject<List<ArrivedTime>>(result);
-                if (data != null)
+                string result1 = response1.Content.ReadAsStringAsync().Result;
+                string result2 = response2.Content.ReadAsStringAsync().Result;
+                var data = JsonConvert.DeserializeObject<List<Reservation>>(result1);
+                var time = JsonConvert.DeserializeObject<List<ArrivedTime>>(result2);
+                if (data != null && time != null)
                 {
-                    arrivedTimes = data;
+                    reservations = data;
+                    arrivedTimes = time;
+                    for (var i = 0; i <= arrivedTimes.Count; i++)
+                    {
+                        int requirement = 0;
+                        for (var j = 0; j <= reservations.Count; j++)
+                        {
+                            if(arrivedTimes[i].Period == reservations[j].ArrivedTime)
+                            {
+                                requirement += reservations[j].SeatRequirement;
+                            }
+                        }
+                        seats.Add(60 - requirement);
+                    }
                     //int minus = 0;
                     //foreach (var p in reservations)
                     //{
@@ -35,7 +54,9 @@ namespace Reservation_Client.Controllers
                     //ViewBag.Seats = 80 - minus;
                 }
             }
-            return View(arrivedTimes);
+            ViewBag.Times = arrivedTimes;
+            ViewBag.Seats = seats;
+            return View();
         }
 
         [HttpGet]
@@ -49,7 +70,7 @@ namespace Reservation_Client.Controllers
         {
             Reservation reservation = new Reservation();
             StringContent content = new StringContent(phone, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = client.PostAsync(url1 + "FindResByPhone", content).Result;
+            HttpResponseMessage response = client1.PostAsync(url1 + "FindResByPhone", content).Result;
             if (response.IsSuccessStatusCode)
             {
                 string result = response.Content.ReadAsStringAsync().Result;
@@ -73,7 +94,7 @@ namespace Reservation_Client.Controllers
             {
                 string data = JsonConvert.SerializeObject(reservation);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = client.PostAsync(url1, content).Result;
+                HttpResponseMessage response = client1.PostAsync(url1, content).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     string result = response.Content.ReadAsStringAsync().Result;
@@ -91,7 +112,7 @@ namespace Reservation_Client.Controllers
         {
             Reservation reservation = new();
             var id = HttpContext.Session.GetInt32("ReservationId");
-            HttpResponseMessage response = client.GetAsync(url1 + id).Result;
+            HttpResponseMessage response = client1.GetAsync(url1 + id).Result;
             if(response.IsSuccessStatusCode)
             {
                 string result = response.Content.ReadAsStringAsync().Result;

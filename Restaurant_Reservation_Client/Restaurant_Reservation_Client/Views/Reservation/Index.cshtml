@@ -9,10 +9,14 @@
 <div class="container text-center">
     <div class="row">
         <div class="col">
-            @foreach (var item in Model)
+            @for (int i = 0; i <= Model.Count(); i++)
+            {
+                <h2>@ViewBag.Times[i] : @ViewBag.Seats[i]</h2>
+            }
+            @* @foreach (var item in Model)
             {
                 <h2>@Html.DisplayFor(modelItem => item.Period) : 人</h2>
-            }
+            } *@
         </div>
     </div>
     <div class="row">

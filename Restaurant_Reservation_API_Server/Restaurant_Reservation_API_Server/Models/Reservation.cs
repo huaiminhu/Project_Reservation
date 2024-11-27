@@ -14,6 +14,8 @@ namespace Reservation_Server.Models
         public string CustomerName { get; set; }
         
         public string Phone { get; set; }
+
+        public int ArrivedTimeId { get; set; }
         
         public ArrivedTime ArrivedTime { get; set; }
         
