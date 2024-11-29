@@ -2,7 +2,7 @@
 {
     public class ArrivedTime
     {
-        public int Id { get; set; }
+        public int TimeId { get; set; }
         public string Period { get; set; }
     }
 }

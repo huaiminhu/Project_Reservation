@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using Reservation_Client.Models;
 using Restaurant_Reservation_Client.Controllers;
@@ -19,7 +20,7 @@ namespace Reservation_Client.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<int> seats = new List<int>();
+            List<string> seats = new List<string>();
             List<Reservation> reservations = new List<Reservation>();
             HttpResponseMessage response1 = client1.GetAsync(url1).Result;
             List<ArrivedTime> arrivedTimes = new List<ArrivedTime>();
@@ -34,27 +35,24 @@ namespace Reservation_Client.Controllers
                 {
                     reservations = data;
                     arrivedTimes = time;
-                    for (var i = 0; i <= arrivedTimes.Count; i++)
+                    for (var i = 0; i < arrivedTimes.Count; i++)
                     {
                         int requirement = 0;
-                        for (var j = 0; j <= reservations.Count; j++)
+                        if(reservations.Count != 0) 
                         {
-                            if(arrivedTimes[i].Period == reservations[j].ArrivedTime)
+                            for (var j = 0; j <= reservations.Count; j++)
                             {
-                                requirement += reservations[j].SeatRequirement;
+                                if (arrivedTimes[i].Period == reservations[j].ArrivedTime)
+                                {
+                                    requirement += reservations[j].SeatRequirement;
+                                }
                             }
+                            seats.Add(arrivedTimes[i].Period + string.Format("{:} 人", 40 - requirement));
                         }
-                        seats.Add(60 - requirement);
+                        seats.Add(arrivedTimes[i].Period + " : 40 人");
                     }
-                    //int minus = 0;
-                    //foreach (var p in reservations)
-                    //{
-                    //    minus += p.SeatRequirement;
-                    //}
-                    //ViewBag.Seats = 80 - minus;
                 }
             }
-            ViewBag.Times = arrivedTimes;
             ViewBag.Seats = seats;
             return View();
         }
@@ -84,6 +82,18 @@ namespace Reservation_Client.Controllers
         [HttpGet]
         public IActionResult MakeRes()
         {
+            List<ArrivedTime> arrivedTimes = new List<ArrivedTime>();
+            HttpResponseMessage response = client2.GetAsync(url2).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string result = response.Content.ReadAsStringAsync().Result;
+                var data = JsonConvert.DeserializeObject<List<ArrivedTime>>(result);
+                if(data != null)
+                {
+                    arrivedTimes = data;
+                }
+            }
+            ViewBag.Periods = new SelectList(arrivedTimes, "TimeId", "Period");
             return View();
         }
 
@@ -104,7 +114,7 @@ namespace Reservation_Client.Controllers
                     return RedirectToAction("Success");
                 }
             }
-            return View();
+            return View(reservation);
         }
 
         [HttpGet]

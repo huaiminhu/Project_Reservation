@@ -1,7 +1,7 @@
 ﻿@* @model IEnumerable<Reservation_Client.Models.Reservation> *@
 
 @* @inject Microsoft.AspNetCore.Http.IHttpContextAccessor accessor *@
-@model IEnumerable<Restaurant_Reservation_Client.Models.ArrivedTime>
+@* @model IEnumerable<Restaurant_Reservation_Client.Models.ArrivedTime> *@
 @{
     ViewData["Title"] = "Index";
 }
@@ -9,9 +9,9 @@
 <div class="container text-center">
     <div class="row">
         <div class="col">
-            @for (int i = 0; i <= Model.Count(); i++)
+            @for (int i = 0; i < ViewBag.Seats.Count; i++)
             {
-                <h2>@ViewBag.Times[i] : @ViewBag.Seats[i]</h2>
+                <h2>@ViewBag.Seats[i]</h2>
             }
             @* @foreach (var item in Model)
             {

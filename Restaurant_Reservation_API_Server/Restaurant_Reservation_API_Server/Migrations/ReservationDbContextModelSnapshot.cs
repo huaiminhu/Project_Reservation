@@ -29,8 +29,9 @@ namespace Restaurant_Reservation_API_Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ArrivedTimeId")
-                        .HasColumnType("int");
+                    b.Property<string>("ArrivedTime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BookingDate")
                         .IsRequired()
@@ -51,8 +52,6 @@ namespace Restaurant_Reservation_API_Server.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ArrivedTimeId");
 
                     b.ToTable("Reservations");
                 });
@@ -99,17 +98,6 @@ namespace Restaurant_Reservation_API_Server.Migrations
                             Id = 5,
                             Period = "19:30"
                         });
-                });
-
-            modelBuilder.Entity("Reservation_Server.Models.Reservation", b =>
-                {
-                    b.HasOne("Restaurant_Reservation_API_Server.Models.ArrivedTime", "ArrivedTime")
-                        .WithMany()
-                        .HasForeignKey("ArrivedTimeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ArrivedTime");
                 });
 #pragma warning restore 612, 618
         }
