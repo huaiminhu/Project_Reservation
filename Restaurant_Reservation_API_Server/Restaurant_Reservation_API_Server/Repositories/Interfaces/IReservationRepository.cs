@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Reservation_Server.Models;
-using Restaurant_Reservation_API_Server.Models;
+using Restaurant_Reservation_API_Server.Entities;
 
-namespace Reservation_Server.Repositories.Interfaces
+namespace Restaurant_Reservation_API_Server.Repositories.Interfaces
 {
     public interface IReservationRepository
     {

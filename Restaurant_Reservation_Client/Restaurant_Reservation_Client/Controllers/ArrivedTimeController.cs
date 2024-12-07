@@ -8,14 +8,14 @@ namespace Restaurant_Reservation_Client.Controllers
     {
         private string url = "https://localhost:7077/api/ArrivedTime/";
         private HttpClient client = new HttpClient();
-        public List<ArrivedTime> PeriodChoices()
+        public List<ArrivedTimeViewModel> PeriodChoices()
         {
-            List<ArrivedTime> arrivedTimes = new List<ArrivedTime>();
+            List<ArrivedTimeViewModel> arrivedTimes = new List<ArrivedTimeViewModel>();
             HttpResponseMessage response = client.GetAsync(url).Result;
             if(response.IsSuccessStatusCode)
             {
                 string result = response.Content.ReadAsStringAsync().Result;
-                var data = JsonConvert.DeserializeObject<List<ArrivedTime>> (result);
+                var data = JsonConvert.DeserializeObject<List<ArrivedTimeViewModel>> (result);
                 if(data != null)
                 {
                     arrivedTimes = data;

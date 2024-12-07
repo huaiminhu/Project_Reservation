@@ -1,4 +1,4 @@
-﻿using Restaurant_Reservation_API_Server.Models;
+﻿using Restaurant_Reservation_API_Server.Entities;
 
 namespace Restaurant_Reservation_API_Server.Repositories.Interfaces
 {

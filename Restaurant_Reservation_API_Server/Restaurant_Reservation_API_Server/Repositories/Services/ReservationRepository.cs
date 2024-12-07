@@ -1,10 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Reservation_Server.Data;
-using Reservation_Server.Models;
-using Reservation_Server.Repositories.Interfaces;
-using Restaurant_Reservation_API_Server.Models;
+using Restaurant_Reservation_API_Server.Data;
+using Restaurant_Reservation_API_Server.Entities;
+using Restaurant_Reservation_API_Server.Repositories.Interfaces;
 
-namespace Reservation_Server.Repositories.Services
+namespace Restaurant_Reservation_API_Server.Repositories.Services
 {
     public class ReservationRepository : IReservationRepository
     {

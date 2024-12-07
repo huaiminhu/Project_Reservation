@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Reservation_Server.Repositories.Services;
+using Restaurant_Reservation_API_Server.Repositories.Services;
 using Restaurant_Reservation_API_Server.Repositories.Interfaces;
 
 namespace Restaurant_Reservation_API_Server.Controllers

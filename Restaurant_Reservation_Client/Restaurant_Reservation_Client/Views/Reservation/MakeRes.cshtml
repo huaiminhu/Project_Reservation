@@ -1,4 +1,4 @@
-﻿@model Reservation_Client.Models.Reservation
+﻿@model Restaurant_Reservation_Client.Models.ReservationViewModel
 
 @{
     ViewData["Title"] = "我要訂位";
@@ -27,9 +27,9 @@
                 <span asp-validation-for="Phone" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ArrivedTime" class="control-label"></label>
-                <select class="form-control" asp-items="ViewBag.Periods" />
-                <span asp-validation-for="ArrivedTime" class="text-danger"></span>
+                <label asp-for="ArrivedTimeId" class="control-label"></label>
+                <select asp-for="ArrivedTimeId" class="form-control" asp-items="@ViewBag.Periods"/>
+                @* <span asp-validation-for="ArrivedTime" class="text-danger"></span> *@
             </div>
             <div class="form-group">
                 <label asp-for="SeatRequirement" class="control-label"></label>
@@ -53,5 +53,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
