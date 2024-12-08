@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Restaurant_Reservation_API_Server.Entities;
+using Restaurant_Reservation_API_Server.Models;
 
 namespace Restaurant_Reservation_API_Server.Data
 {

@@ -92,7 +92,8 @@ namespace Restaurant_Reservation_Client.Controllers
                     arrivedTimes = data;
                 }
             }
-            ViewBag.Periods = arrivedTimes;
+            arrivedTimes.Insert(0, new ArrivedTimeViewModel { Id = 0, Period = "請選擇時段" });
+            ViewBag.Periods = new SelectList(arrivedTimes, "Id", "Period");
             return View();
         }
 
@@ -110,7 +111,8 @@ namespace Restaurant_Reservation_Client.Controllers
                     arrivedTimes = data1;
                 }
             }
-            ViewBag.Periods = arrivedTimes;
+            arrivedTimes.Insert(0, new ArrivedTimeViewModel { Id = 0, Period = "請選擇時段" });
+            ViewBag.Periods = new SelectList(arrivedTimes, "Id", "Period");
             if (ModelState.IsValid)
             {
                 string data2 = JsonConvert.SerializeObject(reservation);

@@ -2,8 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Restaurant_Reservation_API_Server.Data;
-using Restaurant_Reservation_API_Server.DTOs;
-using Restaurant_Reservation_API_Server.Entities;
+using Restaurant_Reservation_API_Server.Models;
 using Restaurant_Reservation_API_Server.Models;
 using Restaurant_Reservation_API_Server.Repositories.Interfaces;
 
@@ -28,7 +27,7 @@ namespace Restaurant_Reservation_API_Server.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ReservationDto>> FindReservation(int id)
+        public async Task<ActionResult<Reservation>> FindReservation(int id)
         {
             var data = await reservationRepository.FindReservation(id);
             if (data == null)
@@ -37,7 +36,7 @@ namespace Restaurant_Reservation_API_Server.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(ReservationDto reservation)
+        public async Task<IActionResult> Create(Reservation reservation)
         {
             await reservationRepository.Create(reservation);
             return CreatedAtAction(nameof(FindReservation), new { id = reservation.Id }, reservation);
