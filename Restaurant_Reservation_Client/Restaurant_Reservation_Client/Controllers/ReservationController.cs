@@ -19,7 +19,7 @@ namespace Restaurant_Reservation_Client.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<string> seats = new List<string>();
+            List<SeatsViewModel> seats = new List<SeatsViewModel>();
             List<ReservationViewModel> reservations = new List<ReservationViewModel>();
             HttpResponseMessage response1 = client1.GetAsync(url1).Result;
             List<ArrivedTimeViewModel> arrivedTimes = new List<ArrivedTimeViewModel>();
@@ -46,14 +46,14 @@ namespace Restaurant_Reservation_Client.Controllers
                                     requirement += reservations[j].SeatRequirement;
                                 }
                             }
-                            seats.Add(arrivedTimes[i].Period + string.Format("{:} 人", 40 - requirement));
+                            seats.Add(new SeatsViewModel{ Period = arrivedTimes[i].Period, RemainSeats = 40 - requirement });
                         }
-                        seats.Add(arrivedTimes[i].Period + " : 40 人");
+                        seats.Add(new SeatsViewModel { Period = arrivedTimes[i].Period, RemainSeats = 40 });
                     }
                 }
             }
-            ViewBag.Seats = seats;
-            return View();
+            //ViewBag.Seats = seats;
+            return View(seats);
         }
 
         [HttpGet]
