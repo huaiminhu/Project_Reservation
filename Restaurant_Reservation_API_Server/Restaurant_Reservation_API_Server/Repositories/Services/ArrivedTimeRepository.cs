@@ -18,5 +18,10 @@ namespace Restaurant_Reservation_API_Server.Repositories.Services
             var data = await _ctx.arrivedTimes.ToListAsync();
             return data;
         }
+
+        public async Task<ArrivedTime?> ArrivedTimeById(int id)
+        {
+            return await _ctx.arrivedTimes.FindAsync(id);
+        }
     }
 }

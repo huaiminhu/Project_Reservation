@@ -4,7 +4,7 @@
     ViewData["Title"] = "訂位完成";
 }
 
-<h1>Success</h1>
+<h1>你訂好了!</h1>
 
 <div>
     <h4>訂位資訊</h4>
@@ -15,6 +15,12 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.BookingDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ArrivedTimeId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ArrivedTime)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.CustomerName)

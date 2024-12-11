@@ -26,6 +26,6 @@ namespace Restaurant_Reservation_API_Server.Models
 
         public int ArrivedTimeId { get; set; }
 
-        public ArrivedTime ArrivedTime { get; set; }
+        public ArrivedTime? ArrivedTime { get; set; }
     }
 }
