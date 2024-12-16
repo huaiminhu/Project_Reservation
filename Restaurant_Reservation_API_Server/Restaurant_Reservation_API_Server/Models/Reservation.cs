@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Restaurant_Reservation_API_Server.Models;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Restaurant_Reservation_API_Server.Models
 {
@@ -10,22 +12,15 @@ namespace Restaurant_Reservation_API_Server.Models
     {
 
         [Key]
-        public int Id { get; set; }
-        
-        public string BookingDate { get; set; }
-        
-        public string CustomerName { get; set; }
-        
-        public string Phone { get; set; }
-        
-        public int SeatRequirement { get; set; }
-        
+        public int Id { get; set; }        
+        public string BookingDate { get; set; }        
+        public string CustomerName { get; set; }        
+        public string Phone { get; set; }        
+        public int SeatRequirement { get; set; }        
         public int ChildSeat { get; set; }
-
-
-
+        
         public int ArrivedTimeId { get; set; }
-
+        [JsonIgnore]
         public ArrivedTime? ArrivedTime { get; set; }
     }
 }

@@ -6,6 +6,7 @@ namespace Restaurant_Reservation_Client.Models
     {
         public int Id { get; set; }
 
+
         [Required(ErrorMessage = "日期未輸入!")]
         [Display(Name = "訂位日期")]
         public string BookingDate { get; set; }
@@ -22,6 +23,7 @@ namespace Restaurant_Reservation_Client.Models
         [MinLength(8, ErrorMessage = "這電話長度不對!")]
         public string Phone { get; set; }
 
+
         [Required(ErrorMessage = "訂位人數未輸入!")]
         [Range(1, 40, ErrorMessage = "訂位人數須介於1到40之間!")]
         [Display(Name = "訂位人數")]
@@ -36,6 +38,5 @@ namespace Restaurant_Reservation_Client.Models
 
         [Display(Name = "用餐時段")]
         public int ArrivedTimeId { get; set; }
-        public ArrivedTimeViewModel? ArrivedTime { get; set; }
     }
 }

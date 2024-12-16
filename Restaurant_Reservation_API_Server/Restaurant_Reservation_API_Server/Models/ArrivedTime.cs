@@ -7,5 +7,7 @@ namespace Restaurant_Reservation_API_Server.Models
         [Key]
         public int Id { get; set; }
         public string Period { get; set; }
+
+        //public ICollection<Reservation>? Reservations { get; set; }
     }
 }

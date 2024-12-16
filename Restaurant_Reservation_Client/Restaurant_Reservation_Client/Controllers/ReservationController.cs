@@ -66,13 +66,25 @@ namespace Restaurant_Reservation_Client.Controllers
         {
             ReservationViewModel reservation = new ReservationViewModel();
             StringContent content = new StringContent(phone, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = client.PostAsync(url1 + "FindResByPhone", content).Result;
+            HttpResponseMessage response = client.PostAsync(url1 + "FindResByPhone?phone=" + phone, content).Result;
             if (response.IsSuccessStatusCode)
             {
                 string result = response.Content.ReadAsStringAsync().Result;
                 var data = JsonConvert.DeserializeObject<ReservationViewModel>(result);
                 if (data != null)
+                {
                     reservation = data;
+                    response = client.GetAsync(url2 + reservation.ArrivedTimeId).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        result = response.Content.ReadAsStringAsync().Result;
+                        var period = JsonConvert.DeserializeObject<ArrivedTimeViewModel>(result);
+                        if (period != null)
+                        {
+                            ViewBag.Period = period.Period;
+                        }
+                    }
+                }
             }
             return View(reservation);
         }
@@ -99,40 +111,30 @@ namespace Restaurant_Reservation_Client.Controllers
         [HttpPost]
         public IActionResult MakeRes(ReservationViewModel reservation)
         {
-            ArrivedTimeViewModel arrivedTime = new();
-            string periodId = reservation.ArrivedTimeId.ToString();            
-            HttpResponseMessage response1 = client.GetAsync(url2 + periodId).Result;
-            if (response1.IsSuccessStatusCode)
-            {
-                string result1 = response1.Content.ReadAsStringAsync().Result;
-                var data1 = JsonConvert.DeserializeObject<ArrivedTimeViewModel>(result1);
-                if (data1 != null)
-                    arrivedTime = data1;
-            }
-            reservation.ArrivedTime = arrivedTime;
+            HttpResponseMessage response = new();
             if (ModelState.IsValid)
             {
-                string data2 = JsonConvert.SerializeObject(reservation);
-                StringContent content2 = new StringContent(data2, Encoding.UTF8, "application/json");
-                HttpResponseMessage response2 = client.PostAsync(url1, content2).Result;
-                if (response2.IsSuccessStatusCode)
+                string data = JsonConvert.SerializeObject(reservation);
+                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                response = client.PostAsync(url1, content).Result;
+                if (response.IsSuccessStatusCode)
                 {
-                    string result2 = response2.Content.ReadAsStringAsync().Result;
-                    var detail = JsonConvert.DeserializeObject<ReservationViewModel>(result2);
+                    string result = response.Content.ReadAsStringAsync().Result;
+                    var detail = JsonConvert.DeserializeObject<ReservationViewModel>(result);
                     int id = detail.Id;
                     HttpContext.Session.SetInt32("ReservationCreator", id);
                     return RedirectToAction("Success");
                 }
             }
             List<ArrivedTimeViewModel> arrivedTimes = new List<ArrivedTimeViewModel>();
-            HttpResponseMessage response3 = client.GetAsync(url2).Result;
-            if (response3.IsSuccessStatusCode)
+            response = client.GetAsync(url2).Result;
+            if (response.IsSuccessStatusCode)
             {
-                string result3 = response3.Content.ReadAsStringAsync().Result;
-                var data3 = JsonConvert.DeserializeObject<List<ArrivedTimeViewModel>>(result3);
-                if (data3 != null)
+                string result = response.Content.ReadAsStringAsync().Result;
+                var data = JsonConvert.DeserializeObject<List<ArrivedTimeViewModel>>(result);
+                if (data != null)
                 {
-                    arrivedTimes = data3;
+                    arrivedTimes = data;
                 }
             }
             arrivedTimes.Insert(0, new ArrivedTimeViewModel { Id = 0, Period = "請選擇時段" });
@@ -151,7 +153,19 @@ namespace Restaurant_Reservation_Client.Controllers
                 string result = response.Content.ReadAsStringAsync().Result;
                 var data = JsonConvert.DeserializeObject<ReservationViewModel>(result);
                 if (data != null)
+                {
                     reservation = data;
+                    response = client.GetAsync(url2 + reservation.ArrivedTimeId).Result;
+                    if( response.IsSuccessStatusCode )
+                    {
+                        result = response.Content.ReadAsStringAsync().Result;
+                        var period = JsonConvert.DeserializeObject<ArrivedTimeViewModel>(result);
+                        if (period != null)
+                        {
+                            ViewBag.Period = period.Period;
+                        }
+                    }
+                }
             }
             return View(reservation);
         }
