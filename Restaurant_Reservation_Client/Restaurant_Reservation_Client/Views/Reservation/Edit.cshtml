@@ -1,0 +1,57 @@
+﻿@model Restaurant_Reservation_Client.Models.ReservationViewModel
+
+@{
+    ViewData["Title"] = "修改訂位";
+}
+
+<h1>修改訂位</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="BookingDate" class="control-label"></label>
+                <input asp-for="BookingDate" type="date" class="form-control" />
+                <span asp-validation-for="BookingDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerName" class="control-label"></label>
+                <input asp-for="CustomerName" class="form-control" />
+                <span asp-validation-for="CustomerName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ArrivedTimeId" class="control-label"></label>
+                <select asp-for="ArrivedTimeId" class="form-control" asp-items="@ViewBag.Periods"></select>
+                <span asp-validation-for="ArrivedTimeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SeatRequirement" class="control-label"></label>
+                <input asp-for="SeatRequirement" type="number" class="form-control" />
+                <span asp-validation-for="SeatRequirement" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ChildSeat" class="control-label"></label>
+                <input asp-for="ChildSeat" type="number" class="form-control" />
+                <span asp-validation-for="ChildSeat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="儲存修改" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">回首頁</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

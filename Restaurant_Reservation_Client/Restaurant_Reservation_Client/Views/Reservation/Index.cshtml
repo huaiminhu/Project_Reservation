@@ -6,10 +6,6 @@
 <div class="container text-center">
     <div class="row">
         <div class="col">
-            @* @for (int i = 0; i < ViewBag.Seats.Count; i++)
-            {
-                <h2>@ViewBag.Seats[i]</h2>
-            } *@
             @foreach (var item in Model)
             {
                 <h2>@Html.DisplayFor(modelItem => item.Period) : @Html.DisplayFor(modelItem => item.RemainSeats) 人</h2>
@@ -31,89 +27,3 @@
         </div>
     </div>
 </div>
-
-@* <div class="container text-center">
-    <div class="row">
-        <div class="col">
-            <h1>訂位開放數: @ViewBag.Seats 人</h1>
-        </div>
-    </div>
-    <br />
-        <div class="row">
-            <div class="col">
-                <p>
-                    <a asp-action="MakeRes" class="btn btn-warning">我要訂位</a>
-                </p>
-            </div>
-        </div>
-    <br />
-        <div class="row">
-            <div class="col">
-                <p>
-                    <a asp-action="Search" class="btn btn-info">訂位修改/刪除</a>
-                </p>
-            </div>
-        </div>
-    <br />
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Id)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.BookingDate)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CustomerName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Phone)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ArrivedTime)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.SeatRequirement)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ChildSeat)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Id)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.BookingDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CustomerName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Phone)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ArrivedTime)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SeatRequirement)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ChildSeat)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-</div> *@

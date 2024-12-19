@@ -56,40 +56,6 @@ namespace Restaurant_Reservation_Client.Controllers
         }
 
         [HttpGet]
-        public IActionResult Search()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Search(string phone)
-        {
-            ReservationViewModel reservation = new ReservationViewModel();
-            StringContent content = new StringContent(phone, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = client.PostAsync(url1 + "FindResByPhone?phone=" + phone, content).Result;
-            if (response.IsSuccessStatusCode)
-            {
-                string result = response.Content.ReadAsStringAsync().Result;
-                var data = JsonConvert.DeserializeObject<ReservationViewModel>(result);
-                if (data != null)
-                {
-                    reservation = data;
-                    response = client.GetAsync(url2 + reservation.ArrivedTimeId).Result;
-                    if (response.IsSuccessStatusCode)
-                    {
-                        result = response.Content.ReadAsStringAsync().Result;
-                        var period = JsonConvert.DeserializeObject<ArrivedTimeViewModel>(result);
-                        if (period != null)
-                        {
-                            ViewBag.Period = period.Period;
-                        }
-                    }
-                }
-            }
-            return View(reservation);
-        }
-
-        [HttpGet]
         public IActionResult MakeRes()
         {
             List<ArrivedTimeViewModel> arrivedTimes = new List<ArrivedTimeViewModel>();
@@ -170,5 +136,110 @@ namespace Restaurant_Reservation_Client.Controllers
             return View(reservation);
         }
 
+        [HttpGet]
+        public IActionResult Search()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Search(string phone)
+        {
+            ReservationViewModel reservation = new ReservationViewModel();
+            StringContent content = new StringContent(phone, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = client.PostAsync(url1 + "FindResByPhone?phone=" + phone, content).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string result = response.Content.ReadAsStringAsync().Result;
+                var data = JsonConvert.DeserializeObject<ReservationViewModel>(result);
+                if (data != null)
+                {
+                    reservation = data;
+                    response = client.GetAsync(url2 + reservation.ArrivedTimeId).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        result = response.Content.ReadAsStringAsync().Result;
+                        var period = JsonConvert.DeserializeObject<ArrivedTimeViewModel>(result);
+                        if (period != null)
+                        {
+                            ViewBag.Period = period.Period;
+                        }
+                    }
+                }
+            }
+            return View(reservation);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            ReservationViewModel reservation = new();
+            HttpResponseMessage response = client.GetAsync(url1 + id).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string result = response.Content.ReadAsStringAsync().Result;
+                var data = JsonConvert.DeserializeObject<ReservationViewModel>(result);
+                if (data != null)
+                {
+                    reservation = data;
+                    HttpContext.Session.SetInt32("ReservationCreator", id);
+                    List<ArrivedTimeViewModel> arrivedTimes = new List<ArrivedTimeViewModel>();
+                    response = client.GetAsync(url2).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        result = response.Content.ReadAsStringAsync().Result;
+                        var periods = JsonConvert.DeserializeObject<List<ArrivedTimeViewModel>>(result);
+                        if (periods != null)
+                        {
+                            arrivedTimes = periods;
+                        }
+                    }
+                    arrivedTimes.Insert(0, new ArrivedTimeViewModel { Id = 0, Period = "請選擇時段" });
+                    ViewBag.Periods = new SelectList(arrivedTimes, "Id", "Period");
+                }
+            }
+            return View(reservation);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(ReservationViewModel reservation)
+        {
+            var id = HttpContext.Session.GetInt32("ReservationCreator");
+            string data = JsonConvert.SerializeObject(reservation);
+            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = client.PutAsync(url1 + id, content).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string result = response.Content.ReadAsStringAsync().Result;
+                var detail = JsonConvert.DeserializeObject<ReservationViewModel>(result);
+                return RedirectToAction("Success");
+            }
+            List<ArrivedTimeViewModel> arrivedTimes = new List<ArrivedTimeViewModel>();
+            response = client.GetAsync(url2).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var result = response.Content.ReadAsStringAsync().Result;
+                var periods = JsonConvert.DeserializeObject<List<ArrivedTimeViewModel>>(result);
+                if (periods != null)
+                {
+                    arrivedTimes = periods;
+                }
+            }
+            arrivedTimes.Insert(0, new ArrivedTimeViewModel { Id = 0, Period = "請選擇時段" });
+            ViewBag.Periods = new SelectList(arrivedTimes, "Id", "Period");
+            return View(reservation);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Delete(ReservationViewModel reservation)
+        {
+            return View();
+        }
     }
 }
