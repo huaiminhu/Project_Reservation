@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_API_Server\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B32016A0-09B2-4547-AA82-0563A94ACED7}|Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server.csproj|c:\\users\\hankh\\desktop\\project_reservation\\restaurant_reservation_api_server\\restaurant_reservation_api_server\\controllers\\reservationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B32016A0-09B2-4547-AA82-0563A94ACED7}|Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server.csproj|solutionrelative:restaurant_reservation_api_server\\controllers\\reservationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B32016A0-09B2-4547-AA82-0563A94ACED7}|Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server.csproj|c:\\users\\hankh\\desktop\\project_reservation\\restaurant_reservation_api_server\\restaurant_reservation_api_server\\models\\reservation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B32016A0-09B2-4547-AA82-0563A94ACED7}|Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server.csproj|solutionrelative:restaurant_reservation_api_server\\models\\reservation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B32016A0-09B2-4547-AA82-0563A94ACED7}|Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server.csproj|c:\\users\\hankh\\desktop\\project_reservation\\restaurant_reservation_api_server\\restaurant_reservation_api_server\\repositories\\services\\reservationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B32016A0-09B2-4547-AA82-0563A94ACED7}|Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server.csproj|solutionrelative:restaurant_reservation_api_server\\repositories\\services\\reservationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B32016A0-09B2-4547-AA82-0563A94ACED7}|Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server.csproj|c:\\users\\hankh\\desktop\\project_reservation\\restaurant_reservation_api_server\\restaurant_reservation_api_server\\models\\arrivedtime.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B32016A0-09B2-4547-AA82-0563A94ACED7}|Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server.csproj|solutionrelative:restaurant_reservation_api_server\\models\\arrivedtime.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B32016A0-09B2-4547-AA82-0563A94ACED7}|Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server.csproj|c:\\users\\hankh\\desktop\\project_reservation\\restaurant_reservation_api_server\\restaurant_reservation_api_server\\controllers\\reservationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B32016A0-09B2-4547-AA82-0563A94ACED7}|Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server.csproj|solutionrelative:restaurant_reservation_api_server\\controllers\\reservationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B32016A0-09B2-4547-AA82-0563A94ACED7}|Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server.csproj|c:\\users\\hankh\\desktop\\project_reservation\\restaurant_reservation_api_server\\restaurant_reservation_api_server\\repositories\\interfaces\\ireservationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -22,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,7 +38,33 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Reservation.cs",
+              "DocumentMoniker": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server\\Models\\Reservation.cs",
+              "RelativeDocumentMoniker": "Restaurant_Reservation_API_Server\\Models\\Reservation.cs",
+              "ToolTip": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server\\Models\\Reservation.cs",
+              "RelativeToolTip": "Restaurant_Reservation_API_Server\\Models\\Reservation.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAuwBUAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-20T12:57:52.032Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "ArrivedTime.cs",
+              "DocumentMoniker": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server\\Models\\ArrivedTime.cs",
+              "RelativeDocumentMoniker": "Restaurant_Reservation_API_Server\\Models\\ArrivedTime.cs",
+              "ToolTip": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server\\Models\\ArrivedTime.cs",
+              "RelativeToolTip": "Restaurant_Reservation_API_Server\\Models\\ArrivedTime.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-20T12:57:51.083Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "IReservationRepository.cs",
               "DocumentMoniker": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server\\Repositories\\Interfaces\\IReservationRepository.cs",
               "RelativeDocumentMoniker": "Restaurant_Reservation_API_Server\\Repositories\\Interfaces\\IReservationRepository.cs",
@@ -48,20 +82,20 @@
               "RelativeDocumentMoniker": "Restaurant_Reservation_API_Server\\Repositories\\Services\\ReservationRepository.cs",
               "ToolTip": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server\\Repositories\\Services\\ReservationRepository.cs",
               "RelativeToolTip": "Restaurant_Reservation_API_Server\\Repositories\\Services\\ReservationRepository.cs",
-              "ViewState": "AQIAABsAAAAAAAAAAADgvyYAAAAIAAAA",
+              "ViewState": "AQIAACYAAAAAAAAAAADgvzAAAABBAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-16T11:59:53.847Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "ReservationController.cs",
               "DocumentMoniker": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server\\Controllers\\ReservationController.cs",
               "RelativeDocumentMoniker": "Restaurant_Reservation_API_Server\\Controllers\\ReservationController.cs",
               "ToolTip": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server\\Controllers\\ReservationController.cs",
               "RelativeToolTip": "Restaurant_Reservation_API_Server\\Controllers\\ReservationController.cs",
-              "ViewState": "AQIAACcAAAAAAAAAAAA+wC8AAAAIAAAA",
+              "ViewState": "AQIAACgAAAAAAAAAAAAAAC8AAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-16T11:59:51.411Z",
               "EditorCaption": ""

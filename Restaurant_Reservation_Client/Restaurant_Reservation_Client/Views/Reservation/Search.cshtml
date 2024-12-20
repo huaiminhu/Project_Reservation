@@ -70,13 +70,41 @@
                         @Html.DisplayFor(model => model.ChildSeat)
                     </td>
                     <td>
-                        @Html.ActionLink("修改", "Edit", new { id = Model.Id }) |
-                        @Html.ActionLink("刪除", "Delete", new { id = Model.Id })
+                        @* @Html.ActionLink("修改", "Edit", new { id = Model.Id }) |
+                        @Html.ActionLink("刪除", "Delete", new { id = Model.Id }) *@
+                        <a asp-controller="Reservation" asp-action="Edit" asp-route-id=@Model.Id
+                           class="btn btn-primary mx-2">修改</a>
+                        <a asp-controller="Reservation" asp-action="Delete" asp-route-id=@Model.Id onclick="return confirm('不吃了?')"
+                           class="btn btn-danger mx-2" >刪除</a>
+                        data-bs-toggle="modal" data-bs-target="#deleteModal"
+                        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">刪除訂位</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        確定不吃?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">再想想</button>
+                                        <button type="button" class="btn btn-danger">這次不吃!</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
+}
+@* else if(Model == null){
+    <h2>您輸入的聯絡電話不存在!請查明後再輸入...</h2>
+} *@
+else{
+    <h2>(查詢結果將顯示於此)</h2>
 }
 
 <div>

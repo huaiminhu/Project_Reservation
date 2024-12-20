@@ -101,23 +101,10 @@ namespace Restaurant_Reservation_API_Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ArrivedTimeId");
-
                     b.HasIndex("Phone")
                         .IsUnique();
 
                     b.ToTable("Reservations");
-                });
-
-            modelBuilder.Entity("Restaurant_Reservation_API_Server.Models.Reservation", b =>
-                {
-                    b.HasOne("Restaurant_Reservation_API_Server.Models.ArrivedTime", "ArrivedTime")
-                        .WithMany()
-                        .HasForeignKey("ArrivedTimeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ArrivedTime");
                 });
 #pragma warning restore 612, 618
         }

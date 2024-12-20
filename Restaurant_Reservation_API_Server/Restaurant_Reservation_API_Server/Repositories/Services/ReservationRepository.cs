@@ -46,7 +46,7 @@ namespace Restaurant_Reservation_API_Server.Repositories.Services
                 former.BookingDate = reservation.BookingDate;
                 former.CustomerName = reservation.CustomerName;
                 former.Phone = reservation.Phone;
-                former.ArrivedTime = reservation.ArrivedTime;
+                former.ArrivedTimeId = reservation.ArrivedTimeId;
                 former.SeatRequirement = reservation.SeatRequirement;
                 former.ChildSeat = reservation.ChildSeat;
             }

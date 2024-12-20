@@ -204,14 +204,12 @@ namespace Restaurant_Reservation_Client.Controllers
         [HttpPost]
         public IActionResult Edit(ReservationViewModel reservation)
         {
-            var id = HttpContext.Session.GetInt32("ReservationCreator");
+            reservation.Id = HttpContext.Session.GetInt32("ReservationCreator").Value;
             string data = JsonConvert.SerializeObject(reservation);
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = client.PutAsync(url1 + id, content).Result;
+            HttpResponseMessage response = client.PutAsync(url1 + reservation.Id, content).Result;
             if (response.IsSuccessStatusCode)
             {
-                string result = response.Content.ReadAsStringAsync().Result;
-                var detail = JsonConvert.DeserializeObject<ReservationViewModel>(result);
                 return RedirectToAction("Success");
             }
             List<ArrivedTimeViewModel> arrivedTimes = new List<ArrivedTimeViewModel>();
@@ -233,13 +231,44 @@ namespace Restaurant_Reservation_Client.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            return View();
+            ReservationViewModel reservation = new();
+            HttpResponseMessage response = client.GetAsync(url1 + id).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string result = response.Content.ReadAsStringAsync().Result;
+                var data = JsonConvert.DeserializeObject<ReservationViewModel>(result);
+                if (data != null)
+                {
+                    reservation = data;
+                    HttpContext.Session.SetInt32("ReservationCreator", id);
+                    List<ArrivedTimeViewModel> arrivedTimes = new List<ArrivedTimeViewModel>();
+                    response = client.GetAsync(url2).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        result = response.Content.ReadAsStringAsync().Result;
+                        var periods = JsonConvert.DeserializeObject<List<ArrivedTimeViewModel>>(result);
+                        if (periods != null)
+                        {
+                            arrivedTimes = periods;
+                        }
+                    }
+                    arrivedTimes.Insert(0, new ArrivedTimeViewModel { Id = 0, Period = "請選擇時段" });
+                    ViewBag.Periods = new SelectList(arrivedTimes, "Id", "Period");
+                    return Ok();
+                }
+            }
+            return BadRequest();
         }
 
-        [HttpPost]
-        public IActionResult Delete(ReservationViewModel reservation)
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteRes(int id)
         {
-            return View();
+            HttpResponseMessage response = client.DeleteAsync(url1 + id).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            return BadRequest();
         }
     }
 }
