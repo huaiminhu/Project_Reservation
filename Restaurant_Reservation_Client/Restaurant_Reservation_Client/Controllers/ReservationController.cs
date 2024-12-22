@@ -228,40 +228,7 @@ namespace Restaurant_Reservation_Client.Controllers
             return View(reservation);
         }
 
-        [HttpGet]
         public IActionResult Delete(int id)
-        {
-            ReservationViewModel reservation = new();
-            HttpResponseMessage response = client.GetAsync(url1 + id).Result;
-            if (response.IsSuccessStatusCode)
-            {
-                string result = response.Content.ReadAsStringAsync().Result;
-                var data = JsonConvert.DeserializeObject<ReservationViewModel>(result);
-                if (data != null)
-                {
-                    reservation = data;
-                    HttpContext.Session.SetInt32("ReservationCreator", id);
-                    List<ArrivedTimeViewModel> arrivedTimes = new List<ArrivedTimeViewModel>();
-                    response = client.GetAsync(url2).Result;
-                    if (response.IsSuccessStatusCode)
-                    {
-                        result = response.Content.ReadAsStringAsync().Result;
-                        var periods = JsonConvert.DeserializeObject<List<ArrivedTimeViewModel>>(result);
-                        if (periods != null)
-                        {
-                            arrivedTimes = periods;
-                        }
-                    }
-                    arrivedTimes.Insert(0, new ArrivedTimeViewModel { Id = 0, Period = "請選擇時段" });
-                    ViewBag.Periods = new SelectList(arrivedTimes, "Id", "Period");
-                    return Ok();
-                }
-            }
-            return BadRequest();
-        }
-
-        [HttpPost, ActionName("Delete")]
-        public IActionResult DeleteRes(int id)
         {
             HttpResponseMessage response = client.DeleteAsync(url1 + id).Result;
             if (response.IsSuccessStatusCode)
