@@ -40,7 +40,7 @@ namespace Restaurant_Reservation_Client.Controllers
                         {
                             for (var j = 0; j <= reservations.Count - 1; j++)
                             {
-                                if (arrivedTimes[i].Id == reservations[j].ArrivedTimeId)
+                                if (reservations[j].BookingDate == DateTime.Today.ToString("d").Replace('/', '-') && arrivedTimes[i].Id == reservations[j].ArrivedTimeId)
                                 {
                                     requirement += reservations[j].SeatRequirement;
                                 }

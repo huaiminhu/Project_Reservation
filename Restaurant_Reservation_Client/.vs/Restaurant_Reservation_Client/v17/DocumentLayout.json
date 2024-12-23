@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}|Restaurant_Reservation_Client\\Restaurant_Reservation_Client.csproj|c:\\users\\hankh\\desktop\\project_reservation\\restaurant_reservation_client\\restaurant_reservation_client\\controllers\\reservationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}|Restaurant_Reservation_Client\\Restaurant_Reservation_Client.csproj|solutionrelative:restaurant_reservation_client\\controllers\\reservationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}|Restaurant_Reservation_Client\\Restaurant_Reservation_Client.csproj|c:\\users\\hankh\\desktop\\project_reservation\\restaurant_reservation_client\\restaurant_reservation_client\\views\\reservation\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}|Restaurant_Reservation_Client\\Restaurant_Reservation_Client.csproj|solutionrelative:restaurant_reservation_client\\views\\reservation\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}|Restaurant_Reservation_Client\\Restaurant_Reservation_Client.csproj|c:\\users\\hankh\\desktop\\project_reservation\\restaurant_reservation_client\\restaurant_reservation_client\\views\\reservation\\search.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}|Restaurant_Reservation_Client\\Restaurant_Reservation_Client.csproj|solutionrelative:restaurant_reservation_client\\views\\reservation\\search.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}|Restaurant_Reservation_Client\\Restaurant_Reservation_Client.csproj|c:\\users\\hankh\\desktop\\project_reservation\\restaurant_reservation_client\\restaurant_reservation_client\\controllers\\reservationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}|Restaurant_Reservation_Client\\Restaurant_Reservation_Client.csproj|solutionrelative:restaurant_reservation_client\\controllers\\reservationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}|Restaurant_Reservation_Client\\Restaurant_Reservation_Client.csproj|c:\\users\\hankh\\desktop\\project_reservation\\restaurant_reservation_client\\restaurant_reservation_client\\models\\reservationviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}|Restaurant_Reservation_Client\\Restaurant_Reservation_Client.csproj|solutionrelative:restaurant_reservation_client\\models\\reservationviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,12 +35,38 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\Restaurant_Reservation_Client\\Views\\Reservation\\Index.cshtml",
+              "RelativeDocumentMoniker": "Restaurant_Reservation_Client\\Views\\Reservation\\Index.cshtml",
+              "ToolTip": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\Restaurant_Reservation_Client\\Views\\Reservation\\Index.cshtml",
+              "RelativeToolTip": "Restaurant_Reservation_Client\\Views\\Reservation\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-23T12:37:16.41Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ReservationViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\Restaurant_Reservation_Client\\Models\\ReservationViewModel.cs",
+              "RelativeDocumentMoniker": "Restaurant_Reservation_Client\\Models\\ReservationViewModel.cs",
+              "ToolTip": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\Restaurant_Reservation_Client\\Models\\ReservationViewModel.cs",
+              "RelativeToolTip": "Restaurant_Reservation_Client\\Models\\ReservationViewModel.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-23T12:24:10.44Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "ReservationController.cs",
               "DocumentMoniker": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\Restaurant_Reservation_Client\\Controllers\\ReservationController.cs",
               "RelativeDocumentMoniker": "Restaurant_Reservation_Client\\Controllers\\ReservationController.cs",
               "ToolTip": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\Restaurant_Reservation_Client\\Controllers\\ReservationController.cs",
               "RelativeToolTip": "Restaurant_Reservation_Client\\Controllers\\ReservationController.cs",
-              "ViewState": "AQIAAOAAAAAAAAAAAAAAAOcAAAAIAAAA",
+              "ViewState": "AQIAABoAAAAAAAAAAAAuwCoAAABxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-20T07:43:11.468Z",
               "EditorCaption": ""
@@ -45,7 +79,7 @@
               "RelativeDocumentMoniker": "Restaurant_Reservation_Client\\Views\\Reservation\\Search.cshtml",
               "ToolTip": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\Restaurant_Reservation_Client\\Views\\Reservation\\Search.cshtml",
               "RelativeToolTip": "Restaurant_Reservation_Client\\Views\\Reservation\\Search.cshtml",
-              "ViewState": "AQIAAEsAAAAAAAAAAAA0wGYAAABAAAAA",
+              "ViewState": "AQIAAFQAAAAAAAAAAAA0wGYAAABAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-12-16T13:27:19.397Z",
               "EditorCaption": ""

@@ -6,10 +6,15 @@
 <div class="container text-center">
     <div class="row">
         <div class="col">
+            <h1>今日開放訂位時段=)</h1>
             @foreach (var item in Model)
             {
-                <h2>@Html.DisplayFor(modelItem => item.Period) : @Html.DisplayFor(modelItem => item.RemainSeats) 人</h2>
+                @if (int.Parse(item.Period[0..2]) - DateTime.Now.Hour > 1)
+                {
+                    <h2>@Html.DisplayFor(modelItem => item.Period) : @Html.DisplayFor(modelItem => item.RemainSeats) 人</h2>
+                }
             }
+            <h3>(若無顯示時段, 表示不再開放今天的訂位, 訂位時日期請從明日選起)</h3>
         </div>
     </div>
     <div class="row">
