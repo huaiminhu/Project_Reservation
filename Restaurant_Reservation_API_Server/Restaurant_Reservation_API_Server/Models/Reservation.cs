@@ -20,5 +20,7 @@ namespace Restaurant_Reservation_API_Server.Models
         public int ChildSeat { get; set; }
         
         public int ArrivedTimeId { get; set; }
+        [JsonIgnore]
+        public ArrivedTime? ArrivedTime { get; set; }
     }
 }

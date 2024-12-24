@@ -40,7 +40,7 @@
               "RelativeDocumentMoniker": "Restaurant_Reservation_Client\\Views\\Reservation\\Index.cshtml",
               "ToolTip": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\Restaurant_Reservation_Client\\Views\\Reservation\\Index.cshtml",
               "RelativeToolTip": "Restaurant_Reservation_Client\\Views\\Reservation\\Index.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAYAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABAAAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-12-23T12:37:16.41Z",
               "EditorCaption": ""
@@ -55,8 +55,7 @@
               "RelativeToolTip": "Restaurant_Reservation_Client\\Models\\ReservationViewModel.cs",
               "ViewState": "AQIAAAgAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-23T12:24:10.44Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-23T12:24:10.44Z"
             },
             {
               "$type": "Document",
@@ -68,8 +67,7 @@
               "RelativeToolTip": "Restaurant_Reservation_Client\\Controllers\\ReservationController.cs",
               "ViewState": "AQIAABoAAAAAAAAAAAAuwCoAAABxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-20T07:43:11.468Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-20T07:43:11.468Z"
             },
             {
               "$type": "Document",
@@ -81,8 +79,7 @@
               "RelativeToolTip": "Restaurant_Reservation_Client\\Views\\Reservation\\Search.cshtml",
               "ViewState": "AQIAAFQAAAAAAAAAAAA0wGYAAABAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-16T13:27:19.397Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-16T13:27:19.397Z"
             }
           ]
         }

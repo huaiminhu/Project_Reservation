@@ -41,32 +41,32 @@ namespace Restaurant_Reservation_API_Server.Migrations
                         new
                         {
                             Id = 1,
-                            Period = "11:30"
+                            Period = "11:30 - 13:00"
                         },
                         new
                         {
                             Id = 2,
-                            Period = "13:00"
+                            Period = "13:00 - 14:30"
                         },
                         new
                         {
                             Id = 3,
-                            Period = "14:30"
+                            Period = "14:30 - 16:00"
                         },
                         new
                         {
                             Id = 4,
-                            Period = "16:00"
+                            Period = "16:00 - 17:30"
                         },
                         new
                         {
                             Id = 5,
-                            Period = "17:30"
+                            Period = "17:30 - 19:00"
                         },
                         new
                         {
                             Id = 6,
-                            Period = "19:00"
+                            Period = "19:00 - 20:30"
                         });
                 });
 
@@ -101,10 +101,23 @@ namespace Restaurant_Reservation_API_Server.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ArrivedTimeId");
+
                     b.HasIndex("Phone")
                         .IsUnique();
 
                     b.ToTable("Reservations");
+                });
+
+            modelBuilder.Entity("Restaurant_Reservation_API_Server.Models.Reservation", b =>
+                {
+                    b.HasOne("Restaurant_Reservation_API_Server.Models.ArrivedTime", "ArrivedTime")
+                        .WithMany()
+                        .HasForeignKey("ArrivedTimeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ArrivedTime");
                 });
 #pragma warning restore 612, 618
         }
