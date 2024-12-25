@@ -3,34 +3,43 @@
     ViewData["Title"] = "Index";
 }
 
-<div class="container text-center">
-    <div class="row">
-        <div class="col">
-            <h1>今日開放訂位的用餐時段=)</h1>
-            @* <h4>(時段 : 開放座位數)</h4> *@
+<h1 class="text-center">今日用餐時段=)</h1>
+
+<div class="container text-center m-3">
+    <div class="row justify-content-md-center">
             @foreach (var item in Model)
             {
-                @* @if (int.Parse(item.Period[0..2]) - DateTime.Now.Hour > 1)
-                {
-                    <h3 class="text-">@Html.DisplayFor(modelItem => item.Period)</h3><h2 class="text-success">@Html.DisplayFor(modelItem => item.RemainSeats)</h2>
-                } *@
-                <h3 class="text-">@Html.DisplayFor(modelItem => item.Period)</h3><h2 class="text-success">@Html.DisplayFor(modelItem => item.RemainSeats)</h2>
+                <div class="col-3 m-1 p-3 border border-primary rounded">
+                    <h3>@Html.DisplayFor(modelItem => item.Period)</h3>
+                    <p class="fs-5">目前空位 : </p>
+                     @if (Convert.ToInt32((DateTime.Parse(item.Period[0..5]) - DateTime.Now).TotalHours) > -11)
+                        {
+                            @if (item.RemainSeats <= 5)
+                            {
+                                <h2 class="text-danger">@Html.DisplayFor(modelItem => item.RemainSeats)</h2>
+                            }
+                            else if (item.RemainSeats <= 10)
+                            {
+                                <h2 class="text-warning">@Html.DisplayFor(modelItem => item.RemainSeats)</h2>
+                            }
+                            else
+                            {
+                                <h2 class="text-success">@Html.DisplayFor(modelItem => item.RemainSeats)</h2>
+                            }
+                        }
+                        else
+                        {
+                            <p class="fs-5 text-primary">這個時段現在不開放訂位~</p>
+                        } 
+                </div>
             }
-            <h5>(若無顯示時段, 表示不再開放今天的訂位, 訂位時日期請從明日選起)</h5>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <p>
-                <a asp-action="MakeRes" class="btn btn-warning">我要訂位</a>
-            </p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <p>
-                <a asp-action="Search" class="btn btn-info">訂位修改/刪除</a>
-            </p>
-        </div>
-    </div>
+        </div>        
 </div>
+
+<p class="text-center">
+    <a asp-action="MakeRes" class="btn btn-success">我要訂位</a>
+</p>
+
+<p class="text-center">
+    <a asp-action="Search" class="btn btn-info">訂位修改/刪除</a>
+</p>

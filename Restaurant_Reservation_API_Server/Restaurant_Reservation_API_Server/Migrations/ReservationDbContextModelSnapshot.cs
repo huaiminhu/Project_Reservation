@@ -21,7 +21,46 @@ namespace Restaurant_Reservation_API_Server.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Restaurant_Reservation_API_Server.Models.ArrivedTime", b =>
+            modelBuilder.Entity("Restaurant_Reservation_API_Server.Models.Reservation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BookingDate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ChildSeat")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CustomerName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("SeatRequirement")
+                        .HasColumnType("int");
+
+                    b.Property<int>("arrivalTimeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Phone")
+                        .IsUnique();
+
+                    b.HasIndex("arrivalTimeId");
+
+                    b.ToTable("Reservations");
+                });
+
+            modelBuilder.Entity("Restaurant_Reservation_API_Server.Models.arrivalTime", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -35,7 +74,7 @@ namespace Restaurant_Reservation_API_Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("arrivedTimes");
+                    b.ToTable("arrivalTimes");
 
                     b.HasData(
                         new
@@ -72,52 +111,13 @@ namespace Restaurant_Reservation_API_Server.Migrations
 
             modelBuilder.Entity("Restaurant_Reservation_API_Server.Models.Reservation", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ArrivedTimeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("BookingDate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ChildSeat")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CustomerName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("SeatRequirement")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ArrivedTimeId");
-
-                    b.HasIndex("Phone")
-                        .IsUnique();
-
-                    b.ToTable("Reservations");
-                });
-
-            modelBuilder.Entity("Restaurant_Reservation_API_Server.Models.Reservation", b =>
-                {
-                    b.HasOne("Restaurant_Reservation_API_Server.Models.ArrivedTime", "ArrivedTime")
+                    b.HasOne("Restaurant_Reservation_API_Server.Models.arrivalTime", "arrivalTime")
                         .WithMany()
-                        .HasForeignKey("ArrivedTimeId")
+                        .HasForeignKey("arrivalTimeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ArrivedTime");
+                    b.Navigation("arrivalTime");
                 });
 #pragma warning restore 612, 618
         }

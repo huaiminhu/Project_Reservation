@@ -37,6 +37,6 @@ namespace Restaurant_Reservation_Client.Models
 
 
         [Display(Name = "用餐時段")]
-        public int ArrivedTimeId { get; set; }
+        public int arrivalTimeId { get; set; }
     }
 }

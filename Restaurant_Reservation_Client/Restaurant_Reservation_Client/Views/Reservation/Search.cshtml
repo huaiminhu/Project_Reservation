@@ -4,7 +4,7 @@
     ViewData["Title"] = "訂位查詢";
 }
 
-<h1>訂位查詢</h1>
+<h1>訂位修改/刪除前請先輸入聯絡資訊查詢</h1>
 
 <hr />
 <div class="row">
@@ -38,7 +38,7 @@
                         @Html.DisplayNameFor(model => model.Phone)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.ArrivedTimeId)
+                        @Html.DisplayNameFor(model => model.arrivalTimeId)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.SeatRequirement)
@@ -70,16 +70,10 @@
                         @Html.DisplayFor(model => model.ChildSeat)
                     </td>
                     <td>
-                        @* @Html.ActionLink("修改", "Edit", new { id = Model.Id }) |
-                        @Html.ActionLink("刪除", "Delete", new { id = Model.Id }) *@
                         <a asp-controller="Reservation" asp-action="Edit" asp-route-id=@Model.Id
                            class="btn btn-primary mx-2">修改</a>
                         <a asp-controller="Reservation" asp-action="Delete" asp-route-id=@Model.Id data-bs-toggle="modal" data-bs-target="#deleteModal"
-                    class="btn btn-danger mx-2" >刪除</a> 
-                        @* <button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal"
-                                class="btn btn-danger mx-2" data-bs-url="@Url.Action($"Delete/{@Model.Id}")">
-                            刪除
-                    </button> data-url="@Url.Action($"Delete/{@Model.Id}")"*@
+                            class="btn btn-danger mx-2" >刪除</a> 
                         <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -88,13 +82,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        @* <form asp-action="Delete">
-                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                            <div class="form-group">
-                                                <input type="hidden" asp-for="Id" /> *@
-                                                <h2>確定不吃?</h2>
-                                            @* </div>
-                                        </form> *@
+                                        <h2>確定不吃?</h2>
                                     </div>
                                     <div class="modal-footer">
                                         <form asp-action="Delete">
@@ -112,9 +100,6 @@
         </table>
     </div>
 }
-@* else if(Model == null){
-    <h2>您輸入的聯絡電話不存在!請查明後再輸入...</h2>
-} *@
 else{
     <h2>(查詢結果將顯示於此)</h2>
 }
@@ -125,19 +110,4 @@ else{
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    @* <script>
-        $(document).ready(function(){
-            var id = $("#asp-route-id").val();
-             $("#sureDelete").click(function(){
-                $.ajax({
-                    type: "POST", 
-                    url: @Url.Action("Delete"), 
-                    data: {id:id}
-                    success: function(){
-
-                        }
-                })
-             })
-        }
-    </script> *@
 }
