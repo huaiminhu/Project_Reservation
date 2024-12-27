@@ -12,7 +12,7 @@
                 <div class="col-3 m-1 p-3 border border-info rounded">
                     <h3 class="fw-bold font-monospace">@Html.DisplayFor(modelItem => item.Period)</h3>
                     <p class="fs-5">目前空位 : </p>
-                    @if (Convert.ToInt32((DateTime.Parse(item.Period[0..5]) - DateTime.Now).TotalHours) > -11)
+                    @if (Convert.ToInt32((DateTime.Parse(item.Period[0..5]) - DateTime.Now).TotalHours) > -21)
                     {
                         @if (item.RemainSeats <= 5)
                         {
@@ -30,7 +30,7 @@
                     else
                     {
                         <p class="fs-5 text-primary">這個時段現在不開放訂位~</p>
-                    } 
+                    }
                 </div>
             }
     </div>        

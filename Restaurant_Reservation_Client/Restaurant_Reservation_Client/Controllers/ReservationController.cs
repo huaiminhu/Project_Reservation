@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using Restaurant_Reservation_Client.Models;
+using System.Linq;
 using System.Text;
 
 namespace Restaurant_Reservation_Client.Controllers
@@ -29,7 +30,8 @@ namespace Restaurant_Reservation_Client.Controllers
                 var time = JsonConvert.DeserializeObject<List<arrivalTimeViewModel>>(result2);
                 if (data != null && time != null)
                 {
-                    reservations = data;
+                    var modifiedData = data.Where(r => r.BookingDate == DateTime.Today.ToString("d").Replace('/', '-')).ToList();
+                    reservations = modifiedData;
                     arrivalTimes = time;
                     for (var i = 0; i < arrivalTimes.Count; i++)
                     {
@@ -38,7 +40,7 @@ namespace Restaurant_Reservation_Client.Controllers
                         {
                             for (var j = 0; j <= reservations.Count - 1; j++)
                             {
-                                if (reservations[j].BookingDate == DateTime.Today.ToString("d").Replace('/', '-') && arrivalTimes[i].Id == reservations[j].arrivalTimeId)
+                                if (arrivalTimes[i].Id == reservations[j].arrivalTimeId)
                                 {
                                     requirement += reservations[j].SeatRequirement;
                                 }
@@ -75,6 +77,24 @@ namespace Restaurant_Reservation_Client.Controllers
         [HttpPost]
         public IActionResult MakeRes(ReservationViewModel reservation)
         {
+            List<ReservationViewModel> reservations = new List<ReservationViewModel>();
+            HttpResponseMessage response1 = client.GetAsync(url1).Result;
+            if (response1.IsSuccessStatusCode)
+            {
+                string result1 = response1.Content.ReadAsStringAsync().Result;
+                var data = JsonConvert.DeserializeObject<List<ReservationViewModel>>(result1);
+                if (data != null)
+                {
+                    var modifiedData = data.Where(r => r.BookingDate == DateTime.Today.ToString("d").Replace('/', '-')).ToList();
+                    reservations = modifiedData;
+                    var invalidSeats = reservations.Sum(s => s.SeatRequirement);
+                    if (invalidSeats + reservation.SeatRequirement > 40)
+                    {
+                        ViewBag.NoMoreSeat = "您選擇的時段座位數不夠了><~請換個時段吧";
+                        return View(reservation);
+                    }
+                }
+            }
             HttpResponseMessage response = new();
             if (ModelState.IsValid)
             {
