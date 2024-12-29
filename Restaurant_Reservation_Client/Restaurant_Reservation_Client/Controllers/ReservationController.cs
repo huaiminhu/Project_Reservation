@@ -56,17 +56,28 @@ namespace Restaurant_Reservation_Client.Controllers
         }
 
         [HttpGet]
-        public IActionResult MakeRes()
+        public IActionResult MakeRes(string selectedDate)
         {
+            List<int> invalidSeats = new List<int>();
+            List <ReservationViewModel> reservations = new List<ReservationViewModel>();
+            HttpResponseMessage getListResponse = client.GetAsync(url1).Result;
             List<arrivalTimeViewModel> arrivalTimes = new List<arrivalTimeViewModel>();
             HttpResponseMessage response = client.GetAsync(url2).Result;
-            if (response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode && getListResponse.IsSuccessStatusCode)
             {
+                string getListResult = getListResponse.Content.ReadAsStringAsync().Result;
+                var listOfData = JsonConvert.DeserializeObject<List<ReservationViewModel>>(getListResult);
                 string result = response.Content.ReadAsStringAsync().Result;
                 var data = JsonConvert.DeserializeObject<List<arrivalTimeViewModel>>(result);
-                if (data != null)
+                if(data != null && listOfData != null)
                 {
-                    arrivalTimes = data;
+                    var modifiedData = listOfData.Where(r => r.BookingDate == selectedDate).ToList();
+                    reservations = modifiedData;
+                    for (int i = 0; i <= data.Count; i++)
+                    {
+                        //從這裡開始CODING, 首頁MODAL選定日期後..., 若想換日期, 在日期欄位下方新增同一個MODAL
+                        if (Convert.ToInt32((DateTime.Parse(data[i].Period[0..5]) - DateTime.Now).TotalHours) > 1 && )
+                    }
                 }
             }
             arrivalTimes.Insert(0, new arrivalTimeViewModel { Id = 0, Period = "請選擇時段" });
@@ -78,40 +89,42 @@ namespace Restaurant_Reservation_Client.Controllers
         public IActionResult MakeRes(ReservationViewModel reservation)
         {
             List<ReservationViewModel> reservations = new List<ReservationViewModel>();
-            HttpResponseMessage response1 = client.GetAsync(url1).Result;
-            if (response1.IsSuccessStatusCode)
+            HttpResponseMessage getListResponse = client.GetAsync(url1).Result;
+            HttpResponseMessage createResponse = new();
+            if (getListResponse.IsSuccessStatusCode)
             {
-                string result1 = response1.Content.ReadAsStringAsync().Result;
-                var data = JsonConvert.DeserializeObject<List<ReservationViewModel>>(result1);
-                if (data != null)
+                string getListResult = getListResponse.Content.ReadAsStringAsync().Result;
+                var listOfData = JsonConvert.DeserializeObject<List<ReservationViewModel>>(getListResult);
+                if (listOfData != null)
                 {
-                    var modifiedData = data.Where(r => r.BookingDate == DateTime.Today.ToString("d").Replace('/', '-')).ToList();
+                    var modifiedData = listOfData.Where(r => r.BookingDate == reservation.BookingDate && r.arrivalTimeId == reservation.arrivalTimeId).ToList();
                     reservations = modifiedData;
                     var invalidSeats = reservations.Sum(s => s.SeatRequirement);
                     if (invalidSeats + reservation.SeatRequirement > 40)
                     {
                         ViewBag.NoMoreSeat = "您選擇的時段座位數不夠了><~請換個時段吧";
-                        return View(reservation);
+                    }
+                    else
+                    {
+                        if (ModelState.IsValid)
+                        {
+                            string data = JsonConvert.SerializeObject(reservation);
+                            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                            createResponse = client.PostAsync(url1, content).Result;
+                            if (createResponse.IsSuccessStatusCode)
+                            {
+                                string result = createResponse.Content.ReadAsStringAsync().Result;
+                                var detail = JsonConvert.DeserializeObject<ReservationViewModel>(result);
+                                int id = detail.Id;
+                                HttpContext.Session.SetInt32("ReservationCreator", id);
+                                return RedirectToAction("Success");
+                            }
+                        }
                     }
                 }
             }
-            HttpResponseMessage response = new();
-            if (ModelState.IsValid)
-            {
-                string data = JsonConvert.SerializeObject(reservation);
-                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                response = client.PostAsync(url1, content).Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    string result = response.Content.ReadAsStringAsync().Result;
-                    var detail = JsonConvert.DeserializeObject<ReservationViewModel>(result);
-                    int id = detail.Id;
-                    HttpContext.Session.SetInt32("ReservationCreator", id);
-                    return RedirectToAction("Success");
-                }
-            }
             List<arrivalTimeViewModel> arrivalTimes = new List<arrivalTimeViewModel>();
-            response = client.GetAsync(url2).Result;
+            HttpResponseMessage response = client.GetAsync(url2).Result;
             if (response.IsSuccessStatusCode)
             {
                 string result = response.Content.ReadAsStringAsync().Result;
