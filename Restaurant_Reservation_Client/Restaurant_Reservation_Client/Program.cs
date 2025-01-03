@@ -4,7 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(60); // Set session timeout
+    options.IdleTimeout = TimeSpan.FromMinutes(60);
 });
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

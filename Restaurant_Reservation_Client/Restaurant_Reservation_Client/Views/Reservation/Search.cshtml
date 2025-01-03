@@ -24,84 +24,91 @@
 </div>
 @if (Model != null)
 {
-    <div class="container text-center">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.BookingDate)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CustomerName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Phone)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.arrivalTimeId)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.SeatRequirement)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ChildSeat)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        @Html.DisplayFor(model => model.BookingDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => model.CustomerName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => model.Phone)
-                    </td>
-                    <td>
-                        @ViewBag.Period
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => model.SeatRequirement)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => model.ChildSeat)
-                    </td>
-                    <td>
-                        <a asp-controller="Reservation" asp-action="Edit" asp-route-id=@Model.Id
-                           class="btn btn-primary mx-2">修改</a>
-                        <a asp-controller="Reservation" asp-action="Delete" asp-route-id=@Model.Id data-bs-toggle="modal" data-bs-target="#deleteModal"
-                            class="btn btn-danger mx-2" >刪除</a> 
-                        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="deleteModalLabel">刪除訂位</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <h2>確定不吃?</h2>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <form asp-action="Delete">
-                                            <input asp-for="@Model.Id" hidden/>
-                                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">再想想</button>
-                                            <button type="submit" class="btn btn-danger">這次不吃!</button>
-                                        </form>
+    if (Model.SeatRequirement == 0)
+    {
+        <h2 class="text-center text-danger">找不到訂位資訊!</h2>
+    }
+    else
+    {
+        <div class="container text-center">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.BookingDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CustomerName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Phone)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.arrivalTimeId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SeatRequirement)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ChildSeat)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => model.BookingDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.CustomerName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.Phone)
+                        </td>
+                        <td>
+                            @ViewBag.Period
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.SeatRequirement)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.ChildSeat)
+                        </td>
+                        <td>
+                            <a asp-controller="Reservation" asp-action="Edit" asp-route-id=@Model.Id
+                               class="btn btn-primary mx-2">修改</a>
+                            <a asp-controller="Reservation" asp-action="Delete" asp-route-id=@Model.Id data-bs-toggle="modal" data-bs-target="#deleteModal"
+                               class="btn btn-danger mx-2">刪除</a>
+                            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="deleteModalLabel">刪除訂位</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h2>確定不吃?</h2>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <form asp-action="Delete">
+                                                <input asp-for="@Model.Id" hidden />
+                                                <button type="button" class="btn btn-success" data-bs-dismiss="modal">再想想</button>
+                                                <button type="submit" class="btn btn-danger">這次不吃!</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    }
 }
 else{
-    <h2>(查詢結果將顯示於此)</h2>
+    <h3 class ="text-center text-info">(查詢結果將顯示於此)</h3>
 }
 
 <div>

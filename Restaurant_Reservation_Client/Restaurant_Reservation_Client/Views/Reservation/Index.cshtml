@@ -5,14 +5,23 @@
 
 <h1 class="text-center fw-bold text-primary">~今日用餐時段~</h1>
 
+@if (TempData["DeleteMsg"] != null)
+{
+    <span class="alert alert-info alert-dismissable fade show" style="display: table; margin: 0 auto;" role="alert">
+        <strong>@TempData["DeleteMsg"]</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </span>
+}
+
 <div class="container text-center m-3">
     <div class="row justify-content-md-center">
             @foreach (var item in Model)
-            {
+            {   
+                var diff = Convert.ToInt32((DateTime.Parse(item.Period[0..5]) - DateTime.Now).TotalHours);
                 <div class="col-3 m-1 p-3 border border-info rounded">
                     <h3 class="fw-bold font-monospace">@Html.DisplayFor(modelItem => item.Period)</h3>
                     <p class="fs-5">目前空位 : </p>
-                    @if (Convert.ToInt32((DateTime.Parse(item.Period[0..5]) - DateTime.Now).TotalHours) > 1)
+                    @if (diff > 1)
                     {
                         @if (item.RemainSeats <= 5 && item.RemainSeats >= 1)
                         {
@@ -41,26 +50,7 @@
 </div>
 
 <p class="text-center">
-    <a asp-controller="Reservation" asp-action="MakeRes" class="btn btn-info fw-bold" data-bs-toggle="modal" data-bs-target="#dateSelectModal">我要訂位</a>
-    <div class="modal fade" id="dateSelectModal" tabindex="-1" aria-labelledby="dateSelectModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="dateSelectModalLabel">請選擇訂位日期</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <h2>請選擇訂位日期</h2>
-                        <form asp-action="MakeRes">
-                            <input type="date" />
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-promary">按我接著完成訂位</button>
-                            </div>
-                        </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    <a asp-controller="Reservation" asp-action="MakeRes" class="btn btn-info fw-bold">我要訂位</a>
 </p>
 
 <p class="text-center">

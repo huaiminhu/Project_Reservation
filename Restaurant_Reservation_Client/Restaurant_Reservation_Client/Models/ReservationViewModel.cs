@@ -8,8 +8,8 @@ namespace Restaurant_Reservation_Client.Models
 
 
         [Required(ErrorMessage = "日期未輸入!")]
-        [Display(Name = "訂位日期")]
-        public string BookingDate { get; set; }
+        [Display(Name = "訂位日期"), DataType(DataType.Date)]
+        public DateTime BookingDate { get; set; }
 
 
         [Required(ErrorMessage = "大名未輸入!")]
@@ -38,5 +38,6 @@ namespace Restaurant_Reservation_Client.Models
 
         [Display(Name = "用餐時段")]
         public int arrivalTimeId { get; set; }
+
     }
 }

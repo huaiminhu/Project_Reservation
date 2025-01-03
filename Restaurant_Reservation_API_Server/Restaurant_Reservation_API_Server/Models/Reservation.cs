@@ -11,14 +11,13 @@ namespace Restaurant_Reservation_API_Server.Models
 
         [Key]
         public int Id { get; set; }        
-        public string BookingDate { get; set; }        
+        public DateTime BookingDate { get; set; }        
         public string CustomerName { get; set; }        
         public string Phone { get; set; }        
         public int SeatRequirement { get; set; }        
         public int ChildSeat { get; set; }
         
         public int arrivalTimeId { get; set; }
-        [JsonIgnore]
         public arrivalTime? arrivalTime { get; set; }
     }
 }
