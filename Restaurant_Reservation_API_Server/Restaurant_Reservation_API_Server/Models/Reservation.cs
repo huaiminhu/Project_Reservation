@@ -5,7 +5,6 @@ using System.Text.Json.Serialization;
 
 namespace Restaurant_Reservation_API_Server.Models
 {
-    [Index(nameof(Phone), IsUnique = true)]
     public class Reservation
     {
 

@@ -42,7 +42,7 @@ namespace Restaurant_Reservation_API_Server.Migrations
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SeatRequirement")
                         .HasColumnType("int");
@@ -51,9 +51,6 @@ namespace Restaurant_Reservation_API_Server.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Phone")
-                        .IsUnique();
 
                     b.HasIndex("arrivalTimeId");
 

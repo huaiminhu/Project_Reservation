@@ -46,18 +46,64 @@ namespace Restaurant_Reservation_Client.Controllers
         [HttpGet]
         public IActionResult MakeRes()
         {
-            List<arrivalTimeViewModel> arrivalTimes = new List<arrivalTimeViewModel>();
-            HttpResponseMessage getTimesresponse = client.GetAsync(arrivalTimeApi).Result;
-            if (getTimesresponse.IsSuccessStatusCode)
+            if (HttpContext.Session.GetString("SelectedDate") != null)
             {
-                string getTimesresult = getTimesresponse.Content.ReadAsStringAsync().Result;
-                var timesData = JsonConvert.DeserializeObject<List<arrivalTimeViewModel>>(getTimesresult);
-                if (timesData != null)
+                var selectedDate = HttpContext.Session.GetString("SelectedDate");
+                List<arrivalTimeViewModel> results = new List<arrivalTimeViewModel>();
+                List<ReservationViewModel> reservations = new List<ReservationViewModel>();
+                HttpResponseMessage response1 = client.GetAsync(reservationApi).Result;
+                List<arrivalTimeViewModel> arrivalTimes = new List<arrivalTimeViewModel>();
+                HttpResponseMessage response2 = client.GetAsync(arrivalTimeApi).Result;
+                if (response1.IsSuccessStatusCode && response2.IsSuccessStatusCode)
                 {
-                    arrivalTimes = timesData;
+                    string result1 = response1.Content.ReadAsStringAsync().Result;
+                    string result2 = response2.Content.ReadAsStringAsync().Result;
+                    var data = JsonConvert.DeserializeObject<List<ReservationViewModel>>(result1);
+                    var time = JsonConvert.DeserializeObject<List<arrivalTimeViewModel>>(result2);
+                    if (data != null && time != null)
+                    {
+                        var modifiedDate = DateTime.Parse(selectedDate);
+                        var modifiedData = data.Where(r => r.BookingDate == modifiedDate).ToList();
+                        reservations = modifiedData;
+                        arrivalTimes = time;
+                        if(modifiedDate == DateTime.Today)
+                        {
+                            for (var i = 0; i < arrivalTimes.Count; i++)
+                            {
+                                int requirement = reservations.Where(r => r.arrivalTimeId == arrivalTimes[i].Id).Sum(s => s.SeatRequirement);
+                                var diff = Convert.ToInt32((DateTime.Parse(arrivalTimes[i].Period[0..5]) - DateTime.Now).TotalHours);
+                                if (requirement < 45 && diff > 1)
+                                    results.Add(arrivalTimes[i]);
+                            }
+                        }
+                        else
+                        {
+                            for (var i = 0; i < arrivalTimes.Count; i++)
+                            {
+                                int requirement = reservations.Where(r => r.arrivalTimeId == arrivalTimes[i].Id).Sum(s => s.SeatRequirement);
+                                if (requirement < 45)
+                                    results.Add(arrivalTimes[i]);
+                            }
+                        }
+                    }
                 }
+                ViewBag.Periods = new SelectList(results, "Id", "Period");
             }
-            ViewBag.Periods = new SelectList(arrivalTimes, "Id", "Period");
+            else
+            {
+                List<arrivalTimeViewModel> arrivalTimes = new List<arrivalTimeViewModel>();
+                HttpResponseMessage getTimesresponse = client.GetAsync(arrivalTimeApi).Result;
+                if (getTimesresponse.IsSuccessStatusCode)
+                {
+                    string getTimesresult = getTimesresponse.Content.ReadAsStringAsync().Result;
+                    var timesData = JsonConvert.DeserializeObject<List<arrivalTimeViewModel>>(getTimesresult);
+                    if (timesData != null)
+                    {
+                        arrivalTimes = timesData;
+                    }
+                }
+                ViewBag.Periods = new SelectList(arrivalTimes, "Id", "Period");
+            }
             return View();
         }
 
@@ -65,17 +111,62 @@ namespace Restaurant_Reservation_Client.Controllers
         public IActionResult MakeRes(ReservationViewModel reservation)
         {
             List<arrivalTimeViewModel> arrivalTimes = new List<arrivalTimeViewModel>();
-            HttpResponseMessage getTimesresponse = client.GetAsync(arrivalTimeApi).Result;
-            if (getTimesresponse.IsSuccessStatusCode)
+            if (HttpContext.Session.GetString("SelectedDate") != null)
             {
-                string getTimesresult = getTimesresponse.Content.ReadAsStringAsync().Result;
-                var timesData = JsonConvert.DeserializeObject<List<arrivalTimeViewModel>>(getTimesresult);
-                if (timesData != null)
+                var selectedDate = HttpContext.Session.GetString("SelectedDate");
+                List<arrivalTimeViewModel> results = new List<arrivalTimeViewModel>();
+                List<ReservationViewModel> reservations = new List<ReservationViewModel>();
+                HttpResponseMessage response1 = client.GetAsync(reservationApi).Result;
+                HttpResponseMessage response2 = client.GetAsync(arrivalTimeApi).Result;
+                if (response1.IsSuccessStatusCode && response2.IsSuccessStatusCode)
                 {
-                    arrivalTimes = timesData;
+                    string result1 = response1.Content.ReadAsStringAsync().Result;
+                    string result2 = response2.Content.ReadAsStringAsync().Result;
+                    var data = JsonConvert.DeserializeObject<List<ReservationViewModel>>(result1);
+                    var time = JsonConvert.DeserializeObject<List<arrivalTimeViewModel>>(result2);
+                    if (data != null && time != null)
+                    {
+                        var modifiedDate = DateTime.Parse(selectedDate);
+                        var modifiedData = data.Where(r => r.BookingDate == modifiedDate).ToList();
+                        reservations = modifiedData;
+                        arrivalTimes = time;
+                        if (modifiedDate == DateTime.Today)
+                        {
+                            for (var i = 0; i < arrivalTimes.Count; i++)
+                            {
+                                int requirement = reservations.Where(r => r.arrivalTimeId == arrivalTimes[i].Id).Sum(s => s.SeatRequirement);
+                                var diff = Convert.ToInt32((DateTime.Parse(arrivalTimes[i].Period[0..5]) - DateTime.Now).TotalHours);
+                                if (requirement < 45 && diff > 1)
+                                    results.Add(arrivalTimes[i]);
+                            }
+                        }
+                        else
+                        {
+                            for (var i = 0; i < arrivalTimes.Count; i++)
+                            {
+                                int requirement = reservations.Where(r => r.arrivalTimeId == arrivalTimes[i].Id).Sum(s => s.SeatRequirement);
+                                if (requirement < 45)
+                                    results.Add(arrivalTimes[i]);
+                            }
+                        }
+                    }
                 }
+                ViewBag.Periods = new SelectList(results, "Id", "Period");
             }
-            ViewBag.Periods = new SelectList(arrivalTimes, "Id", "Period");
+            else
+            {
+                HttpResponseMessage getTimesresponse = client.GetAsync(arrivalTimeApi).Result;
+                if (getTimesresponse.IsSuccessStatusCode)
+                {
+                    string getTimesresult = getTimesresponse.Content.ReadAsStringAsync().Result;
+                    var timesData = JsonConvert.DeserializeObject<List<arrivalTimeViewModel>>(getTimesresult);
+                    if (timesData != null)
+                    {
+                        arrivalTimes = timesData;
+                    }
+                }
+                ViewBag.Periods = new SelectList(arrivalTimes, "Id", "Period");
+            }
             if (reservation.SeatRequirement <= reservation.ChildSeat)
             {
                 ViewBag.ChildSeatError = "兒童座椅數必須少於總訂位數!";
@@ -225,6 +316,18 @@ namespace Restaurant_Reservation_Client.Controllers
                 return RedirectToAction("Index");
             }
             return BadRequest();
+        }
+
+        //public IActionResult SelectDate()
+        //{
+        //    return PartialView("_SelectDate");
+        //}
+
+        [HttpPost]
+        public IActionResult SelectDate(DateTime bookingDate)
+        {
+            HttpContext.Session.SetString("SelectedDate", bookingDate.ToString());
+            return RedirectToAction("MakeRes");
         }
     }
 }
