@@ -46,16 +46,16 @@ namespace Restaurant_Reservation_API_Server.Repositories.Services
                 former.BookingDate = reservation.BookingDate;
                 former.CustomerName = reservation.CustomerName;
                 former.Phone = reservation.Phone;
-                former.arrivalTimeId = reservation.arrivalTimeId;
+                former.ArrivalTimeId = reservation.ArrivalTimeId;
                 former.SeatRequirement = reservation.SeatRequirement;
                 former.ChildSeat = reservation.ChildSeat;
             }
             await _ctx.SaveChangesAsync();
         }
 
-        public Reservation? FindByPhone(string phone)
+        public Reservation? FindByDateAndPhone(DateTime bookingDate, string phone)
         {
-            return _ctx.Reservations.FirstOrDefault(x => x.Phone == phone);
+            return _ctx.Reservations.FirstOrDefault(x => x.BookingDate == bookingDate && x.Phone == phone);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Restaurant_Reservation_API_Server.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "arrivalTimes",
+                name: "ArrivalTimes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -23,7 +23,7 @@ namespace Restaurant_Reservation_API_Server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_arrivalTimes", x => x.Id);
+                    table.PrimaryKey("PK_ArrivalTimes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -37,21 +37,21 @@ namespace Restaurant_Reservation_API_Server.Migrations
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SeatRequirement = table.Column<int>(type: "int", nullable: false),
                     ChildSeat = table.Column<int>(type: "int", nullable: false),
-                    arrivalTimeId = table.Column<int>(type: "int", nullable: false)
+                    ArrivalTimeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Reservations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Reservations_arrivalTimes_arrivalTimeId",
-                        column: x => x.arrivalTimeId,
-                        principalTable: "arrivalTimes",
+                        name: "FK_Reservations_ArrivalTimes_ArrivalTimeId",
+                        column: x => x.ArrivalTimeId,
+                        principalTable: "ArrivalTimes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
-                table: "arrivalTimes",
+                table: "ArrivalTimes",
                 columns: new[] { "Id", "Period" },
                 values: new object[,]
                 {
@@ -64,9 +64,9 @@ namespace Restaurant_Reservation_API_Server.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reservations_arrivalTimeId",
+                name: "IX_Reservations_ArrivalTimeId",
                 table: "Reservations",
-                column: "arrivalTimeId");
+                column: "ArrivalTimeId");
         }
 
         /// <inheritdoc />
@@ -76,7 +76,7 @@ namespace Restaurant_Reservation_API_Server.Migrations
                 name: "Reservations");
 
             migrationBuilder.DropTable(
-                name: "arrivalTimes");
+                name: "ArrivalTimes");
         }
     }
 }

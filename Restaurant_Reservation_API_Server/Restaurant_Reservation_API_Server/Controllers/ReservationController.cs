@@ -58,11 +58,11 @@ namespace Restaurant_Reservation_API_Server.Controllers
             return NoContent();
         }
 
-        [HttpPost]
-        [Route("FindResByPhone")]
-        public ActionResult<Reservation> FindByPhone(string phone)
+        [HttpGet]
+        [Route("FindByDateAndPhone")]
+        public ActionResult<Reservation> FindByDateAndPhone(DateTime bookingDate, string phone)
         {
-            var data = reservationRepository.FindByPhone(phone);
+            var data = reservationRepository.FindByDateAndPhone(bookingDate, phone);
             if(data == null) return NotFound();
             return Ok(data);
         }

@@ -14,7 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ReservationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ReservationDbContext")));
 builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
-builder.Services.AddScoped<IarrivalTimeRepository, arrivalTimeRepository>();
+builder.Services.AddScoped<IArrivalTimeRepository, ArrivalTimeRepository>();
 
 var app = builder.Build();
 

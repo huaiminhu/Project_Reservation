@@ -11,11 +11,11 @@ namespace Restaurant_Reservation_API_Server.Data
         }
 
         public DbSet<Reservation> Reservations { get; set; }
-        public DbSet<arrivalTime> arrivalTimes { get; set; }
+        public DbSet<ArrivalTime> ArrivalTimes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<arrivalTime>().HasData(
+            modelBuilder.Entity<ArrivalTime>().HasData(
                 new { Id = 1, Period = "11:30 - 13:00" },
                 new { Id = 2, Period = "13:00 - 14:30" },
                 new { Id = 3, Period = "14:30 - 16:00" },

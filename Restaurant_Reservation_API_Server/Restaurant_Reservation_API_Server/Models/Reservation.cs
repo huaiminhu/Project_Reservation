@@ -16,7 +16,7 @@ namespace Restaurant_Reservation_API_Server.Models
         public int SeatRequirement { get; set; }        
         public int ChildSeat { get; set; }
         
-        public int arrivalTimeId { get; set; }
-        public arrivalTime? arrivalTime { get; set; }
+        public int ArrivalTimeId { get; set; }
+        public ArrivalTime? ArrivalTime { get; set; }
     }
 }

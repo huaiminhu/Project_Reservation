@@ -5,23 +5,23 @@ using Restaurant_Reservation_API_Server.Repositories.Interfaces;
 
 namespace Restaurant_Reservation_API_Server.Repositories.Services
 {
-    public class arrivalTimeRepository : IarrivalTimeRepository
+    public class ArrivalTimeRepository : IArrivalTimeRepository
     {
         private readonly ReservationDbContext _ctx;
 
-        public arrivalTimeRepository(ReservationDbContext ctx)
+        public ArrivalTimeRepository(ReservationDbContext ctx)
         {
             _ctx = ctx;
         }
-        public async Task<IEnumerable<arrivalTime>> AllarrivalTimes()
+        public async Task<IEnumerable<ArrivalTime>> AllArrivalTimes()
         {
-            var data = await _ctx.arrivalTimes.ToListAsync();
+            var data = await _ctx.ArrivalTimes.ToListAsync();
             return data;
         }
 
-        public async Task<arrivalTime?> arrivalTimeById(int id)
+        public async Task<ArrivalTime?> ArrivalTimeById(int id)
         {
-            return await _ctx.arrivalTimes.FindAsync(id);
+            return await _ctx.ArrivalTimes.FindAsync(id);
         }
     }
 }

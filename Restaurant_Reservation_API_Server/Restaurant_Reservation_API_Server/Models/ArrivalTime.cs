@@ -2,7 +2,7 @@
 
 namespace Restaurant_Reservation_API_Server.Models
 {
-    public class arrivalTime
+    public class ArrivalTime
     {
         [Key]
         public int Id { get; set; }

@@ -1,27 +1,58 @@
 ﻿@model Restaurant_Reservation_Client.Models.ReservationViewModel
-
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor accessor
 @{
     ViewData["Title"] = "訂位查詢";
+    var dateOfToday = DateTime.Now.ToString("yyyy-MM-dd");
 }
 
-<h1>訂位修改/刪除前請先輸入聯絡資訊查詢</h1>
+<h1>訂位修改/刪除前請先輸入查詢資訊</h1>
 
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Search">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" placeholder="請輸入電話進行查詢" />
-                <span asp-validation-for="Phone" class="text-danger"></span>
+
+<a asp-controller="Reservation" asp-action="DateForQuery" data-bs-toggle="modal" data-bs-target="#dateForQueryModal"
+   class="btn btn-info mx-2">按我選擇日期</a>
+<div class="modal fade" id="dateForQueryModal" tabindex="-1" aria-labelledby="dateForQueryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form asp-action="DateForQuery">
+                    <div class="form-group m-2">
+                        <label asp-for="BookingDate" class="control-label"></label>
+                        <input asp-for="BookingDate" class="form-control" min="@dateOfToday" value="@dateOfToday" />
+                        <span asp-validation-for="BookingDate" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">選好日期按我</button>
+                </form>
             </div>
-            <div class="form-group">
-                <input type="submit" value="按我查詢" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
+
+@if (accessor.HttpContext.Session.GetString("DateForQuery") != null)
+{
+    var dateForQuery = @DateTime.Parse(accessor.HttpContext.Session.GetString("DateForQuery")).ToString("yyyy-MM-dd");
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Search">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group m-2">
+                    <label asp-for="BookingDate" class="control-label"></label>
+                    <input asp-for="BookingDate" class="form-control" value="@dateForQuery" readonly />
+                    <span asp-validation-for="BookingDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Phone" class="control-label"></label>
+                    <input asp-for="Phone" class="form-control" placeholder="請輸入電話進行查詢" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="按我查詢" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+}
+
 @if (Model != null)
 {
     if (Model.SeatRequirement == 0)

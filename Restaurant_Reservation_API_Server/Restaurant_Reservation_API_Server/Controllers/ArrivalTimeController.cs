@@ -6,25 +6,25 @@ namespace Restaurant_Reservation_API_Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class arrivalTimeController : ControllerBase
+    public class ArrivalTimeController : ControllerBase
     {
-        private readonly IarrivalTimeRepository arrivalTimeRepository;
-        public arrivalTimeController(IarrivalTimeRepository arrivalTimeRepository)
+        private readonly IArrivalTimeRepository ArrivalTimeRepository;
+        public ArrivalTimeController(IArrivalTimeRepository ArrivalTimeRepository)
         {
-            this.arrivalTimeRepository = arrivalTimeRepository;
+            this.ArrivalTimeRepository = ArrivalTimeRepository;
         }
 
         [HttpGet]
-        public async Task<IActionResult> AllarrivalTimes()
+        public async Task<IActionResult> AllArrivalTimes()
         {
-            var data = await arrivalTimeRepository.AllarrivalTimes();
+            var data = await ArrivalTimeRepository.AllArrivalTimes();
             return Ok(data);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<arrivalTime>> arrivalTimeById(int id)
+        public async Task<ActionResult<ArrivalTime>> ArrivalTimeById(int id)
         {
-            var data = await arrivalTimeRepository.arrivalTimeById(id);
+            var data = await ArrivalTimeRepository.ArrivalTimeById(id);
             if (data == null)
                 return NotFound();
             return Ok(data);

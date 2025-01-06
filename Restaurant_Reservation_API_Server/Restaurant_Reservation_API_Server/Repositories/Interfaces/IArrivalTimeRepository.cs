@@ -2,9 +2,9 @@
 
 namespace Restaurant_Reservation_API_Server.Repositories.Interfaces
 {
-    public interface IarrivalTimeRepository
+    public interface IArrivalTimeRepository
     {
-        Task<IEnumerable<arrivalTime>> AllarrivalTimes();
-        Task<arrivalTime?> arrivalTimeById(int id);
+        Task<IEnumerable<ArrivalTime>> AllArrivalTimes();
+        Task<ArrivalTime?> ArrivalTimeById(int id);
     }
 }

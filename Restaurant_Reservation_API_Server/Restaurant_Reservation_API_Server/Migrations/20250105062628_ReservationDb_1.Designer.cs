@@ -50,17 +50,17 @@ namespace Restaurant_Reservation_API_Server.Migrations
                     b.Property<int>("SeatRequirement")
                         .HasColumnType("int");
 
-                    b.Property<int>("arrivalTimeId")
+                    b.Property<int>("ArrivalTimeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("arrivalTimeId");
+                    b.HasIndex("ArrivalTimeId");
 
                     b.ToTable("Reservations");
                 });
 
-            modelBuilder.Entity("Restaurant_Reservation_API_Server.Models.arrivalTime", b =>
+            modelBuilder.Entity("Restaurant_Reservation_API_Server.Models.ArrivalTime", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -74,7 +74,7 @@ namespace Restaurant_Reservation_API_Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("arrivalTimes");
+                    b.ToTable("ArrivalTimes");
 
                     b.HasData(
                         new
@@ -111,13 +111,13 @@ namespace Restaurant_Reservation_API_Server.Migrations
 
             modelBuilder.Entity("Restaurant_Reservation_API_Server.Models.Reservation", b =>
                 {
-                    b.HasOne("Restaurant_Reservation_API_Server.Models.arrivalTime", "arrivalTime")
+                    b.HasOne("Restaurant_Reservation_API_Server.Models.ArrivalTime", "ArrivalTime")
                         .WithMany()
-                        .HasForeignKey("arrivalTimeId")
+                        .HasForeignKey("ArrivalTimeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("arrivalTime");
+                    b.Navigation("ArrivalTime");
                 });
 #pragma warning restore 612, 618
         }
