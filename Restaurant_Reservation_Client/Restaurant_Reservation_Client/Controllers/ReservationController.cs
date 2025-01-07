@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using Restaurant_Reservation_Client.Models;
@@ -111,11 +112,11 @@ namespace Restaurant_Reservation_Client.Controllers
         public IActionResult MakeRes(ReservationViewModel reservation)
         {
             List<ArrivalTimeViewModel> results = new List<ArrivalTimeViewModel>();
+            List<ReservationViewModel> reservations = new List<ReservationViewModel>();
             if (HttpContext.Session.GetString("SelectedDate") != null)
             {
                 var selectedDate = HttpContext.Session.GetString("SelectedDate");
                 List<ArrivalTimeViewModel> arrivalTimes = new List<ArrivalTimeViewModel>();
-                List<ReservationViewModel> reservations = new List<ReservationViewModel>();
                 HttpResponseMessage response1 = client.GetAsync(reservationApi).Result;
                 HttpResponseMessage response2 = client.GetAsync(arrivalTimeApi).Result;
                 if (response1.IsSuccessStatusCode && response2.IsSuccessStatusCode)
@@ -168,9 +169,15 @@ namespace Restaurant_Reservation_Client.Controllers
                 }
                 ViewBag.Periods = new SelectList(arrivalTimes, "Id", "Period");
             }
+            var repeatCheck = reservations.FirstOrDefault(r => r.BookingDate == reservation.BookingDate && r.Phone == reservation.Phone);
             if (reservation.SeatRequirement <= reservation.ChildSeat)
             {
                 ViewBag.ChildSeatError = "兒童座椅數必須少於總訂位數!";
+                return View(reservation);
+            }
+            else if (repeatCheck !=null)
+            {
+                ViewBag.RepeatError = "當日最多訂位一次!";
                 return View(reservation);
             }
             else if (ModelState.IsValid)
@@ -186,6 +193,7 @@ namespace Restaurant_Reservation_Client.Controllers
                     var detail = JsonConvert.DeserializeObject<ReservationViewModel>(result);
                     int id = detail.Id;
                     HttpContext.Session.SetInt32("ReservationCreator", id);
+                    HttpContext.Session.Remove("SelectedDate");
                     return RedirectToAction("Success");
                 }
             }
@@ -230,6 +238,7 @@ namespace Restaurant_Reservation_Client.Controllers
                 if (data != null)
                 {
                     reservation = data;
+                    HttpContext.Session.SetInt32("ReservationCreator", reservation.Id);
                     HttpResponseMessage timeResponse = client.GetAsync(arrivalTimeApi + reservation.arrivalTimeId).Result;
                     if (timeResponse.IsSuccessStatusCode)
                     {
@@ -249,6 +258,8 @@ namespace Restaurant_Reservation_Client.Controllers
         public IActionResult Edit(int id)
         {
             ReservationViewModel reservation = new();
+            if(HttpContext.Session.GetInt32("ReservationCreator") !=null)
+                id = HttpContext.Session.GetInt32("ReservationCreator").Value;
             HttpResponseMessage response = client.GetAsync(reservationApi + id).Result;
             if (response.IsSuccessStatusCode)
             {
@@ -257,8 +268,8 @@ namespace Restaurant_Reservation_Client.Controllers
                 if (data != null)
                 {
                     reservation = data;
-                    HttpContext.Session.SetInt32("ReservationCreator", id);
-                    var selectedDate = reservation.BookingDate;
+                    if (HttpContext.Session.GetString("ChangedDate") != null)
+                        reservation.BookingDate = DateTime.Parse(HttpContext.Session.GetString("ChangedDate"));
                     List<ArrivalTimeViewModel> results = new List<ArrivalTimeViewModel>();
                     List<ReservationViewModel> reservations = new List<ReservationViewModel>();
                     HttpResponseMessage response1 = client.GetAsync(reservationApi).Result;
@@ -272,10 +283,10 @@ namespace Restaurant_Reservation_Client.Controllers
                         var time = JsonConvert.DeserializeObject<List<ArrivalTimeViewModel>>(result2);
                         if (listOfReservations != null && time != null)
                         {
-                            var modifiedData = listOfReservations.Where(r => r.BookingDate == selectedDate).ToList();
+                            var modifiedData = listOfReservations.Where(r => r.BookingDate == reservation.BookingDate).ToList();
                             reservations = modifiedData;
                             arrivalTimes = time;
-                            if (selectedDate == DateTime.Today)
+                            if (reservation.BookingDate == DateTime.Today)
                             {
                                 for (var i = 0; i < arrivalTimes.Count; i++)
                                 {
@@ -306,7 +317,8 @@ namespace Restaurant_Reservation_Client.Controllers
         public IActionResult Edit(ReservationViewModel reservation)
         {
             List<ArrivalTimeViewModel> results = new List<ArrivalTimeViewModel>();
-            var selectedDate = reservation.BookingDate;
+            if (HttpContext.Session.GetString("ChangedDate") != null)
+                reservation.BookingDate = DateTime.Parse(HttpContext.Session.GetString("ChangedDate"));
             List<ArrivalTimeViewModel> arrivalTimes = new List<ArrivalTimeViewModel>();
             List<ReservationViewModel> reservations = new List<ReservationViewModel>();
             HttpResponseMessage response1 = client.GetAsync(reservationApi).Result;
@@ -319,10 +331,10 @@ namespace Restaurant_Reservation_Client.Controllers
                 var time = JsonConvert.DeserializeObject<List<ArrivalTimeViewModel>>(result2);
                 if (listOfReservation != null && time != null)
                 {
-                    var modifiedData = listOfReservation.Where(r => r.BookingDate == selectedDate).ToList();
+                    var modifiedData = listOfReservation.Where(r => r.BookingDate == reservation.BookingDate).ToList();
                     reservations = modifiedData;
                     arrivalTimes = time;
-                    if (selectedDate == DateTime.Today)
+                    if (reservation.BookingDate == DateTime.Today)
                     {
                         for (var i = 0; i < arrivalTimes.Count; i++)
                         {
@@ -344,6 +356,7 @@ namespace Restaurant_Reservation_Client.Controllers
                 }
             }
             ViewBag.Periods = new SelectList(results, "Id", "Period");
+            var repeatCheck = reservations.FirstOrDefault(r => r.BookingDate == reservation.BookingDate && r.Phone == reservation.Phone);
             if (reservation.SeatRequirement <= reservation.ChildSeat)
             {
                 ViewBag.ChildSeatError = "兒童座椅數必須少於總訂位數!";
@@ -358,6 +371,8 @@ namespace Restaurant_Reservation_Client.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     HttpContext.Session.SetString("selectedTime", selectedTime);
+                    HttpContext.Session.Remove("ChangedDate");
+                    HttpContext.Session.Remove("DateForQuery");
                     return RedirectToAction("Success");
                 }
             }

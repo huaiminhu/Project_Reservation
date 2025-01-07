@@ -5,9 +5,7 @@
     var dateOfToday = DateTime.Now.ToString("yyyy-MM-dd");
 }
 
-<h1>訂位修改/刪除前請先輸入查詢資訊</h1>
-
-<hr />
+<h3 class="text-center fw-bold text-primary">訂位修改/刪除前請先輸入查詢資訊</h3>
 
 <a asp-controller="Reservation" asp-action="DateForQuery" data-bs-toggle="modal" data-bs-target="#dateForQueryModal"
    class="btn btn-info mx-2">按我選擇日期</a>
@@ -31,7 +29,7 @@
 @if (accessor.HttpContext.Session.GetString("DateForQuery") != null)
 {
     var dateForQuery = @DateTime.Parse(accessor.HttpContext.Session.GetString("DateForQuery")).ToString("yyyy-MM-dd");
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col-md-4">
             <form asp-action="Search">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -40,12 +38,12 @@
                     <input asp-for="BookingDate" class="form-control" value="@dateForQuery" readonly />
                     <span asp-validation-for="BookingDate" class="text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group m-2">
                     <label asp-for="Phone" class="control-label"></label>
                     <input asp-for="Phone" class="form-control" placeholder="請輸入電話進行查詢" />
                     <span asp-validation-for="Phone" class="text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group text-center m-4">
                     <input type="submit" value="按我查詢" class="btn btn-primary" />
                 </div>
             </form>
@@ -137,9 +135,6 @@
             </table>
         </div>
     }
-}
-else{
-    <h3 class ="text-center text-info">(查詢結果將顯示於此)</h3>
 }
 
 <div>
