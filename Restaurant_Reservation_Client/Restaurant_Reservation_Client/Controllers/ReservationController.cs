@@ -110,11 +110,11 @@ namespace Restaurant_Reservation_Client.Controllers
         [HttpPost]
         public IActionResult MakeRes(ReservationViewModel reservation)
         {
-            List<ArrivalTimeViewModel> arrivalTimes = new List<ArrivalTimeViewModel>();
+            List<ArrivalTimeViewModel> results = new List<ArrivalTimeViewModel>();
             if (HttpContext.Session.GetString("SelectedDate") != null)
             {
                 var selectedDate = HttpContext.Session.GetString("SelectedDate");
-                List<ArrivalTimeViewModel> results = new List<ArrivalTimeViewModel>();
+                List<ArrivalTimeViewModel> arrivalTimes = new List<ArrivalTimeViewModel>();
                 List<ReservationViewModel> reservations = new List<ReservationViewModel>();
                 HttpResponseMessage response1 = client.GetAsync(reservationApi).Result;
                 HttpResponseMessage response2 = client.GetAsync(arrivalTimeApi).Result;
@@ -155,6 +155,7 @@ namespace Restaurant_Reservation_Client.Controllers
             }
             else
             {
+                List<ArrivalTimeViewModel> arrivalTimes = new List<ArrivalTimeViewModel>();
                 HttpResponseMessage getTimesresponse = client.GetAsync(arrivalTimeApi).Result;
                 if (getTimesresponse.IsSuccessStatusCode)
                 {
@@ -174,7 +175,7 @@ namespace Restaurant_Reservation_Client.Controllers
             }
             else if (ModelState.IsValid)
             {
-                var selectedTime = arrivalTimes.Where(t => t.Id == reservation.arrivalTimeId).Select(p => p.Period).ToList()[0];
+                var selectedTime = results.Where(t => t.Id == reservation.arrivalTimeId).Select(p => p.Period).ToList()[0];
                 HttpContext.Session.SetString("selectedTime", selectedTime);
                 string data = JsonConvert.SerializeObject(reservation);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
@@ -220,7 +221,8 @@ namespace Restaurant_Reservation_Client.Controllers
         public IActionResult Search(DateTime bookingDate, string phone)
         {
             ReservationViewModel reservation = new();
-            HttpResponseMessage response = client.GetAsync(reservationApi + "FindByDateAndPhone?bookingDate=" + bookingDate + "&phone=" + phone).Result;
+            string newDate = bookingDate.ToString("yyyy-MM-dd");
+            HttpResponseMessage response = client.GetAsync(reservationApi + "FindByDateAndPhone?bookingDate=" + newDate + "&phone=" + phone).Result;
             if (response.IsSuccessStatusCode)
             {
                 string result = response.Content.ReadAsStringAsync().Result;
@@ -232,10 +234,10 @@ namespace Restaurant_Reservation_Client.Controllers
                     if (timeResponse.IsSuccessStatusCode)
                     {
                         string getTimeResult = timeResponse.Content.ReadAsStringAsync().Result;
-                        var timeData = JsonConvert.DeserializeObject<ArrivalTimeViewModel>(result);
+                        var timeData = JsonConvert.DeserializeObject<ArrivalTimeViewModel>(getTimeResult);
                         if (timeData != null)
                         {
-                            ViewBag.Period = timeData;
+                            ViewBag.Period = timeData.Period;
                         }
                     }
                 }
@@ -303,24 +305,9 @@ namespace Restaurant_Reservation_Client.Controllers
         [HttpPost]
         public IActionResult Edit(ReservationViewModel reservation)
         {
-            if (reservation.SeatRequirement <= reservation.ChildSeat)
-            {
-                ViewBag.ChildSeatError = "兒童座椅數必須少於總訂位數!";
-            }
-            else
-            {
-                reservation.Id = HttpContext.Session.GetInt32("ReservationCreator").Value;
-                string data = JsonConvert.SerializeObject(reservation);
-                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = client.PutAsync(reservationApi + reservation.Id, content).Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    return RedirectToAction("Success");
-                }
-            }
-            List<ArrivalTimeViewModel> arrivalTimes = new List<ArrivalTimeViewModel>();
-            var selectedDate = reservation.BookingDate;
             List<ArrivalTimeViewModel> results = new List<ArrivalTimeViewModel>();
+            var selectedDate = reservation.BookingDate;
+            List<ArrivalTimeViewModel> arrivalTimes = new List<ArrivalTimeViewModel>();
             List<ReservationViewModel> reservations = new List<ReservationViewModel>();
             HttpResponseMessage response1 = client.GetAsync(reservationApi).Result;
             HttpResponseMessage response2 = client.GetAsync(arrivalTimeApi).Result;
@@ -357,6 +344,23 @@ namespace Restaurant_Reservation_Client.Controllers
                 }
             }
             ViewBag.Periods = new SelectList(results, "Id", "Period");
+            if (reservation.SeatRequirement <= reservation.ChildSeat)
+            {
+                ViewBag.ChildSeatError = "兒童座椅數必須少於總訂位數!";
+            }
+            else
+            {
+                var selectedTime = results.Where(t => t.Id == reservation.arrivalTimeId).Select(p => p.Period).ToList()[0];
+                reservation.Id = HttpContext.Session.GetInt32("ReservationCreator").Value;
+                string data = JsonConvert.SerializeObject(reservation);
+                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = client.PutAsync(reservationApi + reservation.Id, content).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    HttpContext.Session.SetString("selectedTime", selectedTime);
+                    return RedirectToAction("Success");
+                }
+            }
             return View(reservation);
         }
 
