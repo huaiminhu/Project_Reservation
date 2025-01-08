@@ -50,7 +50,7 @@ namespace Restaurant_Reservation_Client.Controllers
             if (HttpContext.Session.GetString("SelectedDate") != null)
             {
                 var selectedDate = HttpContext.Session.GetString("SelectedDate");
-                List<ArrivalTimeViewModel> results = new List<ArrivalTimeViewModel>();
+                List<DisplayViewModel> results = new List<DisplayViewModel>();
                 List<ReservationViewModel> reservations = new List<ReservationViewModel>();
                 HttpResponseMessage response1 = client.GetAsync(reservationApi).Result;
                 List<ArrivalTimeViewModel> arrivalTimes = new List<ArrivalTimeViewModel>();
@@ -71,24 +71,24 @@ namespace Restaurant_Reservation_Client.Controllers
                         {
                             for (var i = 0; i < arrivalTimes.Count; i++)
                             {
-                                int requirement = reservations.Where(r => r.arrivalTimeId == arrivalTimes[i].Id).Sum(s => s.SeatRequirement);
+                                int remainSeat = 45 - reservations.Where(r => r.arrivalTimeId == arrivalTimes[i].Id).Sum(s => s.SeatRequirement);
                                 var diff = Convert.ToInt32((DateTime.Parse(arrivalTimes[i].Period[0..5]) - DateTime.Now).TotalHours);
-                                if (requirement < 45 && diff > 1)
-                                    results.Add(arrivalTimes[i]);
+                                if (remainSeat > 0 && diff > 1)
+                                    results.Add(new DisplayViewModel{Id=arrivalTimes[i].Id, Display=arrivalTimes[i].Period+string.Format("\t(剩餘空位:{0})", remainSeat)});
                             }
                         }
                         else
                         {
                             for (var i = 0; i < arrivalTimes.Count; i++)
                             {
-                                int requirement = reservations.Where(r => r.arrivalTimeId == arrivalTimes[i].Id).Sum(s => s.SeatRequirement);
-                                if (requirement < 45)
-                                    results.Add(arrivalTimes[i]);
+                                int remainSeat = 45 - reservations.Where(r => r.arrivalTimeId == arrivalTimes[i].Id).Sum(s => s.SeatRequirement);
+                                if (remainSeat > 0)
+                                    results.Add(new DisplayViewModel { Id = arrivalTimes[i].Id, Display = arrivalTimes[i].Period + string.Format("\t(剩餘空位:{0})", remainSeat) });
                             }
                         }
                     }
                 }
-                ViewBag.Periods = new SelectList(results, "Id", "Period");
+                ViewBag.Periods = new SelectList(results, "Id", "Display");
             }
             else
             {
@@ -111,7 +111,8 @@ namespace Restaurant_Reservation_Client.Controllers
         [HttpPost]
         public IActionResult MakeRes(ReservationViewModel reservation)
         {
-            List<ArrivalTimeViewModel> results = new List<ArrivalTimeViewModel>();
+            int remainSeat = 0;
+            List <DisplayViewModel> results = new List<DisplayViewModel>();
             List<ReservationViewModel> reservations = new List<ReservationViewModel>();
             if (HttpContext.Session.GetString("SelectedDate") != null)
             {
@@ -135,24 +136,24 @@ namespace Restaurant_Reservation_Client.Controllers
                         {
                             for (var i = 0; i < arrivalTimes.Count; i++)
                             {
-                                int requirement = reservations.Where(r => r.arrivalTimeId == arrivalTimes[i].Id).Sum(s => s.SeatRequirement);
+                                remainSeat = 45 - reservations.Where(r => r.arrivalTimeId == arrivalTimes[i].Id).Sum(s => s.SeatRequirement);
                                 var diff = Convert.ToInt32((DateTime.Parse(arrivalTimes[i].Period[0..5]) - DateTime.Now).TotalHours);
-                                if (requirement < 45 && diff > 1)
-                                    results.Add(arrivalTimes[i]);
+                                if (remainSeat > 0 && diff > 1)
+                                    results.Add(new DisplayViewModel { Id = arrivalTimes[i].Id, Display = arrivalTimes[i].Period + string.Format("\t(剩餘空位:{0})", remainSeat) });
                             }
                         }
                         else
                         {
                             for (var i = 0; i < arrivalTimes.Count; i++)
                             {
-                                int requirement = reservations.Where(r => r.arrivalTimeId == arrivalTimes[i].Id).Sum(s => s.SeatRequirement);
-                                if (requirement < 45)
-                                    results.Add(arrivalTimes[i]);
+                                remainSeat = 45 - reservations.Where(r => r.arrivalTimeId == arrivalTimes[i].Id).Sum(s => s.SeatRequirement);
+                                if (remainSeat > 0)
+                                    results.Add(new DisplayViewModel { Id = arrivalTimes[i].Id, Display = arrivalTimes[i].Period + string.Format("\t(剩餘空位:{0})", remainSeat) });
                             }
                         }
                     }
                 }
-                ViewBag.Periods = new SelectList(results, "Id", "Period");
+                ViewBag.Periods = new SelectList(results, "Id", "Display");
             }
             else
             {
@@ -170,19 +171,17 @@ namespace Restaurant_Reservation_Client.Controllers
                 ViewBag.Periods = new SelectList(arrivalTimes, "Id", "Period");
             }
             var repeatCheck = reservations.FirstOrDefault(r => r.BookingDate == reservation.BookingDate && r.Phone == reservation.Phone);
+            remainSeat = 45 - reservations.Where(r => r.BookingDate == reservation.BookingDate && r.arrivalTimeId == reservation.arrivalTimeId).Sum(s => s.SeatRequirement);
+            var remainSeatCheck = remainSeat - reservation.SeatRequirement;
             if (reservation.SeatRequirement <= reservation.ChildSeat)
-            {
                 ViewBag.ChildSeatError = "兒童座椅數必須少於總訂位數!";
-                return View(reservation);
-            }
+            else if (remainSeatCheck < 0)
+                ViewBag.RemainSeatError = "剩餘座位數不夠!換個時段吧~";
             else if (repeatCheck !=null)
-            {
                 ViewBag.RepeatError = "當日最多訂位一次!";
-                return View(reservation);
-            }
             else if (ModelState.IsValid)
             {
-                var selectedTime = results.Where(t => t.Id == reservation.arrivalTimeId).Select(p => p.Period).ToList()[0];
+                var selectedTime = results.Where(t => t.Id == reservation.arrivalTimeId).Select(p => p.Display[0..13]).ToList()[0];
                 HttpContext.Session.SetString("selectedTime", selectedTime);
                 string data = JsonConvert.SerializeObject(reservation);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
@@ -246,7 +245,11 @@ namespace Restaurant_Reservation_Client.Controllers
                         var timeData = JsonConvert.DeserializeObject<ArrivalTimeViewModel>(getTimeResult);
                         if (timeData != null)
                         {
+                            var diff = Convert.ToInt32((DateTime.Parse(timeData.Period[0..5]) - DateTime.Now).TotalHours);
+                            if (diff < 1)
+                                reservation.SeatRequirement = 0;
                             ViewBag.Period = timeData.Period;
+                            HttpContext.Session.Remove("DateForQuery");
                         }
                     }
                 }
@@ -257,6 +260,7 @@ namespace Restaurant_Reservation_Client.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
+            int remainSeat = 0;
             ReservationViewModel reservation = new();
             if(HttpContext.Session.GetInt32("ReservationCreator") !=null)
                 id = HttpContext.Session.GetInt32("ReservationCreator").Value;
@@ -270,7 +274,7 @@ namespace Restaurant_Reservation_Client.Controllers
                     reservation = data;
                     if (HttpContext.Session.GetString("ChangedDate") != null)
                         reservation.BookingDate = DateTime.Parse(HttpContext.Session.GetString("ChangedDate"));
-                    List<ArrivalTimeViewModel> results = new List<ArrivalTimeViewModel>();
+                    List<DisplayViewModel> results = new List<DisplayViewModel>();
                     List<ReservationViewModel> reservations = new List<ReservationViewModel>();
                     HttpResponseMessage response1 = client.GetAsync(reservationApi).Result;
                     List<ArrivalTimeViewModel> arrivalTimes = new List<ArrivalTimeViewModel>();
@@ -290,24 +294,24 @@ namespace Restaurant_Reservation_Client.Controllers
                             {
                                 for (var i = 0; i < arrivalTimes.Count; i++)
                                 {
-                                    int requirement = reservations.Where(r => r.arrivalTimeId == arrivalTimes[i].Id).Sum(s => s.SeatRequirement);
+                                    remainSeat = 45 - reservations.Where(r => r.arrivalTimeId == arrivalTimes[i].Id).Sum(s => s.SeatRequirement);
                                     var diff = Convert.ToInt32((DateTime.Parse(arrivalTimes[i].Period[0..5]) - DateTime.Now).TotalHours);
-                                    if (requirement < 45 && diff > 1)
-                                        results.Add(arrivalTimes[i]);
+                                    if (remainSeat > 0 && diff > 1)
+                                        results.Add(new DisplayViewModel { Id = arrivalTimes[i].Id, Display = arrivalTimes[i].Period + string.Format("\t(剩餘空位:{0})", remainSeat) });
                                 }
                             }
                             else
                             {
                                 for (var i = 0; i < arrivalTimes.Count; i++)
                                 {
-                                    int requirement = reservations.Where(r => r.arrivalTimeId == arrivalTimes[i].Id).Sum(s => s.SeatRequirement);
-                                    if (requirement < 45)
-                                        results.Add(arrivalTimes[i]);
+                                    remainSeat = 45 - reservations.Where(r => r.arrivalTimeId == arrivalTimes[i].Id).Sum(s => s.SeatRequirement);
+                                    if (remainSeat > 0)
+                                        results.Add(new DisplayViewModel { Id = arrivalTimes[i].Id, Display = arrivalTimes[i].Period + string.Format("\t(剩餘空位:{0})", remainSeat) });
                                 }
                             }
                         }
                     }
-                    ViewBag.Periods = new SelectList(results, "Id", "Period");
+                    ViewBag.Periods = new SelectList(results, "Id", "Display");
                 }
             }
             return View(reservation);
@@ -316,7 +320,8 @@ namespace Restaurant_Reservation_Client.Controllers
         [HttpPost]
         public IActionResult Edit(ReservationViewModel reservation)
         {
-            List<ArrivalTimeViewModel> results = new List<ArrivalTimeViewModel>();
+            int remainSeat = 0;
+            List<DisplayViewModel> results = new List<DisplayViewModel>();
             if (HttpContext.Session.GetString("ChangedDate") != null)
                 reservation.BookingDate = DateTime.Parse(HttpContext.Session.GetString("ChangedDate"));
             List<ArrivalTimeViewModel> arrivalTimes = new List<ArrivalTimeViewModel>();
@@ -338,32 +343,33 @@ namespace Restaurant_Reservation_Client.Controllers
                     {
                         for (var i = 0; i < arrivalTimes.Count; i++)
                         {
-                            int requirement = reservations.Where(r => r.arrivalTimeId == arrivalTimes[i].Id).Sum(s => s.SeatRequirement);
+                            remainSeat = 45 - reservations.Where(r => r.arrivalTimeId == arrivalTimes[i].Id).Sum(s => s.SeatRequirement);
                             var diff = Convert.ToInt32((DateTime.Parse(arrivalTimes[i].Period[0..5]) - DateTime.Now).TotalHours);
-                            if (requirement < 45 && diff > 1)
-                                results.Add(arrivalTimes[i]);
+                            if (remainSeat > 0 && diff > 1)
+                                results.Add(new DisplayViewModel { Id = arrivalTimes[i].Id, Display = arrivalTimes[i].Period + string.Format("\t(剩餘空位:{0})", remainSeat) });
                         }
                     }
                     else
                     {
                         for (var i = 0; i < arrivalTimes.Count; i++)
                         {
-                            int requirement = reservations.Where(r => r.arrivalTimeId == arrivalTimes[i].Id).Sum(s => s.SeatRequirement);
-                            if (requirement < 45)
-                                results.Add(arrivalTimes[i]);
+                            remainSeat = 45 - reservations.Where(r => r.arrivalTimeId == arrivalTimes[i].Id).Sum(s => s.SeatRequirement);
+                            if (remainSeat > 0)
+                                results.Add(new DisplayViewModel { Id = arrivalTimes[i].Id, Display = arrivalTimes[i].Period + string.Format("\t(剩餘空位:{0})", remainSeat) });
                         }
                     }
                 }
             }
-            ViewBag.Periods = new SelectList(results, "Id", "Period");
-            var repeatCheck = reservations.FirstOrDefault(r => r.BookingDate == reservation.BookingDate && r.Phone == reservation.Phone);
+            ViewBag.Periods = new SelectList(results, "Id", "Display");
+            remainSeat = 45 - reservations.Where(r => r.BookingDate == reservation.BookingDate && r.arrivalTimeId == reservation.arrivalTimeId).Sum(s => s.SeatRequirement);
+            var remainSeatCheck = remainSeat - reservation.SeatRequirement;
             if (reservation.SeatRequirement <= reservation.ChildSeat)
-            {
                 ViewBag.ChildSeatError = "兒童座椅數必須少於總訂位數!";
-            }
+            else if (remainSeatCheck < 0)
+                ViewBag.RemainSeatError = "剩餘座位數不夠!換個時段吧~";
             else
             {
-                var selectedTime = results.Where(t => t.Id == reservation.arrivalTimeId).Select(p => p.Period).ToList()[0];
+                var selectedTime = results.Where(t => t.Id == reservation.arrivalTimeId).Select(p => p.Display[0..13]).ToList()[0];
                 reservation.Id = HttpContext.Session.GetInt32("ReservationCreator").Value;
                 string data = JsonConvert.SerializeObject(reservation);
                 StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
@@ -372,7 +378,6 @@ namespace Restaurant_Reservation_Client.Controllers
                 {
                     HttpContext.Session.SetString("selectedTime", selectedTime);
                     HttpContext.Session.Remove("ChangedDate");
-                    HttpContext.Session.Remove("DateForQuery");
                     return RedirectToAction("Success");
                 }
             }
