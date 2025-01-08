@@ -9,6 +9,6 @@ namespace Restaurant_Reservation_API_Server.Repositories.Interfaces
         Task Create(Reservation reservation);
         Task Update(Reservation reservation);
         Task Delete(Reservation reservation);
-        Reservation? FindByDateAndPhone(DateTime bookingDate, string phone);
+        Reservation? ResByDateAndPhone(DateTime bookingDate, string phone);
     }
 }

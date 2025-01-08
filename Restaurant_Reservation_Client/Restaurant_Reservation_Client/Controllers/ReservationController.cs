@@ -18,22 +18,22 @@ namespace Restaurant_Reservation_Client.Controllers
         public IActionResult Index()
         {
             List<SeatsViewModel> seats = new List<SeatsViewModel>();
-            DateTime todayString = DateTime.Today;
+            DateTime todayCheck = DateTime.Today;
             List<ReservationViewModel> reservations = new List<ReservationViewModel>();
-            HttpResponseMessage response1 = client.GetAsync(reservationApi).Result;
+            HttpResponseMessage responseForReservations = client.GetAsync(reservationApi).Result;
             List<ArrivalTimeViewModel> arrivalTimes = new List<ArrivalTimeViewModel>();
-            HttpResponseMessage response2 = client.GetAsync(arrivalTimeApi).Result;
-            if (response1.IsSuccessStatusCode && response2.IsSuccessStatusCode)
+            HttpResponseMessage responseForTimes = client.GetAsync(arrivalTimeApi).Result;
+            if (responseForReservations.IsSuccessStatusCode && responseForTimes.IsSuccessStatusCode)
             {
-                string result1 = response1.Content.ReadAsStringAsync().Result;
-                string result2 = response2.Content.ReadAsStringAsync().Result;
-                var data = JsonConvert.DeserializeObject<List<ReservationViewModel>>(result1);
-                var time = JsonConvert.DeserializeObject<List<ArrivalTimeViewModel>>(result2);
-                if (data != null && time != null)
+                string resultForReservations = responseForReservations.Content.ReadAsStringAsync().Result;
+                string resultForTimes = responseForTimes.Content.ReadAsStringAsync().Result;
+                var reservationsData = JsonConvert.DeserializeObject<List<ReservationViewModel>>(resultForReservations);
+                var timesData = JsonConvert.DeserializeObject<List<ArrivalTimeViewModel>>(resultForTimes);
+                if (reservationsData != null && timesData != null)
                 {
-                    var modifiedData = data.Where(r => r.BookingDate == todayString).ToList();
-                    reservations = modifiedData;
-                    arrivalTimes = time;
+                    var resAfterDateCheck = reservationsData.Where(r => r.BookingDate == todayCheck).ToList();
+                    reservations = resAfterDateCheck;
+                    arrivalTimes = timesData;
                     for (var i = 0; i < arrivalTimes.Count; i++)
                     {
                         int requirement = reservations.Where(r => r.arrivalTimeId == arrivalTimes[i].Id).Sum(s => s.SeatRequirement);
@@ -52,22 +52,22 @@ namespace Restaurant_Reservation_Client.Controllers
                 var selectedDate = HttpContext.Session.GetString("SelectedDate");
                 List<DisplayViewModel> results = new List<DisplayViewModel>();
                 List<ReservationViewModel> reservations = new List<ReservationViewModel>();
-                HttpResponseMessage response1 = client.GetAsync(reservationApi).Result;
+                HttpResponseMessage responseForReservations = client.GetAsync(reservationApi).Result;
                 List<ArrivalTimeViewModel> arrivalTimes = new List<ArrivalTimeViewModel>();
-                HttpResponseMessage response2 = client.GetAsync(arrivalTimeApi).Result;
-                if (response1.IsSuccessStatusCode && response2.IsSuccessStatusCode)
+                HttpResponseMessage responseForTimes = client.GetAsync(arrivalTimeApi).Result;
+                if (responseForReservations.IsSuccessStatusCode && responseForTimes.IsSuccessStatusCode)
                 {
-                    string result1 = response1.Content.ReadAsStringAsync().Result;
-                    string result2 = response2.Content.ReadAsStringAsync().Result;
-                    var data = JsonConvert.DeserializeObject<List<ReservationViewModel>>(result1);
-                    var time = JsonConvert.DeserializeObject<List<ArrivalTimeViewModel>>(result2);
-                    if (data != null && time != null)
+                    string resultForReservations = responseForReservations.Content.ReadAsStringAsync().Result;
+                    string resultForTimes = responseForTimes.Content.ReadAsStringAsync().Result;
+                    var reservationsData = JsonConvert.DeserializeObject<List<ReservationViewModel>>(resultForReservations);
+                    var timesData = JsonConvert.DeserializeObject<List<ArrivalTimeViewModel>>(resultForTimes);
+                    if (reservationsData != null && timesData != null)
                     {
-                        var modifiedDate = DateTime.Parse(selectedDate);
-                        var modifiedData = data.Where(r => r.BookingDate == modifiedDate).ToList();
-                        reservations = modifiedData;
-                        arrivalTimes = time;
-                        if(modifiedDate == DateTime.Today)
+                        var parsedDate = DateTime.Parse(selectedDate);
+                        var resAfterDateCheck = reservationsData.Where(r => r.BookingDate == parsedDate).ToList();
+                        reservations = resAfterDateCheck;
+                        arrivalTimes = timesData;
+                        if(parsedDate == DateTime.Today)
                         {
                             for (var i = 0; i < arrivalTimes.Count; i++)
                             {
@@ -118,21 +118,21 @@ namespace Restaurant_Reservation_Client.Controllers
             {
                 var selectedDate = HttpContext.Session.GetString("SelectedDate");
                 List<ArrivalTimeViewModel> arrivalTimes = new List<ArrivalTimeViewModel>();
-                HttpResponseMessage response1 = client.GetAsync(reservationApi).Result;
-                HttpResponseMessage response2 = client.GetAsync(arrivalTimeApi).Result;
-                if (response1.IsSuccessStatusCode && response2.IsSuccessStatusCode)
+                HttpResponseMessage responseForReservations = client.GetAsync(reservationApi).Result;
+                HttpResponseMessage responseForTimes = client.GetAsync(arrivalTimeApi).Result;
+                if (responseForReservations.IsSuccessStatusCode && responseForTimes.IsSuccessStatusCode)
                 {
-                    string result1 = response1.Content.ReadAsStringAsync().Result;
-                    string result2 = response2.Content.ReadAsStringAsync().Result;
-                    var data = JsonConvert.DeserializeObject<List<ReservationViewModel>>(result1);
-                    var time = JsonConvert.DeserializeObject<List<ArrivalTimeViewModel>>(result2);
-                    if (data != null && time != null)
+                    string resultForReservations = responseForReservations.Content.ReadAsStringAsync().Result;
+                    string resultForTimes = responseForTimes.Content.ReadAsStringAsync().Result;
+                    var reservationsData = JsonConvert.DeserializeObject<List<ReservationViewModel>>(resultForReservations);
+                    var timesData = JsonConvert.DeserializeObject<List<ArrivalTimeViewModel>>(resultForTimes);
+                    if (reservationsData != null && timesData != null)
                     {
-                        var modifiedDate = DateTime.Parse(selectedDate);
-                        var modifiedData = data.Where(r => r.BookingDate == modifiedDate).ToList();
-                        reservations = modifiedData;
-                        arrivalTimes = time;
-                        if (modifiedDate == DateTime.Today)
+                        var parsedDate = DateTime.Parse(selectedDate);
+                        var resAfterDateCheck = reservationsData.Where(r => r.BookingDate == parsedDate).ToList();
+                        reservations = resAfterDateCheck;
+                        arrivalTimes = timesData;
+                        if (parsedDate == DateTime.Today)
                         {
                             for (var i = 0; i < arrivalTimes.Count; i++)
                             {
@@ -183,13 +183,13 @@ namespace Restaurant_Reservation_Client.Controllers
             {
                 var selectedTime = results.Where(t => t.Id == reservation.arrivalTimeId).Select(p => p.Display[0..13]).ToList()[0];
                 HttpContext.Session.SetString("selectedTime", selectedTime);
-                string data = JsonConvert.SerializeObject(reservation);
-                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+                string dataForCreate = JsonConvert.SerializeObject(reservation);
+                StringContent content = new StringContent(dataForCreate, Encoding.UTF8, "application/json");
                 HttpResponseMessage createResponse = client.PostAsync(reservationApi, content).Result;
                 if (createResponse.IsSuccessStatusCode)
                 {
-                    string result = createResponse.Content.ReadAsStringAsync().Result;
-                    var detail = JsonConvert.DeserializeObject<ReservationViewModel>(result);
+                    string createResult = createResponse.Content.ReadAsStringAsync().Result;
+                    var detail = JsonConvert.DeserializeObject<ReservationViewModel>(createResult);
                     int id = detail.Id;
                     HttpContext.Session.SetInt32("ReservationCreator", id);
                     HttpContext.Session.Remove("SelectedDate");
@@ -203,8 +203,8 @@ namespace Restaurant_Reservation_Client.Controllers
         public IActionResult Success()
         {
             ReservationViewModel reservation = new();
-            var id = HttpContext.Session.GetInt32("ReservationCreator");
-            HttpResponseMessage response = client.GetAsync(reservationApi + id).Result;
+            var reservationId = HttpContext.Session.GetInt32("ReservationCreator");
+            HttpResponseMessage response = client.GetAsync(reservationApi + reservationId).Result;
             if(response.IsSuccessStatusCode)
             {
                 string result = response.Content.ReadAsStringAsync().Result;
@@ -229,24 +229,24 @@ namespace Restaurant_Reservation_Client.Controllers
         {
             ReservationViewModel reservation = new();
             string newDate = bookingDate.ToString("yyyy-MM-dd");
-            HttpResponseMessage response = client.GetAsync(reservationApi + "FindByDateAndPhone?bookingDate=" + newDate + "&phone=" + phone).Result;
-            if (response.IsSuccessStatusCode)
+            HttpResponseMessage responseForReservation = client.GetAsync(reservationApi + "ResByDateAndPhone?bookingDate=" + newDate + "&phone=" + phone).Result;
+            if (responseForReservation.IsSuccessStatusCode)
             {
-                string result = response.Content.ReadAsStringAsync().Result;
-                var data = JsonConvert.DeserializeObject<ReservationViewModel>(result);
-                if (data != null)
+                string resultForReservation = responseForReservation.Content.ReadAsStringAsync().Result;
+                var reservationData = JsonConvert.DeserializeObject<ReservationViewModel>(resultForReservation);
+                if (reservationData != null)
                 {
-                    reservation = data;
+                    reservation = reservationData;
                     HttpContext.Session.SetInt32("ReservationCreator", reservation.Id);
-                    HttpResponseMessage timeResponse = client.GetAsync(arrivalTimeApi + reservation.arrivalTimeId).Result;
-                    if (timeResponse.IsSuccessStatusCode)
+                    HttpResponseMessage responseForTime = client.GetAsync(arrivalTimeApi + reservation.arrivalTimeId).Result;
+                    if (responseForTime.IsSuccessStatusCode)
                     {
-                        string getTimeResult = timeResponse.Content.ReadAsStringAsync().Result;
-                        var timeData = JsonConvert.DeserializeObject<ArrivalTimeViewModel>(getTimeResult);
+                        string resultForTime = responseForTime.Content.ReadAsStringAsync().Result;
+                        var timeData = JsonConvert.DeserializeObject<ArrivalTimeViewModel>(resultForTime);
                         if (timeData != null)
                         {
                             var diff = Convert.ToInt32((DateTime.Parse(timeData.Period[0..5]) - DateTime.Now).TotalHours);
-                            if (diff < 1)
+                            if (diff < 1 && reservation.BookingDate == DateTime.Today)
                                 reservation.SeatRequirement = 0;
                             ViewBag.Period = timeData.Period;
                             HttpContext.Session.Remove("DateForQuery");
@@ -258,38 +258,38 @@ namespace Restaurant_Reservation_Client.Controllers
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int reservationId)
         {
             int remainSeat = 0;
             ReservationViewModel reservation = new();
             if(HttpContext.Session.GetInt32("ReservationCreator") !=null)
-                id = HttpContext.Session.GetInt32("ReservationCreator").Value;
-            HttpResponseMessage response = client.GetAsync(reservationApi + id).Result;
-            if (response.IsSuccessStatusCode)
+                reservationId = HttpContext.Session.GetInt32("ReservationCreator").Value;
+            HttpResponseMessage responseForReservation = client.GetAsync(reservationApi + reservationId).Result;
+            if (responseForReservation.IsSuccessStatusCode)
             {
-                string result = response.Content.ReadAsStringAsync().Result;
-                var data = JsonConvert.DeserializeObject<ReservationViewModel>(result);
-                if (data != null)
+                string resultForReservation = responseForReservation.Content.ReadAsStringAsync().Result;
+                var reservationData = JsonConvert.DeserializeObject<ReservationViewModel>(resultForReservation);
+                if (reservationData != null)
                 {
-                    reservation = data;
+                    reservation = reservationData;
                     if (HttpContext.Session.GetString("ChangedDate") != null)
                         reservation.BookingDate = DateTime.Parse(HttpContext.Session.GetString("ChangedDate"));
                     List<DisplayViewModel> results = new List<DisplayViewModel>();
                     List<ReservationViewModel> reservations = new List<ReservationViewModel>();
-                    HttpResponseMessage response1 = client.GetAsync(reservationApi).Result;
+                    HttpResponseMessage responseForReservations = client.GetAsync(reservationApi).Result;
                     List<ArrivalTimeViewModel> arrivalTimes = new List<ArrivalTimeViewModel>();
-                    HttpResponseMessage response2 = client.GetAsync(arrivalTimeApi).Result;
-                    if (response1.IsSuccessStatusCode && response2.IsSuccessStatusCode)
+                    HttpResponseMessage responseForTimes = client.GetAsync(arrivalTimeApi).Result;
+                    if (responseForReservations.IsSuccessStatusCode && responseForTimes.IsSuccessStatusCode)
                     {
-                        string result1 = response1.Content.ReadAsStringAsync().Result;
-                        string result2 = response2.Content.ReadAsStringAsync().Result;
-                        var listOfReservations = JsonConvert.DeserializeObject<List<ReservationViewModel>>(result1);
-                        var time = JsonConvert.DeserializeObject<List<ArrivalTimeViewModel>>(result2);
-                        if (listOfReservations != null && time != null)
+                        string resultForReservations = responseForReservations.Content.ReadAsStringAsync().Result;
+                        string resultForTimes = responseForTimes.Content.ReadAsStringAsync().Result;
+                        var reservationsData = JsonConvert.DeserializeObject<List<ReservationViewModel>>(resultForReservations);
+                        var timesData = JsonConvert.DeserializeObject<List<ArrivalTimeViewModel>>(resultForTimes);
+                        if (reservationsData != null && timesData != null)
                         {
-                            var modifiedData = listOfReservations.Where(r => r.BookingDate == reservation.BookingDate).ToList();
-                            reservations = modifiedData;
-                            arrivalTimes = time;
+                            var resAfterDateCheck = reservationsData.Where(r => r.BookingDate == reservation.BookingDate).ToList();
+                            reservations = resAfterDateCheck;
+                            arrivalTimes = timesData;
                             if (reservation.BookingDate == DateTime.Today)
                             {
                                 for (var i = 0; i < arrivalTimes.Count; i++)
@@ -326,19 +326,19 @@ namespace Restaurant_Reservation_Client.Controllers
                 reservation.BookingDate = DateTime.Parse(HttpContext.Session.GetString("ChangedDate"));
             List<ArrivalTimeViewModel> arrivalTimes = new List<ArrivalTimeViewModel>();
             List<ReservationViewModel> reservations = new List<ReservationViewModel>();
-            HttpResponseMessage response1 = client.GetAsync(reservationApi).Result;
-            HttpResponseMessage response2 = client.GetAsync(arrivalTimeApi).Result;
-            if (response1.IsSuccessStatusCode && response2.IsSuccessStatusCode)
+            HttpResponseMessage responseForReservations = client.GetAsync(reservationApi).Result;
+            HttpResponseMessage responseForTimes = client.GetAsync(arrivalTimeApi).Result;
+            if (responseForReservations.IsSuccessStatusCode && responseForTimes.IsSuccessStatusCode)
             {
-                string result1 = response1.Content.ReadAsStringAsync().Result;
-                string result2 = response2.Content.ReadAsStringAsync().Result;
-                var listOfReservation = JsonConvert.DeserializeObject<List<ReservationViewModel>>(result1);
-                var time = JsonConvert.DeserializeObject<List<ArrivalTimeViewModel>>(result2);
-                if (listOfReservation != null && time != null)
+                string resultForReservations = responseForReservations.Content.ReadAsStringAsync().Result;
+                string resultForTimes = responseForTimes.Content.ReadAsStringAsync().Result;
+                var reservationsData = JsonConvert.DeserializeObject<List<ReservationViewModel>>(resultForReservations);
+                var timesData = JsonConvert.DeserializeObject<List<ArrivalTimeViewModel>>(resultForTimes);
+                if (reservationsData != null && timesData != null)
                 {
-                    var modifiedData = listOfReservation.Where(r => r.BookingDate == reservation.BookingDate).ToList();
-                    reservations = modifiedData;
-                    arrivalTimes = time;
+                    var resAfterDateCheck = reservationsData.Where(r => r.BookingDate == reservation.BookingDate).ToList();
+                    reservations = resAfterDateCheck;
+                    arrivalTimes = timesData;
                     if (reservation.BookingDate == DateTime.Today)
                     {
                         for (var i = 0; i < arrivalTimes.Count; i++)
@@ -371,10 +371,10 @@ namespace Restaurant_Reservation_Client.Controllers
             {
                 var selectedTime = results.Where(t => t.Id == reservation.arrivalTimeId).Select(p => p.Display[0..13]).ToList()[0];
                 reservation.Id = HttpContext.Session.GetInt32("ReservationCreator").Value;
-                string data = JsonConvert.SerializeObject(reservation);
-                StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = client.PutAsync(reservationApi + reservation.Id, content).Result;
-                if (response.IsSuccessStatusCode)
+                string dataForUpdate = JsonConvert.SerializeObject(reservation);
+                StringContent content = new StringContent(dataForUpdate, Encoding.UTF8, "application/json");
+                HttpResponseMessage responseForUpdate = client.PutAsync(reservationApi + reservation.Id, content).Result;
+                if (responseForUpdate.IsSuccessStatusCode)
                 {
                     HttpContext.Session.SetString("selectedTime", selectedTime);
                     HttpContext.Session.Remove("ChangedDate");

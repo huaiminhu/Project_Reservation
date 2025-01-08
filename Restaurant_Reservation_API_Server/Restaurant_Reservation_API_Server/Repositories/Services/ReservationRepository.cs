@@ -17,8 +17,8 @@ namespace Restaurant_Reservation_API_Server.Repositories.Services
 
         public async Task<IEnumerable<Reservation>> AllReservations()
         {
-            var data = await _ctx.Reservations.ToListAsync();
-            return data;
+            var reservations = await _ctx.Reservations.ToListAsync();
+            return reservations;
         }
 
         public async Task Create(Reservation reservation)
@@ -40,20 +40,20 @@ namespace Restaurant_Reservation_API_Server.Repositories.Services
 
         public async Task Update(Reservation reservation)
         {
-            var former = _ctx.Reservations.FirstOrDefault(x => x.Id == reservation.Id);
-            if (former != null)
+            var originalReservation = _ctx.Reservations.FirstOrDefault(x => x.Id == reservation.Id);
+            if (originalReservation != null)
             {
-                former.BookingDate = reservation.BookingDate;
-                former.CustomerName = reservation.CustomerName;
-                former.Phone = reservation.Phone;
-                former.ArrivalTimeId = reservation.ArrivalTimeId;
-                former.SeatRequirement = reservation.SeatRequirement;
-                former.ChildSeat = reservation.ChildSeat;
+                originalReservation.BookingDate = reservation.BookingDate;
+                originalReservation.CustomerName = reservation.CustomerName;
+                originalReservation.Phone = reservation.Phone;
+                originalReservation.ArrivalTimeId = reservation.ArrivalTimeId;
+                originalReservation.SeatRequirement = reservation.SeatRequirement;
+                originalReservation.ChildSeat = reservation.ChildSeat;
             }
             await _ctx.SaveChangesAsync();
         }
 
-        public Reservation? FindByDateAndPhone(DateTime bookingDate, string phone)
+        public Reservation? ResByDateAndPhone(DateTime bookingDate, string phone)
         {
             return _ctx.Reservations.FirstOrDefault(x => x.BookingDate == bookingDate && x.Phone == phone);
         }

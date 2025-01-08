@@ -5,22 +5,24 @@
     var dateOfToday = DateTime.Now.ToString("yyyy-MM-dd");
 }
 
-<h3 class="text-center fw-bold text-primary">訂位修改/刪除前請先輸入查詢資訊</h3>
+<h3 class="text-center fw-bold text-primary m-4">訂位修改/刪除前請先輸入查詢資訊</h3>
 
-<a asp-controller="Reservation" asp-action="DateForQuery" data-bs-toggle="modal" data-bs-target="#dateForQueryModal"
-   class="btn btn-info mx-2">按我選擇日期</a>
-<div class="modal fade" id="dateForQueryModal" tabindex="-1" aria-labelledby="dateForQueryModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <form asp-action="DateForQuery">
-                    <div class="form-group m-2">
-                        <label asp-for="BookingDate" class="control-label"></label>
-                        <input asp-for="BookingDate" class="form-control" min="@dateOfToday" value="@dateOfToday" />
-                        <span asp-validation-for="BookingDate" class="text-danger"></span>
-                    </div>
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">選好日期按我</button>
-                </form>
+<div class="m-4" style="text-align:center">
+    <a asp-controller="Reservation" asp-action="DateForQuery" data-bs-toggle="modal" data-bs-target="#dateForQueryModal"
+       class="btn btn-info mx-2">按我選擇日期</a>
+    <div class="modal fade" id="dateForQueryModal" tabindex="-1" aria-labelledby="dateForQueryModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form asp-action="DateForQuery">
+                        <div class="form-group m-2">
+                            <label asp-for="BookingDate" class="control-label"></label>
+                            <input asp-for="BookingDate" class="form-control" min="@dateOfToday" value="@dateOfToday" />
+                            <span asp-validation-for="BookingDate" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary text-center" data-bs-dismiss="modal">選好日期按我</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -44,7 +46,7 @@
                     <span asp-validation-for="Phone" class="text-danger"></span>
                 </div>
                 <div class="form-group text-center m-4">
-                    <input type="submit" value="按我查詢" class="btn btn-primary" />
+                    <input type="submit" value="按我查詢" class="btn btn-warning" />
                 </div>
             </form>
         </div>
@@ -137,8 +139,9 @@
     }
 }
 
-<div>
-    <a asp-action="Index">回首頁</a>
+<div style="text-align:center">
+    <a asp-action="Index"
+       class="btn btn-warning m-2">回首頁</a>
 </div>
 
 @section Scripts {

@@ -5,22 +5,24 @@
     var dateOfToday = DateTime.Now.ToString("yyyy-MM-dd");
 }
 
-<h1 class="text-center fw-bold text-primary">我要訂位</h1>
+<h1 class="text-center fw-bold text-primary m-4">我要訂位</h1>
 
-<a asp-controller="Reservation" asp-action="SelectDate" data-bs-toggle="modal" data-bs-target="#selectDateModal"
-   class="btn btn-info mx-2">按我選擇日期</a>
-<div class="modal fade" id="selectDateModal" tabindex="-1" aria-labelledby="selectDateModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <form asp-action="SelectDate">
-                    <div class="form-group m-2">
-                        <label asp-for="BookingDate" class="control-label"></label>
-                        <input asp-for="BookingDate" class="form-control" min="@dateOfToday" value="@dateOfToday" />
-                        <span asp-validation-for="BookingDate" class="text-danger"></span>
-                    </div>
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">選好日期按我</button>
-                </form>
+<div class="m-4" style="text-align:center">
+    <a asp-controller="Reservation" asp-action="SelectDate" data-bs-toggle="modal" data-bs-target="#selectDateModal"
+       class="btn btn-info mx-2 fw-bold">按我選擇日期</a>
+    <div class="modal fade" id="selectDateModal" tabindex="-1" aria-labelledby="selectDateModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form asp-action="SelectDate">
+                        <div class="form-group m-2">
+                            <label asp-for="BookingDate" class="control-label"></label>
+                            <input asp-for="BookingDate" class="form-control" min="@dateOfToday" value="@dateOfToday" />
+                            <span asp-validation-for="BookingDate" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary text-center" data-bs-dismiss="modal">選好日期按我</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -76,8 +78,8 @@
     </div>
 }
 
-<div>
-    <a asp-action="Index">回首頁</a>
+<div class="m-2" style="text-align:center">
+    <a asp-action="Index" class="btn btn-warning mx-2 fw-bold">回首頁</a>
 </div>
 
 @section Scripts {

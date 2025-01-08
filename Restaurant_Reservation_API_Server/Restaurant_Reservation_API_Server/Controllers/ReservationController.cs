@@ -18,17 +18,17 @@ namespace Restaurant_Reservation_API_Server.Controllers
         [HttpGet]
         public async Task<IActionResult> AllReservations()
         {
-            var data = await reservationRepository.AllReservations();
-            return Ok(data);
+            var reservations = await reservationRepository.AllReservations();
+            return Ok(reservations);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Reservation>> FindReservation(int id)
         {
-            var data = await reservationRepository.FindReservation(id);
-            if (data == null)
+            var reservation = await reservationRepository.FindReservation(id);
+            if (reservation == null)
                 return NotFound();
-            return Ok(data);
+            return Ok(reservation);
         }
 
         [HttpPost]
@@ -41,8 +41,8 @@ namespace Restaurant_Reservation_API_Server.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(Reservation reservation)
         {
-            var former = await reservationRepository.FindReservation(reservation.Id);
-            if(former == null)
+            var originalReservation = await reservationRepository.FindReservation(reservation.Id);
+            if(originalReservation == null)
                 return NotFound();
             await reservationRepository.Update(reservation);
             return NoContent();
@@ -51,20 +51,20 @@ namespace Restaurant_Reservation_API_Server.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var data = await reservationRepository.FindReservation(id);
-            if (data == null)
+            var reservation = await reservationRepository.FindReservation(id);
+            if (reservation == null)
                 return NotFound();
-            await reservationRepository.Delete(data);
+            await reservationRepository.Delete(reservation);
             return NoContent();
         }
 
         [HttpGet]
-        [Route("FindByDateAndPhone")]
-        public ActionResult<Reservation> FindByDateAndPhone(DateTime bookingDate, string phone)
+        [Route("ResByDateAndPhone")]
+        public ActionResult<Reservation> ResByDateAndPhone(DateTime bookingDate, string phone)
         {
-            var data = reservationRepository.FindByDateAndPhone(bookingDate, phone);
-            if(data == null) return NotFound();
-            return Ok(data);
+            var reservation = reservationRepository.ResByDateAndPhone(bookingDate, phone);
+            if(reservation == null) return NotFound();
+            return Ok(reservation);
         }
     }
 }
