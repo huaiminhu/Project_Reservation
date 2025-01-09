@@ -1,3 +1,6 @@
+using Restaurant_Reservation_Client.Modules.IServices;
+using Restaurant_Reservation_Client.Modules.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,6 +10,10 @@ builder.Services.AddSession(options =>
     options.IdleTimeout = TimeSpan.FromMinutes(60);
 });
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+builder.Services.AddScoped<IReservationApiConsuming, ReservationApiConsuming>();
+builder.Services.AddScoped<IArrivalTimeApiConsuming, ArrivalTimeApiConsuming>();
+builder.Services.AddScoped<IShowPeriods, ShowPeriods>();
 
 var app = builder.Build();
 

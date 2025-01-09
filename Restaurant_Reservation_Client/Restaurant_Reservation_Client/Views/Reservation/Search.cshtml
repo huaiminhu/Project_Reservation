@@ -9,7 +9,7 @@
 
 <div class="m-4" style="text-align:center">
     <a asp-controller="Reservation" asp-action="DateForQuery" data-bs-toggle="modal" data-bs-target="#dateForQueryModal"
-       class="btn btn-info mx-2">按我選擇日期</a>
+       class="btn btn-info mx-2 fw-bold fs-5">按我選擇日期</a>
     <div class="modal fade" id="dateForQueryModal" tabindex="-1" aria-labelledby="dateForQueryModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -20,7 +20,7 @@
                             <input asp-for="BookingDate" class="form-control" min="@dateOfToday" value="@dateOfToday" />
                             <span asp-validation-for="BookingDate" class="text-danger"></span>
                         </div>
-                        <button type="submit" class="btn btn-primary text-center" data-bs-dismiss="modal">選好日期按我</button>
+                        <button type="submit" class="btn btn-primary text-center fw-bold fs-5" data-bs-dismiss="modal">選好日期按我</button>
                     </form>
                 </div>
             </div>
@@ -36,17 +36,17 @@
             <form asp-action="Search">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group m-2">
-                    <label asp-for="BookingDate" class="control-label"></label>
+                    <label asp-for="BookingDate" class="control-label fw-bold fs-5"></label>
                     <input asp-for="BookingDate" class="form-control" value="@dateForQuery" readonly />
                     <span asp-validation-for="BookingDate" class="text-danger"></span>
                 </div>
                 <div class="form-group m-2">
-                    <label asp-for="Phone" class="control-label"></label>
+                    <label asp-for="Phone" class="control-label fw-bold fs-5"></label>
                     <input asp-for="Phone" class="form-control" placeholder="請輸入電話進行查詢" />
                     <span asp-validation-for="Phone" class="text-danger"></span>
                 </div>
                 <div class="form-group text-center m-4">
-                    <input type="submit" value="按我查詢" class="btn btn-warning" />
+                    <input type="submit" value="按我查詢" class="btn btn-success fw-bold fs-5" />
                 </div>
             </form>
         </div>
@@ -108,9 +108,9 @@
                         </td>
                         <td>
                             <a asp-controller="Reservation" asp-action="Edit" asp-route-id=@Model.Id
-                               class="btn btn-primary mx-2">修改</a>
+                               class="btn btn-primary mx-2 fw-bold">修改</a>
                             <a asp-controller="Reservation" asp-action="Delete" asp-route-id=@Model.Id data-bs-toggle="modal" data-bs-target="#deleteModal"
-                               class="btn btn-danger mx-2">刪除</a>
+                               class="btn btn-danger mx-2 fw-bold">刪除</a>
                             <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -124,8 +124,8 @@
                                         <div class="modal-footer">
                                             <form asp-action="Delete">
                                                 <input asp-for="@Model.Id" hidden />
-                                                <button type="button" class="btn btn-success" data-bs-dismiss="modal">再想想</button>
-                                                <button type="submit" class="btn btn-danger">這次不吃!</button>
+                                                <button type="button" class="btn btn-success fw-bold fs-5" data-bs-dismiss="modal">再想想</button>
+                                                <button type="submit" class="btn btn-danger fw-bold fs-5">這次不吃!</button>
                                             </form>
                                         </div>
                                     </div>
@@ -141,7 +141,7 @@
 
 <div style="text-align:center">
     <a asp-action="Index"
-       class="btn btn-warning m-2">回首頁</a>
+       class="btn btn-warning m-2 fw-bold fs-5">回首頁</a>
 </div>
 
 @section Scripts {
