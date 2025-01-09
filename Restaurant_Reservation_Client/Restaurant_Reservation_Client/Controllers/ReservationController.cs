@@ -27,68 +27,74 @@ namespace Restaurant_Reservation_Client.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             List<SeatsViewModel> seats = new List<SeatsViewModel>();
             List<ReservationViewModel> reservations = new List<ReservationViewModel>();
-            reservations = reservationApiConsuming.AllReservations(client, reservationApi);
+            reservations = await reservationApiConsuming.AllReservations(client, reservationApi);
             List<ArrivalTimeViewModel> arrivalTimes = new List<ArrivalTimeViewModel>();
-            arrivalTimes = arrivalTimeApiConsuming.AllArrivalTimes(client, arrivalTimeApi);
+            arrivalTimes = await arrivalTimeApiConsuming.AllArrivalTimes(client, arrivalTimeApi);
             reservations = reservations.Where(r => r.BookingDate == DateTime.Today).ToList();
             for (var i = 0; i < arrivalTimes.Count; i++)
             {
-                int requirement = reservations.Where(r => r.arrivalTimeId == arrivalTimes[i].Id).Sum(s => s.SeatRequirement);
-                seats.Add(new SeatsViewModel { Period = arrivalTimes[i].Period, RemainSeats = 45 - requirement });
+                int requirement = reservations.Where(r => 
+                r.arrivalTimeId == arrivalTimes[i].Id)
+                    .Sum(s => s.SeatRequirement);
+                seats.Add(new SeatsViewModel { Period = arrivalTimes[i].Period, 
+                    RemainSeats = 45 - requirement });
             }
             return View(seats);
         }
 
         [HttpGet]
-        public IActionResult MakeRes()
+        public async Task<IActionResult> MakeRes()
         {
             List<ArrivalTimeViewModel> arrivalTimes = new List<ArrivalTimeViewModel>();
+            arrivalTimes = await arrivalTimeApiConsuming.AllArrivalTimes(client, arrivalTimeApi);
             if (HttpContext.Session.GetString("SelectedDate") != null)
             {
                 var selectedDate = HttpContext.Session.GetString("SelectedDate");
                 List<DisplayViewModel> results = new List<DisplayViewModel>();
                 List<ReservationViewModel> reservations = new List<ReservationViewModel>();
-                reservations = reservationApiConsuming.AllReservations(client, reservationApi);
-                arrivalTimes = arrivalTimeApiConsuming.AllArrivalTimes(client, arrivalTimeApi);
+                reservations = await reservationApiConsuming.AllReservations(client, reservationApi);
                 var parsedDate = DateTime.Parse(selectedDate);
-                results = showPeriods.periods(parsedDate, results, reservations, arrivalTimes);
+                results = showPeriods.ListOfPeriods(parsedDate, results, reservations, arrivalTimes);
                 ViewBag.Periods = new SelectList(results, "Id", "Display");
             }
             else
             {
-                arrivalTimes = arrivalTimeApiConsuming.AllArrivalTimes(client, arrivalTimeApi);
                 ViewBag.Periods = new SelectList(arrivalTimes, "Id", "Period");
             }
             return View();
         }
 
         [HttpPost]
-        public IActionResult MakeRes(ReservationViewModel reservation)
+        public async Task<IActionResult> MakeRes(ReservationViewModel reservation)
         {
             int remainSeat = 0;
             List<DisplayViewModel> results = new List<DisplayViewModel>();
             List<ReservationViewModel> reservations = new List<ReservationViewModel>();
             List<ArrivalTimeViewModel> arrivalTimes = new List<ArrivalTimeViewModel>();
+            arrivalTimes = await arrivalTimeApiConsuming.AllArrivalTimes(client, arrivalTimeApi);
             if (HttpContext.Session.GetString("SelectedDate") != null)
             {
                 var selectedDate = HttpContext.Session.GetString("SelectedDate");
-                reservations = reservationApiConsuming.AllReservations(client, reservationApi);
-                arrivalTimes = arrivalTimeApiConsuming.AllArrivalTimes(client, arrivalTimeApi);
+                reservations = await reservationApiConsuming.AllReservations(client, reservationApi);
                 var parsedDate = DateTime.Parse(selectedDate);
-                results = showPeriods.periods(parsedDate, results, reservations, arrivalTimes);
+                results = showPeriods.ListOfPeriods(parsedDate, results, reservations, arrivalTimes);
                 ViewBag.Periods = new SelectList(results, "Id", "Display");
             }
             else
             {
-                arrivalTimes = arrivalTimeApiConsuming.AllArrivalTimes(client, arrivalTimeApi);
                 ViewBag.Periods = new SelectList(arrivalTimes, "Id", "Period");
             }
-            var repeatCheck = reservations.FirstOrDefault(r => r.BookingDate == reservation.BookingDate && r.Phone == reservation.Phone);
-            remainSeat = 45 - reservations.Where(r => r.BookingDate == reservation.BookingDate && r.arrivalTimeId == reservation.arrivalTimeId).Sum(s => s.SeatRequirement);
+            var repeatCheck = reservations.FirstOrDefault(r => 
+            r.BookingDate == reservation.BookingDate && 
+            r.Phone == reservation.Phone);
+            remainSeat = 45 - reservations.Where(r => 
+            r.BookingDate == reservation.BookingDate && 
+            r.arrivalTimeId == reservation.arrivalTimeId)
+                .Sum(s => s.SeatRequirement);
             var remainSeatCheck = remainSeat - reservation.SeatRequirement;
             if (reservation.SeatRequirement <= reservation.ChildSeat)
                 ViewBag.ChildSeatError = "兒童座椅數必須少於總訂位數!";
@@ -98,9 +104,10 @@ namespace Restaurant_Reservation_Client.Controllers
                 ViewBag.RepeatError = "當日最多訂位一次!";
             else if (ModelState.IsValid)
             {
-                var selectedTime = results.Where(t => t.Id == reservation.arrivalTimeId).Select(p => p.Display[0..13]).ToList()[0];
+                var selectedTime = results.Where(t => t.Id == reservation.arrivalTimeId)
+                    .Select(p => p.Display[0..13]).ToList()[0];
                 HttpContext.Session.SetString("selectedTime", selectedTime);
-                int Reservationid = reservationApiConsuming.Create(reservation, client, reservationApi);
+                int Reservationid = await reservationApiConsuming.Create(reservation, client, reservationApi);
                 HttpContext.Session.SetInt32("ReservationCreator", Reservationid);
                 HttpContext.Session.Remove("SelectedDate");
                 return RedirectToAction("Success");
@@ -109,11 +116,11 @@ namespace Restaurant_Reservation_Client.Controllers
         }
 
         [HttpGet]
-        public IActionResult Success()
+        public async Task<IActionResult> Success()
         {
-            ReservationViewModel reservation = new();
+            ReservationViewModel? reservation = new ReservationViewModel();
             var reservationId = HttpContext.Session.GetInt32("ReservationCreator").Value;
-            reservation = reservationApiConsuming.FindReservation(reservationId, client, reservationApi);
+            reservation = await reservationApiConsuming.FindReservation(reservationId, client, reservationApi);
             ViewBag.Period = HttpContext.Session.GetString("selectedTime");
             return View(reservation);
         }
@@ -125,43 +132,42 @@ namespace Restaurant_Reservation_Client.Controllers
         }
 
         [HttpPost]
-        public IActionResult Search(DateTime bookingDate, string phone)
+        public async Task<IActionResult> Search(DateTime bookingDate, string phone)
         {
-            ReservationViewModel reservation = new();
+            ReservationViewModel? reservation = new ReservationViewModel();
             string newDate = bookingDate.ToString("yyyy-MM-dd");
-            reservation = reservationApiConsuming.ResByDateAndPhone(newDate, phone, client, reservationApi);
+            reservation = await reservationApiConsuming.ResByDateAndPhone(newDate, phone, client, reservationApi);
             HttpContext.Session.SetInt32("ReservationCreator", reservation.Id);
             var timeData = arrivalTimeApiConsuming.ArrivalTimeById(reservation.arrivalTimeId, client, arrivalTimeApi);
-            var diff = Convert.ToInt32((DateTime.Parse(timeData.Period[0..5]) - DateTime.Now).TotalHours);
+            var diff = Convert.ToInt32((DateTime.Parse(timeData.Result.Period[0..5]) - DateTime.Now).TotalHours);
             if (diff < 1 && reservation.BookingDate == DateTime.Today)
                 reservation.SeatRequirement = 0;
-            ViewBag.Period = timeData.Period;
+            ViewBag.Period = timeData.Result.Period;
             HttpContext.Session.Remove("DateForQuery");
             return View(reservation);
         }
 
         [HttpGet]
-        public IActionResult Edit(int reservationId)
+        public async Task<IActionResult> Edit(int reservationId)
         {
-            int remainSeat = 0;
-            ReservationViewModel reservation = new();
+            ReservationViewModel reservation = new ReservationViewModel();
             if(HttpContext.Session.GetInt32("ReservationCreator") !=null)
                 reservationId = HttpContext.Session.GetInt32("ReservationCreator").Value;
-            reservation = reservationApiConsuming.FindReservation(reservationId, client, reservationApi);
+            reservation = await reservationApiConsuming.FindReservation(reservationId, client, reservationApi);
             if (HttpContext.Session.GetString("ChangedDate") != null)
                 reservation.BookingDate = DateTime.Parse(HttpContext.Session.GetString("ChangedDate"));
             List<DisplayViewModel> results = new List<DisplayViewModel>();
             List<ReservationViewModel> reservations = new List<ReservationViewModel>();
             List<ArrivalTimeViewModel> arrivalTimes = new List<ArrivalTimeViewModel>();
-            reservations = reservationApiConsuming.AllReservations(client, reservationApi);
-            arrivalTimes = arrivalTimeApiConsuming.AllArrivalTimes(client, arrivalTimeApi);
-            results = showPeriods.periods(reservation.BookingDate, results, reservations, arrivalTimes);
+            reservations = await reservationApiConsuming.AllReservations(client, reservationApi);
+            arrivalTimes = await arrivalTimeApiConsuming.AllArrivalTimes(client, arrivalTimeApi);
+            results = showPeriods.ListOfPeriods(reservation.BookingDate, results, reservations, arrivalTimes);
             ViewBag.Periods = new SelectList(results, "Id", "Display");
             return View(reservation);
         }
 
         [HttpPost]
-        public IActionResult Edit(ReservationViewModel reservation)
+        public async Task<IActionResult> Edit(ReservationViewModel reservation)
         {
             int remainSeat = 0;
             List<DisplayViewModel> results = new List<DisplayViewModel>();
@@ -169,11 +175,14 @@ namespace Restaurant_Reservation_Client.Controllers
                 reservation.BookingDate = DateTime.Parse(HttpContext.Session.GetString("ChangedDate"));
             List<ArrivalTimeViewModel> arrivalTimes = new List<ArrivalTimeViewModel>();
             List<ReservationViewModel> reservations = new List<ReservationViewModel>();
-            reservations = reservationApiConsuming.AllReservations(client, reservationApi);
-            arrivalTimes = arrivalTimeApiConsuming.AllArrivalTimes(client, arrivalTimeApi);
-            results = showPeriods.periods(reservation.BookingDate, results, reservations, arrivalTimes);
+            reservations = await reservationApiConsuming.AllReservations(client, reservationApi);
+            arrivalTimes = await arrivalTimeApiConsuming.AllArrivalTimes(client, arrivalTimeApi);
+            results = showPeriods.ListOfPeriods(reservation.BookingDate, results, reservations, arrivalTimes);
             ViewBag.Periods = new SelectList(results, "Id", "Display");
-            remainSeat = 45 - reservations.Where(r => r.BookingDate == reservation.BookingDate && r.arrivalTimeId == reservation.arrivalTimeId).Sum(s => s.SeatRequirement);
+            remainSeat = 45 - reservations.Where(r => 
+            r.BookingDate == reservation.BookingDate && 
+            r.arrivalTimeId == reservation.arrivalTimeId)
+                .Sum(s => s.SeatRequirement);
             var remainSeatCheck = remainSeat - reservation.SeatRequirement;
             if (reservation.SeatRequirement <= reservation.ChildSeat)
                 ViewBag.ChildSeatError = "兒童座椅數必須少於總訂位數!";
@@ -181,9 +190,11 @@ namespace Restaurant_Reservation_Client.Controllers
                 ViewBag.RemainSeatError = "剩餘座位數不夠!換個時段吧~";
             else
             {
-                var selectedTime = results.Where(t => t.Id == reservation.arrivalTimeId).Select(p => p.Display[0..13]).ToList()[0];
+                var selectedTime = results.Where(t => 
+                t.Id == reservation.arrivalTimeId)
+                    .Select(p => p.Display[0..13]).ToList()[0];
                 reservation.Id = HttpContext.Session.GetInt32("ReservationCreator").Value;
-                reservationApiConsuming.Update(reservation, client, reservationApi);
+                await reservationApiConsuming.Update(reservation, client, reservationApi);
                 HttpContext.Session.SetString("selectedTime", selectedTime);
                 HttpContext.Session.Remove("ChangedDate");
                 return RedirectToAction("Success");
@@ -191,9 +202,9 @@ namespace Restaurant_Reservation_Client.Controllers
             return View(reservation);
         }
 
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            reservationApiConsuming.Delete(id, client, reservationApi);
+            await reservationApiConsuming.Delete(id, client, reservationApi);
             TempData["DeleteMsg"] = "訂位已刪除...下次要再來!!!";
             HttpContext.Session.Remove("ReservationCreator");
             return RedirectToAction("Index");

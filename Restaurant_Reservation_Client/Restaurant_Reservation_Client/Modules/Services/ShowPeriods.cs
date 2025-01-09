@@ -5,7 +5,7 @@ namespace Restaurant_Reservation_Client.Modules.Services
 {
     public class ShowPeriods : IShowPeriods
     {
-        public List<DisplayViewModel> periods(DateTime selectedDate,
+        public List<DisplayViewModel> ListOfPeriods(DateTime selectedDate,
             List<DisplayViewModel> results, 
             List<ReservationViewModel> reservations, 
             List<ArrivalTimeViewModel> arrivalTimes)

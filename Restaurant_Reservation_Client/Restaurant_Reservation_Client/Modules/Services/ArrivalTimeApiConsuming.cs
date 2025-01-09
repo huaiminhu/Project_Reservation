@@ -6,12 +6,12 @@ namespace Restaurant_Reservation_Client.Modules.Services
 {
     public class ArrivalTimeApiConsuming : IArrivalTimeApiConsuming
     {
-        public List<ArrivalTimeViewModel> AllArrivalTimes(HttpClient client, string arrivalTimeApi)
+        public async Task<List<ArrivalTimeViewModel>> AllArrivalTimes(HttpClient client, string arrivalTimeApi)
         {
-            HttpResponseMessage responseForTimes = client.GetAsync(arrivalTimeApi).Result;
+            HttpResponseMessage responseForTimes = await client.GetAsync(arrivalTimeApi);
             if (responseForTimes.IsSuccessStatusCode)
             {
-                string resultForTimes = responseForTimes.Content.ReadAsStringAsync().Result;
+                string resultForTimes = await responseForTimes.Content.ReadAsStringAsync();
                 var timesData = JsonConvert.DeserializeObject<List<ArrivalTimeViewModel>>(resultForTimes);
                 if (timesData != null)
                 {
@@ -21,12 +21,12 @@ namespace Restaurant_Reservation_Client.Modules.Services
             return null;
         }
 
-        public ArrivalTimeViewModel? ArrivalTimeById(int id, HttpClient client, string arrivalTimeApi)
+        public async Task<ArrivalTimeViewModel?> ArrivalTimeById(int id, HttpClient client, string arrivalTimeApi)
         {
-            HttpResponseMessage responseForTime = client.GetAsync(arrivalTimeApi + id).Result;
+            HttpResponseMessage responseForTime = await client.GetAsync(arrivalTimeApi + id);
             if (responseForTime.IsSuccessStatusCode)
             {
-                string resultForTime = responseForTime.Content.ReadAsStringAsync().Result;
+                string resultForTime = await responseForTime.Content.ReadAsStringAsync();
                 var timeData = JsonConvert.DeserializeObject<ArrivalTimeViewModel>(resultForTime);
                 if (timeData != null)
                     return timeData;
