@@ -21,7 +21,7 @@
                 <div class="col-3 m-1 p-3 border border-info rounded">
                     <h3 class="fw-bold font-monospace">@Html.DisplayFor(modelItem => item.Period)</h3>
                     <p class="fs-5">目前空位 : </p>
-                    @if (diff > 1)
+                    @if (diff > 0)
                     {
                         @if (item.RemainSeats <= 5 && item.RemainSeats >= 1)
                         {
