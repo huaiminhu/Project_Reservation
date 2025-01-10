@@ -5,7 +5,7 @@
     var dateOfToday = DateTime.Now.ToString("yyyy-MM-dd");
 }
 
-<h3 class="text-center fw-bold text-primary m-4">訂位修改/刪除前請先輸入查詢資訊</h3>
+<h3 class="text-center fw-bold text-primary m-4">請先輸入查詢資訊</h3>
 
 <div class="m-4" style="text-align:center">
     <a asp-controller="Reservation" asp-action="DateForQuery" data-bs-toggle="modal" data-bs-target="#dateForQueryModal"
@@ -110,22 +110,22 @@
                             <a asp-controller="Reservation" asp-action="Edit" asp-route-id=@Model.Id
                                class="btn btn-primary mx-2 fw-bold">修改</a>
                             <a asp-controller="Reservation" asp-action="Delete" asp-route-id=@Model.Id data-bs-toggle="modal" data-bs-target="#deleteModal"
-                               class="btn btn-danger mx-2 fw-bold">刪除</a>
+                               class="btn btn-danger mx-2 fw-bold">取消</a>
                             <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="deleteModalLabel">刪除訂位</h1>
+                                            <h1 class="modal-title fs-5" id="deleteModalLabel">取消訂位</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <h2>確定不吃?</h2>
+                                            <h2>確定要放棄?</h2>
                                         </div>
                                         <div class="modal-footer">
                                             <form asp-action="Delete">
                                                 <input asp-for="@Model.Id" hidden />
                                                 <button type="button" class="btn btn-success fw-bold fs-5" data-bs-dismiss="modal">再想想</button>
-                                                <button type="submit" class="btn btn-danger fw-bold fs-5">這次不吃!</button>
+                                                <button type="submit" class="btn btn-danger fw-bold fs-5">確定放棄</button>
                                             </form>
                                         </div>
                                     </div>

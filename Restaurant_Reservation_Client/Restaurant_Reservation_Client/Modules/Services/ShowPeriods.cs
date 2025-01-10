@@ -17,7 +17,7 @@ namespace Restaurant_Reservation_Client.Modules.Services
             // 判定訂位日期是否為今日
             if (selectedDate == DateTime.Today)
             {
-                // 若訂位日為今日, 需確定下拉式選單選項未超過訂位時段
+                // 若訂位日為今日, 需確定下拉式選單選項訂位時段是否已過
                 for (var i = 0; i < arrivalTimes.Count; i++)
                 {
                     int remainSeat = 45 - reservations.Where(r => r.arrivalTimeId == arrivalTimes[i].Id).Sum(s => s.SeatRequirement);
