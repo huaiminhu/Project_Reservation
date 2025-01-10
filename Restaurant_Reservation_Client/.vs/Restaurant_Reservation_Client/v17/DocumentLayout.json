@@ -46,8 +46,7 @@
               "RelativeToolTip": "Restaurant_Reservation_Client\\Views\\Reservation\\Search.cshtml",
               "ViewState": "AQIAAG8AAAAAAAAAAAAAAH8AAABuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-01-10T11:26:01.54Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-10T11:26:01.54Z"
             },
             {
               "$type": "Document",
@@ -59,8 +58,7 @@
               "RelativeToolTip": "Restaurant_Reservation_Client\\Views\\Reservation\\Edit.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-01-10T11:25:17.885Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-10T11:25:17.885Z"
             },
             {
               "$type": "Document",
@@ -70,7 +68,7 @@
               "RelativeDocumentMoniker": "Restaurant_Reservation_Client\\Views\\Reservation\\Index.cshtml",
               "ToolTip": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\Restaurant_Reservation_Client\\Views\\Reservation\\Index.cshtml",
               "RelativeToolTip": "Restaurant_Reservation_Client\\Views\\Reservation\\Index.cshtml",
-              "ViewState": "AQIAABIAAAAAAAAAAAAAABcAAAAgAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-01-10T11:13:08.455Z",
               "EditorCaption": ""
@@ -85,8 +83,7 @@
               "RelativeToolTip": "Restaurant_Reservation_Client\\Modules\\Services\\ShowPeriods.cs",
               "ViewState": "AQIAAA4AAAAAAAAAAAAAABMAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-10T11:12:00.296Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-10T11:12:00.296Z"
             },
             {
               "$type": "Document",
@@ -98,8 +95,7 @@
               "RelativeToolTip": "Restaurant_Reservation_Client\\Controllers\\ReservationController.cs",
               "ViewState": "AQIAAPcAAAAAAAAAAAAAABMAAABAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-10T06:58:02.706Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-10T06:58:02.706Z"
             }
           ]
         }
