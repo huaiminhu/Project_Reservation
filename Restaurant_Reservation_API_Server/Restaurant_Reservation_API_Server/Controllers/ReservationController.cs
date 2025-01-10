@@ -54,7 +54,7 @@ namespace Restaurant_Reservation_API_Server.Controllers
             return NoContent(); // 更新成功將回傳204 HTTP RESPONSE
         }
 
-        [HttpDelete("{id}")] // 刪除訂位
+        [HttpDelete("{id}")] // 取消訂位
         public async Task<IActionResult> Delete(int id)
         {
             var reservation = await reservationRepository.FindReservation(id);

@@ -130,7 +130,7 @@ namespace Restaurant_Reservation_Client.Controllers
                 int Reservationid = await reservationApiConsuming.Create(reservation, client, reservationApi);
                 HttpContext.Session.SetInt32("ReservationCreator", Reservationid);
                 
-                // 刪除不再使用的SESSION
+                // 移除不再使用的SESSION
                 HttpContext.Session.Remove("SelectedDate");
 
                 // 完成訂位將導至Success(成功訂位頁面)
@@ -244,18 +244,18 @@ namespace Restaurant_Reservation_Client.Controllers
             return View(reservation);
         }
 
-        // 刪除訂位
+        // 取消訂位
         public async Task<IActionResult> Delete(int id)
         {
             await reservationApiConsuming.Delete(id, client, reservationApi);
             
-            // 檢視中Alert呈現刪除訊息
-            TempData["DeleteMsg"] = "訂位已刪除...下次要再來!!!";
+            // 首頁檢視中Alert呈現取消訂位訊息
+            TempData["DeleteMsg"] = "訂位已取消...下次要再來!!!";
 
             // 移除訂位時產生的SESSION
             HttpContext.Session.Remove("ReservationCreator");
 
-            // 刪除成功將返回首頁
+            // 取消成功將返回首頁
             return RedirectToAction("Index");
         }
 

@@ -38,7 +38,7 @@ namespace Restaurant_Reservation_Client.Modules.Services
             return -1;
         }
 
-        // 刪除訂位
+        // 取消訂位
         public async Task<int> Delete(int id, HttpClient client, string reservationApi)
         {
             HttpResponseMessage response = await client.DeleteAsync(reservationApi + id);

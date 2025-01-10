@@ -16,7 +16,7 @@ namespace Restaurant_Reservation_Client.Modules.IServices
         // 更新訂位資訊
         Task<int> Update(ReservationViewModel reservation, HttpClient client, string reservationApi);
 
-        // 刪除訂位
+        // 取消訂位
         Task<int> Delete(int id, HttpClient client, string reservationApi);
 
         // 使用日期及連絡電話查詢訂位資訊

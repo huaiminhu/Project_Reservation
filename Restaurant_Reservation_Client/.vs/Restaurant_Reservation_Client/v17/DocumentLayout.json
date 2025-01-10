@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}|Restaurant_Reservation_Client\\Restaurant_Reservation_Client.csproj|c:\\users\\hankh\\desktop\\project_reservation\\restaurant_reservation_client\\restaurant_reservation_client\\controllers\\reservationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}|Restaurant_Reservation_Client\\Restaurant_Reservation_Client.csproj|solutionrelative:restaurant_reservation_client\\controllers\\reservationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}|Restaurant_Reservation_Client\\Restaurant_Reservation_Client.csproj|c:\\users\\hankh\\desktop\\project_reservation\\restaurant_reservation_client\\restaurant_reservation_client\\modules\\services\\reservationapiconsuming.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}|Restaurant_Reservation_Client\\Restaurant_Reservation_Client.csproj|solutionrelative:restaurant_reservation_client\\modules\\services\\reservationapiconsuming.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}|Restaurant_Reservation_Client\\Restaurant_Reservation_Client.csproj|c:\\users\\hankh\\desktop\\project_reservation\\restaurant_reservation_client\\restaurant_reservation_client\\modules\\iservices\\ireservationapiconsuming.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}|Restaurant_Reservation_Client\\Restaurant_Reservation_Client.csproj|solutionrelative:restaurant_reservation_client\\modules\\iservices\\ireservationapiconsuming.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}|Restaurant_Reservation_Client\\Restaurant_Reservation_Client.csproj|c:\\users\\hankh\\desktop\\project_reservation\\restaurant_reservation_client\\restaurant_reservation_client\\modules\\services\\showperiods.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}|Restaurant_Reservation_Client\\Restaurant_Reservation_Client.csproj|solutionrelative:restaurant_reservation_client\\modules\\services\\showperiods.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}|Restaurant_Reservation_Client\\Restaurant_Reservation_Client.csproj|c:\\users\\hankh\\desktop\\project_reservation\\restaurant_reservation_client\\restaurant_reservation_client\\views\\reservation\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}|Restaurant_Reservation_Client\\Restaurant_Reservation_Client.csproj|solutionrelative:restaurant_reservation_client\\views\\reservation\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}|Restaurant_Reservation_Client\\Restaurant_Reservation_Client.csproj|c:\\users\\hankh\\desktop\\project_reservation\\restaurant_reservation_client\\restaurant_reservation_client\\controllers\\reservationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}|Restaurant_Reservation_Client\\Restaurant_Reservation_Client.csproj|solutionrelative:restaurant_reservation_client\\controllers\\reservationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,39 +38,65 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
+              "Title": "ReservationApiConsuming.cs",
+              "DocumentMoniker": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\Restaurant_Reservation_Client\\Modules\\Services\\ReservationApiConsuming.cs",
+              "RelativeDocumentMoniker": "Restaurant_Reservation_Client\\Modules\\Services\\ReservationApiConsuming.cs",
+              "ToolTip": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\Restaurant_Reservation_Client\\Modules\\Services\\ReservationApiConsuming.cs",
+              "RelativeToolTip": "Restaurant_Reservation_Client\\Modules\\Services\\ReservationApiConsuming.cs",
+              "ViewState": "AQIAACgAAAAAAAAAAAAAACgAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T15:01:20.81Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IReservationApiConsuming.cs",
+              "DocumentMoniker": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\Restaurant_Reservation_Client\\Modules\\IServices\\IReservationApiConsuming.cs",
+              "RelativeDocumentMoniker": "Restaurant_Reservation_Client\\Modules\\IServices\\IReservationApiConsuming.cs",
+              "ToolTip": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\Restaurant_Reservation_Client\\Modules\\IServices\\IReservationApiConsuming.cs",
+              "RelativeToolTip": "Restaurant_Reservation_Client\\Modules\\IServices\\IReservationApiConsuming.cs",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAuwBIAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-10T15:01:04.907Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "ShowPeriods.cs",
               "DocumentMoniker": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\Restaurant_Reservation_Client\\Modules\\Services\\ShowPeriods.cs",
               "RelativeDocumentMoniker": "Restaurant_Reservation_Client\\Modules\\Services\\ShowPeriods.cs",
               "ToolTip": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\Restaurant_Reservation_Client\\Modules\\Services\\ShowPeriods.cs",
               "RelativeToolTip": "Restaurant_Reservation_Client\\Modules\\Services\\ShowPeriods.cs",
-              "ViewState": "AQIAABEAAAAAAAAAAAAAABgAAAAyAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAAyAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-10T14:39:03.744Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\Restaurant_Reservation_Client\\Views\\Reservation\\Index.cshtml",
               "RelativeDocumentMoniker": "Restaurant_Reservation_Client\\Views\\Reservation\\Index.cshtml",
               "ToolTip": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\Restaurant_Reservation_Client\\Views\\Reservation\\Index.cshtml",
               "RelativeToolTip": "Restaurant_Reservation_Client\\Views\\Reservation\\Index.cshtml",
-              "ViewState": "AQIAABUAAAAAAAAAAAAAABcAAAAhAAAA",
+              "ViewState": "AQIAABIAAAAAAAAAAIBWwBcAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-01-10T11:13:08.455Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "ReservationController.cs",
               "DocumentMoniker": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\Restaurant_Reservation_Client\\Controllers\\ReservationController.cs",
               "RelativeDocumentMoniker": "Restaurant_Reservation_Client\\Controllers\\ReservationController.cs",
               "ToolTip": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\Restaurant_Reservation_Client\\Controllers\\ReservationController.cs",
               "RelativeToolTip": "Restaurant_Reservation_Client\\Controllers\\ReservationController.cs",
-              "ViewState": "AQIAAKUAAAAAAAAAAAAkwK0AAAAUAAAA",
+              "ViewState": "AQIAAH0AAAAAAAAAAAAkwIQAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-10T06:58:02.706Z",
               "EditorCaption": ""

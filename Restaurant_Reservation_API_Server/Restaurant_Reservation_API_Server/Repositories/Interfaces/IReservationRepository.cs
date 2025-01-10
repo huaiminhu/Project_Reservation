@@ -16,7 +16,7 @@ namespace Restaurant_Reservation_API_Server.Repositories.Interfaces
         // 更新訂位資訊
         Task Update(Reservation reservation);
 
-        // 刪除訂位
+        // 取消訂位
         Task Delete(Reservation reservation);
 
         // 使用日期及連絡電話查詢訂位資訊

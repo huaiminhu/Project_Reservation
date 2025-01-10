@@ -29,7 +29,7 @@ namespace Restaurant_Reservation_API_Server.Repositories.Services
             await _ctx.SaveChangesAsync();
         }
 
-        // 刪除訂位
+        // 取消訂位
         public async Task Delete(Reservation reservation)
         {
             _ctx.Reservations.Remove(reservation);
