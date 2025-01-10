@@ -8,6 +8,7 @@ namespace Restaurant_Reservation_Client.Modules.Services
 {
     public class ReservationApiConsuming : IReservationApiConsuming
     {
+        // 讀取所有訂位資訊
         public async Task<List<ReservationViewModel>> AllReservations(HttpClient client, string reservationApi)
         {
             HttpResponseMessage responseForReservations = await client.GetAsync(reservationApi);
@@ -21,6 +22,7 @@ namespace Restaurant_Reservation_Client.Modules.Services
             return null;
         }
 
+        // 新增訂位
         public async Task<int> Create(ReservationViewModel reservation, HttpClient client, string reservationApi)
         {
             string dataForCreate = JsonConvert.SerializeObject(reservation);
@@ -36,6 +38,7 @@ namespace Restaurant_Reservation_Client.Modules.Services
             return -1;
         }
 
+        // 刪除訂位
         public async Task<int> Delete(int id, HttpClient client, string reservationApi)
         {
             HttpResponseMessage response = await client.DeleteAsync(reservationApi + id);
@@ -44,6 +47,7 @@ namespace Restaurant_Reservation_Client.Modules.Services
             return -1;
         }
 
+        //使用ID尋找訂位資訊
         public async Task<ReservationViewModel?> FindReservation(int id, HttpClient client, string reservationApi)
         {
             HttpResponseMessage response = await client.GetAsync(reservationApi + id);
@@ -57,6 +61,7 @@ namespace Restaurant_Reservation_Client.Modules.Services
             return null;
         }
 
+        // 使用日期及連絡電話查詢訂位資訊
         public async Task<ReservationViewModel?> ResByDateAndPhone(string newDate, string phone, HttpClient client, string reservationApi)
         {
             HttpResponseMessage responseForReservation = await client.GetAsync(reservationApi + "ResByDateAndPhone?bookingDate=" + newDate + "&phone=" + phone);
@@ -70,6 +75,7 @@ namespace Restaurant_Reservation_Client.Modules.Services
             return null;
         }
 
+        // 更新訂位資訊
         public async Task<int> Update(ReservationViewModel reservation, HttpClient client, string reservationApi)
         {
             string dataForUpdate = JsonConvert.SerializeObject(reservation);

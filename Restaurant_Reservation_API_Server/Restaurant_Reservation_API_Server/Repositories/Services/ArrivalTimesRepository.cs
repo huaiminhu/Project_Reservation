@@ -13,12 +13,15 @@ namespace Restaurant_Reservation_API_Server.Repositories.Services
         {
             _ctx = ctx;
         }
+
+        // 讀取所有訂位時段
         public async Task<IEnumerable<ArrivalTime>> AllArrivalTimes()
         {
             var data = await _ctx.ArrivalTimes.ToListAsync();
             return data;
         }
 
+        // 使用時段ID讀取訂位時段
         public async Task<ArrivalTime?> ArrivalTimeById(int id)
         {
             return await _ctx.ArrivalTimes.FindAsync(id);

@@ -8,6 +8,7 @@ namespace Restaurant_Reservation_API_Server.Controllers
     [ApiController]
     public class ReservationController : ControllerBase
     {
+        // 使用分層服務
         private readonly IReservationRepository reservationRepository;
 
         public ReservationController(IReservationRepository reservationRepository)
@@ -15,50 +16,55 @@ namespace Restaurant_Reservation_API_Server.Controllers
             this.reservationRepository = reservationRepository;
         }
 
-        [HttpGet]
+        [HttpGet] // 讀取所有訂位資訊
         public async Task<IActionResult> AllReservations()
         {
             var reservations = await reservationRepository.AllReservations();
-            return Ok(reservations);
+            return Ok(reservations); // 回傳200的HTTP RESPONSE和資料
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}")] //使用ID尋找訂位資訊
         public async Task<ActionResult<Reservation>> FindReservation(int id)
         {
             var reservation = await reservationRepository.FindReservation(id);
             if (reservation == null)
-                return NotFound();
+                return NotFound(); // 沒有找到則回傳404 HTTP RESPONSE
             return Ok(reservation);
         }
 
-        [HttpPost]
+        [HttpPost] // 新增訂位
         public async Task<IActionResult> Create(Reservation reservation)
         {
             await reservationRepository.Create(reservation);
+
+            // 新增成功將回傳201 HTTP RESPONSE
             return CreatedAtAction(nameof(FindReservation), new { id = reservation.Id }, reservation);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id}")] // 更新訂位資訊
         public async Task<IActionResult> Update(Reservation reservation)
         {
+            // 使用CLIENT傳來的ID尋找原訂位資訊
             var originalReservation = await reservationRepository.FindReservation(reservation.Id);
             if(originalReservation == null)
                 return NotFound();
+
+            // 更新原訂位資訊
             await reservationRepository.Update(reservation);
-            return NoContent();
+            return NoContent(); // 更新成功將回傳204 HTTP RESPONSE
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}")] // 刪除訂位
         public async Task<IActionResult> Delete(int id)
         {
             var reservation = await reservationRepository.FindReservation(id);
             if (reservation == null)
                 return NotFound();
             await reservationRepository.Delete(reservation);
-            return NoContent();
+            return NoContent(); // 刪除成功將回傳204 HTTP RESPONSE
         }
 
-        [HttpGet]
+        [HttpGet] // 使用日期及連絡電話查詢訂位資訊
         [Route("ResByDateAndPhone")]
         public ActionResult<Reservation> ResByDateAndPhone(DateTime bookingDate, string phone)
         {

@@ -6,6 +6,7 @@ namespace Restaurant_Reservation_Client.Modules.Services
 {
     public class ArrivalTimeApiConsuming : IArrivalTimeApiConsuming
     {
+        // 讀取所有訂位時段
         public async Task<List<ArrivalTimeViewModel>> AllArrivalTimes(HttpClient client, string arrivalTimeApi)
         {
             HttpResponseMessage responseForTimes = await client.GetAsync(arrivalTimeApi);
@@ -21,6 +22,7 @@ namespace Restaurant_Reservation_Client.Modules.Services
             return null;
         }
 
+        // 使用時段ID讀取訂位時段
         public async Task<ArrivalTimeViewModel?> ArrivalTimeById(int id, HttpClient client, string arrivalTimeApi)
         {
             HttpResponseMessage responseForTime = await client.GetAsync(arrivalTimeApi + id);

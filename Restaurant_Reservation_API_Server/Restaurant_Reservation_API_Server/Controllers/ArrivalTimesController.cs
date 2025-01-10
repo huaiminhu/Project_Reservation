@@ -14,14 +14,14 @@ namespace Restaurant_Reservation_API_Server.Controllers
             this.ArrivalTimeRepository = ArrivalTimeRepository;
         }
 
-        [HttpGet]
+        [HttpGet] // 讀取所有訂位時段
         public async Task<IActionResult> AllArrivalTimes()
         {
             var data = await ArrivalTimeRepository.AllArrivalTimes();
             return Ok(data);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}")] // 使用時段ID讀取訂位時段
         public async Task<ActionResult<ArrivalTime>> ArrivalTimeById(int id)
         {
             var data = await ArrivalTimeRepository.ArrivalTimeById(id);

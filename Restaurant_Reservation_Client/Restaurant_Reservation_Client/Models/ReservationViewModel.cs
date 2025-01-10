@@ -2,7 +2,7 @@
 
 namespace Restaurant_Reservation_Client.Models
 {
-    public class ReservationViewModel
+    public class ReservationViewModel   // 訂位資訊
     {
         public int Id { get; set; }
 
@@ -25,13 +25,13 @@ namespace Restaurant_Reservation_Client.Models
 
 
         [Required(ErrorMessage = "訂位人數未輸入!")]
-        [Range(1, 40, ErrorMessage = "訂位人數須介於1到40之間!")]
+        [Range(1, 35, ErrorMessage = "訂位人數須介於1到35之間!")]
         [Display(Name = "訂位人數")]
         public int SeatRequirement { get; set; }
 
 
         [Required(ErrorMessage = "兒童座椅數未輸入!")]
-        [Range(0, 20, ErrorMessage = "兒童座椅數須介於0到20之間!")]
+        [Range(0, 15, ErrorMessage = "兒童座椅數須介於0到15之間!")]
         [Display(Name = "兒童座椅需求數")]
         public int ChildSeat { get; set; }
 
