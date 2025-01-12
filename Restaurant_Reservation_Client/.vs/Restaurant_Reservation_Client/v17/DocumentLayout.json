@@ -50,8 +50,7 @@
               "RelativeToolTip": "Restaurant_Reservation_Client\\Modules\\IServices\\IReservationApiConsuming.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAABYAAABSAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-12T03:06:01.526Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-12T03:06:01.526Z"
             },
             {
               "$type": "Document",
@@ -63,8 +62,7 @@
               "RelativeToolTip": "Restaurant_Reservation_Client\\Modules\\IServices\\IArrivalTimeApiConsuming.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAA6AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-12T03:06:00.822Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-12T03:06:00.822Z"
             },
             {
               "$type": "Document",
@@ -76,8 +74,7 @@
               "RelativeToolTip": "Restaurant_Reservation_Client\\Modules\\Services\\ArrivalTimeApiConsuming.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAAB4AAABHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-12T03:04:56.504Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-12T03:04:56.504Z"
             },
             {
               "$type": "Document",
@@ -89,8 +86,7 @@
               "RelativeToolTip": "Restaurant_Reservation_Client\\Modules\\Services\\ReservationApiConsuming.cs",
               "ViewState": "AQIAAAYAAAAAAAAAAAAAAFAAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-12T03:01:43.297Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-12T03:01:43.297Z"
             },
             {
               "$type": "Document",
@@ -115,8 +111,7 @@
               "RelativeToolTip": "Restaurant_Reservation_Client\\Views\\Reservation\\MakeRes.cshtml",
               "ViewState": "AQIAAE4AAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-01-11T09:36:56.42Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-11T09:36:56.42Z"
             }
           ]
         }

@@ -38,8 +38,7 @@
               "RelativeToolTip": "Restaurant_Reservation_API_Server\\Repositories\\Services\\ReservationRepository.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAAB8AAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-10T07:13:20.241Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-10T07:13:20.241Z"
             },
             {
               "$type": "Document",
@@ -64,8 +63,7 @@
               "RelativeToolTip": "Restaurant_Reservation_API_Server\\Controllers\\ReservationController.cs",
               "ViewState": "AQIAAAgAAAAAAAAAAAA+wD0AAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-10T07:10:52.005Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-10T07:10:52.005Z"
             }
           ]
         }
