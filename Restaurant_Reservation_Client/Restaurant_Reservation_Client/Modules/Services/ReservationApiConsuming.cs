@@ -8,8 +8,13 @@ namespace Restaurant_Reservation_Client.Modules.Services
 {
     public class ReservationApiConsuming : IReservationApiConsuming
     {
+        // API串接用端點
+        private string reservationApi = "https://localhost:7077/api/Reservation/";
+
+        private HttpClient client = new HttpClient();
+
         // 讀取所有訂位資訊
-        public async Task<List<ReservationViewModel>> AllReservations(HttpClient client, string reservationApi)
+        public async Task<List<ReservationViewModel>> AllReservations()
         {
             HttpResponseMessage responseForReservations = await client.GetAsync(reservationApi);
             if (responseForReservations.IsSuccessStatusCode)
@@ -23,7 +28,7 @@ namespace Restaurant_Reservation_Client.Modules.Services
         }
 
         // 新增訂位
-        public async Task<int> Create(ReservationViewModel reservation, HttpClient client, string reservationApi)
+        public async Task<int> Create(ReservationViewModel reservation)
         {
             string dataForCreate = JsonConvert.SerializeObject(reservation);
             StringContent content = new StringContent(dataForCreate, Encoding.UTF8, "application/json");
@@ -39,7 +44,7 @@ namespace Restaurant_Reservation_Client.Modules.Services
         }
 
         // 取消訂位
-        public async Task<int> Delete(int id, HttpClient client, string reservationApi)
+        public async Task<int> Delete(int id)
         {
             HttpResponseMessage response = await client.DeleteAsync(reservationApi + id);
             if (response.IsSuccessStatusCode)
@@ -48,7 +53,7 @@ namespace Restaurant_Reservation_Client.Modules.Services
         }
 
         //使用ID尋找訂位資訊
-        public async Task<ReservationViewModel?> FindReservation(int id, HttpClient client, string reservationApi)
+        public async Task<ReservationViewModel?> FindReservation(int id)
         {
             HttpResponseMessage response = await client.GetAsync(reservationApi + id);
             if (response.IsSuccessStatusCode)
@@ -62,7 +67,7 @@ namespace Restaurant_Reservation_Client.Modules.Services
         }
 
         // 使用日期及連絡電話查詢訂位資訊
-        public async Task<ReservationViewModel?> ResByDateAndPhone(string newDate, string phone, HttpClient client, string reservationApi)
+        public async Task<ReservationViewModel?> ResByDateAndPhone(string newDate, string phone)
         {
             HttpResponseMessage responseForReservation = await client.GetAsync(reservationApi + "ResByDateAndPhone?bookingDate=" + newDate + "&phone=" + phone);
             if (responseForReservation.IsSuccessStatusCode)
@@ -76,7 +81,7 @@ namespace Restaurant_Reservation_Client.Modules.Services
         }
 
         // 更新訂位資訊
-        public async Task<int> Update(ReservationViewModel reservation, HttpClient client, string reservationApi)
+        public async Task<int> Update(ReservationViewModel reservation)
         {
             string dataForUpdate = JsonConvert.SerializeObject(reservation);
             StringContent content = new StringContent(dataForUpdate, Encoding.UTF8, "application/json");

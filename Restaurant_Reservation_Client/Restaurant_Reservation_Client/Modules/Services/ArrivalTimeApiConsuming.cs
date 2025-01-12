@@ -6,8 +6,13 @@ namespace Restaurant_Reservation_Client.Modules.Services
 {
     public class ArrivalTimeApiConsuming : IArrivalTimeApiConsuming
     {
+        // API串接用端點
+        private string arrivalTimeApi = "https://localhost:7077/api/ArrivalTime/";
+
+        private HttpClient client = new HttpClient();
+
         // 讀取所有訂位時段
-        public async Task<List<ArrivalTimeViewModel>> AllArrivalTimes(HttpClient client, string arrivalTimeApi)
+        public async Task<List<ArrivalTimeViewModel>> AllArrivalTimes()
         {
             HttpResponseMessage responseForTimes = await client.GetAsync(arrivalTimeApi);
             if (responseForTimes.IsSuccessStatusCode)
@@ -23,7 +28,7 @@ namespace Restaurant_Reservation_Client.Modules.Services
         }
 
         // 使用時段ID讀取訂位時段
-        public async Task<ArrivalTimeViewModel?> ArrivalTimeById(int id, HttpClient client, string arrivalTimeApi)
+        public async Task<ArrivalTimeViewModel?> ArrivalTimeById(int id)
         {
             HttpResponseMessage responseForTime = await client.GetAsync(arrivalTimeApi + id);
             if (responseForTime.IsSuccessStatusCode)
