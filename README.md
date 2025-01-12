@@ -2,9 +2,14 @@
 
 ## 使用技術
 **Client端: ASP.NET CORE MVC、Bootstrap**  
+
 **Server端: ASP.NET CORE Web API、Entity Framework、SQL SERVER**
 
+
+
 ## 軟體介紹  
+
+**一、頁面簡介**  
 
 訂位首頁  
 ![](https://github.com/huaiminhu/Project_Reservation/blob/main/Pics/0111/%E9%A6%96%E9%A0%811.png)  
@@ -24,3 +29,9 @@
 
 修改訂位頁  
 ![](https://github.com/huaiminhu/Project_Reservation/blob/main/Pics/0111/%E4%BF%AE%E6%94%B91.png)  
+
+
+**二、功能介紹**  
+
+1. 訂位
+
