@@ -33,5 +33,29 @@
 
 **二、功能介紹**  
 
-1. 訂位
+1. 訂位  
 
+![](https://github.com/huaiminhu/Project_Reservation/blob/main/Pics/0111/%E9%A6%96%E9%A0%817.png)  
+
+![](https://github.com/huaiminhu/Project_Reservation/blob/main/Pics/%E8%A8%82%E4%BD%8D%E9%A0%812.png)  
+
+![](https://github.com/huaiminhu/Project_Reservation/blob/main/Pics/0111/%E6%88%91%E8%A6%81%E8%A8%82%E4%BD%8D1.png)  
+
+![](https://github.com/huaiminhu/Project_Reservation/blob/main/Pics/0111/%E6%88%91%E8%A6%81%E8%A8%82%E4%BD%8D2.png)  
+
+![](https://github.com/huaiminhu/Project_Reservation/blob/main/Pics/0111/%E6%88%91%E8%A6%81%E8%A8%82%E4%BD%8D3.png)  
+
+![](https://github.com/huaiminhu/Project_Reservation/blob/main/Pics/0111/%E6%88%91%E8%A6%81%E8%A8%82%E4%BD%8D4.png)  
+
+![](https://github.com/huaiminhu/Project_Reservation/blob/main/Pics/0111/%E6%88%91%E8%A6%81%E8%A8%82%E4%BD%8D5.png)  
+
+![](https://github.com/huaiminhu/Project_Reservation/blob/main/Pics/0111/%E6%88%90%E5%8A%9F1.png)  
+
+
+2. 查詢訂位資訊
+
+![]()  
+
+
+
+3. 
