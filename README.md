@@ -53,7 +53,7 @@
 ![](https://github.com/huaiminhu/Project_Reservation/blob/main/Pics/0111/%E6%88%91%E8%A6%81%E8%A8%82%E4%BD%8D1.png)  
 <br/>
   
-- 日期選擇也是從當天開始選擇，選完日期後點選「選好日期按我」
+- 日期選擇限制從當天為開始，選完日期後點選「選好日期按我」
 ![](https://github.com/huaiminhu/Project_Reservation/blob/main/Pics/0111/%E6%88%91%E8%A6%81%E8%A8%82%E4%BD%8D2.png)  
 <br/>
   
