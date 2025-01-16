@@ -160,7 +160,7 @@ namespace Restaurant_Reservation_Client.Controllers
                 reservationId = HttpContext.Session.GetInt32("ReservationCreator").Value;
             ReservationViewModel? reservation = await reservationApiConsuming.FindReservation(reservationId);
 
-            // 傳送今日開放時段至檢視中時段下拉式選單
+            // 傳送所選訂位日期對應開放時段至檢視中時段下拉式選單
             if (reservation != null)
             {
                 var todayPeriods = await ShowPeriods(reservation.BookingDate);
@@ -178,7 +178,7 @@ namespace Restaurant_Reservation_Client.Controllers
                 // 使用SESSION設定訂位資訊ID供資料傳遞給後端更新
                 reservation.Id = HttpContext.Session.GetInt32("ReservationCreator").Value;
 
-                // 傳送今日開放時段至檢視中時段下拉式選單
+                // 傳送所選訂位日期對應開放時段至檢視中時段下拉式選單
                 var todayPeriods = await ShowPeriods(reservation.BookingDate);
                 ViewBag.Periods = todayPeriods.ToList();
 
