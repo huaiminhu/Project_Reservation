@@ -1,7 +1,7 @@
 # 家庭餐廳訂位
 
 ## 使用技術
-**Client端: ASP.NET Core MVC、Bootstrap、jQuery、Ajax**  
+**Client端: ASP.NET Core MVC、Bootstrap、jQuery、AJAX**  
 
 **Server端: ASP.NET Core Web API、Entity Framework、SQL SERVER**
 
