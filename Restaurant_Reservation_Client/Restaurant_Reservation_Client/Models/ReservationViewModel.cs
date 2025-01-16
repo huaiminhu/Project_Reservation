@@ -7,7 +7,7 @@ namespace Restaurant_Reservation_Client.Models
         public int Id { get; set; }
 
 
-        [Required(ErrorMessage = "日期未輸入!")]
+        [Required(ErrorMessage = "請點選欄位右方圖示選日期!")]
         [Display(Name = "訂位日期"), DataType(DataType.Date)]
         public DateTime BookingDate { get; set; }
 
@@ -37,7 +37,7 @@ namespace Restaurant_Reservation_Client.Models
 
 
         [Display(Name = "用餐時段")]
-        public int arrivalTimeId { get; set; }
+        public int ArrivalTimeId { get; set; }
 
     }
 }

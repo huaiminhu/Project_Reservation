@@ -7,9 +7,9 @@ namespace Restaurant_Reservation_Client.Modules.Services
     public class ArrivalTimeApiConsuming : IArrivalTimeApiConsuming
     {
         // API串接用端點
-        private string arrivalTimeApi = "https://localhost:7077/api/ArrivalTime/";
+        private readonly string arrivalTimeApi = "https://localhost:7077/api/ArrivalTime/";
 
-        private HttpClient client = new HttpClient();
+        private readonly HttpClient client = new();
 
         // 讀取所有訂位時段
         public async Task<List<ArrivalTimeViewModel>> AllArrivalTimes()
@@ -24,7 +24,7 @@ namespace Restaurant_Reservation_Client.Modules.Services
                     return timesData;
                 }
             }
-            return null;
+            return [];
         }
 
         // 使用時段ID讀取訂位時段

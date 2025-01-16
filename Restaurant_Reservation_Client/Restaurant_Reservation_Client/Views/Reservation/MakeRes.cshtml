@@ -7,76 +7,58 @@
 
 <h1 class="text-center fw-bold text-primary m-4">我要訂位</h1>
 
-<div class="m-4" style="text-align:center">
-    <a asp-controller="Reservation" asp-action="SelectDate" data-bs-toggle="modal" data-bs-target="#selectDateModal"
-       class="btn btn-info mx-2 fw-bold fs-5">按我選擇日期</a>
-    <div class="modal fade" id="selectDateModal" tabindex="-1" aria-labelledby="selectDateModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <form asp-action="SelectDate">
-                        <div class="form-group m-2">
-                            <label asp-for="BookingDate" class="control-label"></label>
-                            <input asp-for="BookingDate" class="form-control" min="@dateOfToday" value="@dateOfToday" />
-                            <span asp-validation-for="BookingDate" class="text-danger"></span>
-                        </div>
-                        <button type="submit" class="btn btn-primary text-center fw-bold fs-5" data-bs-dismiss="modal">選好日期按我</button>
-                    </form>
-                </div>
+<div class="row justify-content-center">
+    <div class="col-md-4">
+        <form asp-action="MakeRes">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <h5 class="text-danger">@ViewBag.RepeatError</h5>
+            <div class="form-group m-2">
+                <label asp-for="BookingDate" class="control-label fw-bold fs-5"></label>
+                <input asp-for="BookingDate" class="form-control" min="@dateOfToday" value="@dateOfToday" /><p class="text-dark">(點選欄位右方圖示選日期)</p>
+                <span asp-validation-for="BookingDate" class="text-danger"></span>
             </div>
-        </div>
+            <h5 class="text-danger">@ViewBag.RemainSeatError</h5>
+            <div class="form-group m-2">
+                <label asp-for="ArrivalTimeId" class="control-label fw-bold fs-5"></label>
+                <select asp-for="ArrivalTimeId" class="form-select">
+                    <option value="">請選擇時段</option>
+                    @{
+                        var periods = ViewBag.Periods;
+                        for(int i = 0; i < periods.Count; i++)
+                        {
+                            <option value="@periods[i].Id">@periods[i].Display</option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="ArrivalTimeId" class="text-danger"></span>
+            </div>
+            <div class="form-group m-2">
+                <label asp-for="CustomerName" class="control-label fw-bold fs-5"></label>
+                <input asp-for="CustomerName" class="form-control" placeholder="請輸入訂位人姓名" />
+                <span asp-validation-for="CustomerName" class="text-danger"></span>
+            </div>
+            <div class="form-group m-2">
+                <label asp-for="Phone" class="control-label fw-bold fs-5"></label>
+                <input asp-for="Phone" class="form-control" placeholder="請輸入連絡電話" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group m-2">
+                <label asp-for="SeatRequirement" class="control-label fw-bold fs-5"></label>
+                <input asp-for="SeatRequirement" type="number" class="form-control" placeholder="請輸入訂位數" />
+                <span asp-validation-for="SeatRequirement" class="text-danger"></span>
+            </div>
+            <h5 class="text-danger">@ViewBag.ChildSeatError</h5>
+            <div class="form-group m-2">
+                <label asp-for="ChildSeat" class="control-label fw-bold fs-5"></label>
+                <input asp-for="ChildSeat" type="number" class="form-control" placeholder="請輸入兒童座椅需求數" />
+                <span asp-validation-for="ChildSeat" class="text-danger"></span>
+            </div>
+            <div class="form-group text-center m-4">
+                <input type="submit" value="按我訂位" class="btn btn-primary fw-bold fs-5" />
+            </div>
+        </form>
     </div>
 </div>
-
-@if (accessor.HttpContext.Session.GetString("SelectedDate") != null)
-{
-    var selectedDate = @DateTime.Parse(accessor.HttpContext.Session.GetString("SelectedDate")).ToString("yyyy-MM-dd");
-    <div class="row justify-content-center">
-        <div class="col-md-4">
-            <form asp-action="MakeRes">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <h5 class="text-danger">@ViewBag.RepeatError</h5>
-                <div class="form-group m-2">
-                    <label asp-for="BookingDate" class="control-label fw-bold fs-5"></label>
-                    <input asp-for="BookingDate" class="form-control" value="@selectedDate" readonly />
-                    <span asp-validation-for="BookingDate" class="text-danger"></span>
-                </div>
-                <h5 class="text-danger">@ViewBag.RemainSeatError</h5>
-                <div class="form-group m-2">
-                    <label asp-for="arrivalTimeId" class="control-label fw-bold fs-5"></label>
-                    <select asp-for="arrivalTimeId" class="form-select" asp-items="@ViewBag.Periods">
-                        <option selected>請選擇時段</option>
-                    </select>
-                    <span asp-validation-for="arrivalTimeId" class="text-danger"></span>
-                </div>
-                <div class="form-group m-2">
-                    <label asp-for="CustomerName" class="control-label fw-bold fs-5"></label>
-                    <input asp-for="CustomerName" class="form-control" placeholder="請輸入訂位人姓名" />
-                    <span asp-validation-for="CustomerName" class="text-danger"></span>
-                </div>
-                <div class="form-group m-2">
-                    <label asp-for="Phone" class="control-label fw-bold fs-5"></label>
-                    <input asp-for="Phone" class="form-control" placeholder="請輸入連絡電話" />
-                    <span asp-validation-for="Phone" class="text-danger"></span>
-                </div>
-                <div class="form-group m-2">
-                    <label asp-for="SeatRequirement" class="control-label fw-bold fs-5"></label>
-                    <input asp-for="SeatRequirement" type="number" class="form-control" placeholder="請輸入訂位數" />
-                    <span asp-validation-for="SeatRequirement" class="text-danger"></span>
-                </div>
-                <h5 class="text-danger">@ViewBag.ChildSeatError</h5>
-                <div class="form-group m-2">
-                    <label asp-for="ChildSeat" class="control-label fw-bold fs-5"></label>
-                    <input asp-for="ChildSeat" type="number" class="form-control" placeholder="請輸入兒童座椅需求數" />
-                    <span asp-validation-for="ChildSeat" class="text-danger"></span>
-                </div>
-                <div class="form-group text-center m-4">
-                    <input type="submit" value="按我訂位" class="btn btn-primary fw-bold fs-5" />
-                </div>
-            </form>
-        </div>
-    </div>
-}
 
 <div class="m-2" style="text-align:center">
     <a asp-action="Index" class="btn btn-warning mx-2 fw-bold fs-5">回首頁</a>
@@ -84,4 +66,25 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+        $(function () {
+            $("#BookingDate").change( function () {
+                var selectedDate = $(this).val();
+                $("#ArrivalTimeId").empty();
+                $("#ArrivalTimeId").append("<option value=''>請選擇時段</option>");
+                $.ajax({
+                    method: 'POST',
+                    url: '@Url.Action("ShowPeriods")',
+                    data: { bookingDate :selectedDate }, 
+                    dataType: 'json', 
+                    success: function (response) {
+                        for (var i = 0; i < response.length; i++) {
+                            console.log(response[i].display);
+                            $("#ArrivalTimeId").append('<option value="' + response[i].id + '">' + response[i].display + '</option>');
+                        }
+                    }
+                })
+            });
+        });
+    </script>
 }

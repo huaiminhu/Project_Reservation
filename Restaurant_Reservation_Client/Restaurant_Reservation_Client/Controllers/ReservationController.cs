@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Restaurant_Reservation_Client.Models;
 using Restaurant_Reservation_Client.Modules.IServices;
 using System.Text;
@@ -9,7 +8,9 @@ namespace Restaurant_Reservation_Client.Controllers
     public class ReservationController : Controller
     {
         // 使用分層服務
+        // 串接訂位資訊API
         private readonly IReservationApiConsuming reservationApiConsuming;
+        // 串接訂位時段API
         private readonly IArrivalTimeApiConsuming arrivalTimeApiConsuming;
         private readonly IShowPeriods showPeriods;   // 顯示可選訂位時段
 
@@ -26,20 +27,20 @@ namespace Restaurant_Reservation_Client.Controllers
         public async Task<IActionResult> Index()
         {
             // 取得所有訂位資訊
-            List<ReservationViewModel> reservations = new List<ReservationViewModel>();
+            List<ReservationViewModel> reservations = [];
             reservations = await reservationApiConsuming.AllReservations();
 
             // 取得所有訂位時段
-            List<ArrivalTimeViewModel> arrivalTimes = new List<ArrivalTimeViewModel>();
+            List<ArrivalTimeViewModel> arrivalTimes = [];
             arrivalTimes = await arrivalTimeApiConsuming.AllArrivalTimes();
 
             // 將今日時段以及即時空位數新增至seat串列並回傳給檢視
-            List<SeatsViewModel> seats = new List<SeatsViewModel>();
+            List<SeatsViewModel> seats = [];
             reservations = reservations.Where(r => r.BookingDate == DateTime.Today).ToList();
             for (var i = 0; i < arrivalTimes.Count; i++)
             {
                 int requirement = reservations.Where(r => 
-                r.arrivalTimeId == arrivalTimes[i].Id)
+                r.ArrivalTimeId == arrivalTimes[i].Id)
                     .Sum(s => s.SeatRequirement);
                 seats.Add(new SeatsViewModel { Period = arrivalTimes[i].Period, 
                     RemainSeats = 45 - requirement });
@@ -50,51 +51,23 @@ namespace Restaurant_Reservation_Client.Controllers
         [HttpGet]   // 新增訂位
         public async Task<IActionResult> MakeRes()
         {
-            List<ArrivalTimeViewModel> arrivalTimes = new List<ArrivalTimeViewModel>();
-            arrivalTimes = await arrivalTimeApiConsuming.AllArrivalTimes();
+            // 傳送今日開放時段至檢視中時段下拉式選單
+            var todayPeriods = await ShowPeriods(DateTime.Today);
+            ViewBag.Periods = todayPeriods.ToList();
             
-            // 若有選定日期, 選定後將產生日期SESSION字串, 再由MakeRes方法讀取 
-            if (HttpContext.Session.GetString("SelectedDate") != null)
-            {
-                var selectedDate = HttpContext.Session.GetString("SelectedDate");
-                List<DisplayViewModel> results = new List<DisplayViewModel>();
-                List<ReservationViewModel> reservations = new List<ReservationViewModel>();
-                reservations = await reservationApiConsuming.AllReservations();
-                var parsedDate = DateTime.Parse(selectedDate);
-
-                // 依據選定日期, 在檢視當中時段下拉式選單呈現可選時段以及即時空位數
-                results = showPeriods.ListOfPeriods(parsedDate, results, reservations, arrivalTimes);
-                ViewBag.Periods = new SelectList(results, "Id", "Display");
-            }
-            else
-            {
-                ViewBag.Periods = new SelectList(arrivalTimes, "Id", "Period");
-            }
             return View();
         }
 
         [HttpPost]   // 新增訂位
         public async Task<IActionResult> MakeRes(ReservationViewModel reservation)
         {
-            // 呈現檢視中下拉式選單資料
-            List<DisplayViewModel> results = new List<DisplayViewModel>();
-            List<ReservationViewModel> reservations = new List<ReservationViewModel>();
-            List<ArrivalTimeViewModel> arrivalTimes = new List<ArrivalTimeViewModel>();
-            arrivalTimes = await arrivalTimeApiConsuming.AllArrivalTimes();
-            if (HttpContext.Session.GetString("SelectedDate") != null)
-            {
-                var selectedDate = HttpContext.Session.GetString("SelectedDate");
-                reservations = await reservationApiConsuming.AllReservations();
-                var parsedDate = DateTime.Parse(selectedDate);
-                results = showPeriods.ListOfPeriods(parsedDate, results, reservations, arrivalTimes);
-                ViewBag.Periods = new SelectList(results, "Id", "Display");
-            }
-            else
-            {
-                ViewBag.Periods = new SelectList(arrivalTimes, "Id", "Period");
-            }
+            // 傳送今日開放時段至檢視中時段下拉式選單
+            var todayPeriods = await ShowPeriods(DateTime.Today);
+            ViewBag.Periods = todayPeriods.ToList();
 
             // 單日重複訂位驗證
+            List<ReservationViewModel> reservations = [];
+            reservations = await reservationApiConsuming.AllReservations();
             var repeatCheck = reservations.FirstOrDefault(r => 
             r.BookingDate == reservation.BookingDate && 
             r.Phone == reservation.Phone);
@@ -102,7 +75,7 @@ namespace Restaurant_Reservation_Client.Controllers
             // 訂位數超過剩餘空位數驗證
             int remainSeat = 45 - reservations.Where(r => 
             r.BookingDate == reservation.BookingDate && 
-            r.arrivalTimeId == reservation.arrivalTimeId)
+            r.ArrivalTimeId == reservation.ArrivalTimeId)
                 .Sum(s => s.SeatRequirement);
             int remainSeatCheck = remainSeat - reservation.SeatRequirement;
             
@@ -116,17 +89,14 @@ namespace Restaurant_Reservation_Client.Controllers
             else if (ModelState.IsValid)
             {
                 // 產生所選時段SESSION字串供Success(成功訂位頁面)在檢視中顯示資訊
-                var selectedTime = results.Where(t => t.Id == reservation.arrivalTimeId)
-                    .Select(p => p.Display[0..13]).ToList()[0];
-                HttpContext.Session.SetString("selectedTime", selectedTime);
+                var selectedTime = await arrivalTimeApiConsuming.ArrivalTimeById(reservation.ArrivalTimeId);
+                if(selectedTime!=null)
+                    HttpContext.Session.SetString("selectedTime", selectedTime.Period);
 
                 // 使用訂位ID產生SESSION整數供Success在檢視中顯示資訊
                 int Reservationid = await reservationApiConsuming.Create(reservation);
                 HttpContext.Session.SetInt32("ReservationCreator", Reservationid);
                 
-                // 移除不再使用的SESSION
-                HttpContext.Session.Remove("SelectedDate");
-
                 // 完成訂位將導至Success(成功訂位頁面)
                 return RedirectToAction("Success");
             }
@@ -138,7 +108,7 @@ namespace Restaurant_Reservation_Client.Controllers
         {
             // 取得訂位資訊並顯示於檢視
             ReservationViewModel? reservation = new ReservationViewModel();
-            var reservationId = HttpContext.Session.GetInt32("ReservationCreator").Value;
+            int reservationId = HttpContext.Session.GetInt32("ReservationCreator").Value;
             reservation = await reservationApiConsuming.FindReservation(reservationId);
             ViewBag.Period = HttpContext.Session.GetString("selectedTime");
             return View(reservation);
@@ -154,22 +124,31 @@ namespace Restaurant_Reservation_Client.Controllers
         public async Task<IActionResult> Search(DateTime bookingDate, string phone)
         {
             // 讀取訂位資訊
-            ReservationViewModel? reservation = new ReservationViewModel();
             string newDate = bookingDate.ToString("yyyy-MM-dd");
-            reservation = await reservationApiConsuming.ResByDateAndPhone(newDate, phone);
-            HttpContext.Session.SetInt32("ReservationCreator", reservation.Id);
-            
-            // 使用時段ID讀取訂位時段, 用於檢視中呈現
-            var timeData = arrivalTimeApiConsuming.ArrivalTimeById(reservation.arrivalTimeId);
+            ReservationViewModel? reservation = await reservationApiConsuming.ResByDateAndPhone(newDate, phone);
+            if (reservation != null)
+            {
+                // 使用訂位ID設定SESSION, 供修改頁面以及訂位完成檢視顯示資訊使用
+                HttpContext.Session.SetInt32("ReservationCreator", reservation.Id);
 
-            // 若該時段已過, 讓檢視不再呈現該訂位資訊
-            // (檢視中SeatRequirement, 座位需求若為0, 將不呈現訂位資訊)
-            var diff = Convert.ToInt32((DateTime.Parse(timeData.Result.Period[0..5]) - DateTime.Now).TotalHours);
-            if (diff < 1 && reservation.BookingDate == DateTime.Today)
-                reservation.SeatRequirement = 0;
+                // 使用時段ID讀取訂位時段, 用於檢視中呈現
+                var timeData = await arrivalTimeApiConsuming.ArrivalTimeById(reservation.ArrivalTimeId);
 
-            ViewBag.Period = timeData.Result.Period;
-            HttpContext.Session.Remove("DateForQuery");
+                // 若該時段已過, 讓檢視不再呈現該訂位資訊
+                // (檢視中SeatRequirement, 座位需求若為0, 將呈現錯誤訊息)
+                if (timeData != null)
+                {
+                    var diff = Convert.ToInt32((DateTime.Parse(timeData.Period[0..5]) - DateTime.Now).TotalHours);
+                    if (diff < 1 && reservation.BookingDate == DateTime.Today)
+                        reservation.SeatRequirement = 0;
+                    ViewBag.Period = timeData.Period;
+                }
+            }
+            else
+            {
+                // 找不到訂位資訊
+                reservation = new ReservationViewModel() { SeatRequirement = 0 };
+            }
             return View(reservation);
         }
 
@@ -177,63 +156,57 @@ namespace Restaurant_Reservation_Client.Controllers
         public async Task<IActionResult> Edit(int reservationId)
         {
             // 讀取原訂位資訊
-            ReservationViewModel reservation = new ReservationViewModel();
-            if(HttpContext.Session.GetInt32("ReservationCreator") !=null)
+            if (HttpContext.Session.GetInt32("ReservationCreator") != null)
                 reservationId = HttpContext.Session.GetInt32("ReservationCreator").Value;
-            reservation = await reservationApiConsuming.FindReservation(reservationId);
+            ReservationViewModel? reservation = await reservationApiConsuming.FindReservation(reservationId);
+
+            // 傳送今日開放時段至檢視中時段下拉式選單
+            if (reservation != null)
+            {
+                var todayPeriods = await ShowPeriods(reservation.BookingDate);
+                ViewBag.Periods = todayPeriods.ToList();
+            }
             
-            // 在檢視中更改日期
-            if (HttpContext.Session.GetString("ChangedDate") != null)
-                reservation.BookingDate = DateTime.Parse(HttpContext.Session.GetString("ChangedDate"));
-            
-            // 呈現檢視中下拉式選單可選時段
-            List<DisplayViewModel> results = new List<DisplayViewModel>();
-            List<ReservationViewModel> reservations = new List<ReservationViewModel>();
-            List<ArrivalTimeViewModel> arrivalTimes = new List<ArrivalTimeViewModel>();
-            reservations = await reservationApiConsuming.AllReservations();
-            arrivalTimes = await arrivalTimeApiConsuming.AllArrivalTimes();
-            results = showPeriods.ListOfPeriods(reservation.BookingDate, results, reservations, arrivalTimes);
-            ViewBag.Periods = new SelectList(results, "Id", "Display");
             return View(reservation);
         }
 
         [HttpPost]   // 修改訂位資訊
         public async Task<IActionResult> Edit(ReservationViewModel reservation)
         {
-            // 呈現檢視中下拉式選單可選時段
-            List<DisplayViewModel> results = new List<DisplayViewModel>();
-            if (HttpContext.Session.GetString("ChangedDate") != null)
-                reservation.BookingDate = DateTime.Parse(HttpContext.Session.GetString("ChangedDate"));
-            List<ArrivalTimeViewModel> arrivalTimes = new List<ArrivalTimeViewModel>();
-            List<ReservationViewModel> reservations = new List<ReservationViewModel>();
-            reservations = await reservationApiConsuming.AllReservations();
-            arrivalTimes = await arrivalTimeApiConsuming.AllArrivalTimes();
-            results = showPeriods.ListOfPeriods(reservation.BookingDate, results, reservations, arrivalTimes);
-            ViewBag.Periods = new SelectList(results, "Id", "Display");
-
-            // 訂位數超過剩餘空位數驗證
-            int remainSeat = 45 - reservations.Where(r => 
-            r.BookingDate == reservation.BookingDate && 
-            r.arrivalTimeId == reservation.arrivalTimeId)
-                .Sum(s => s.SeatRequirement);
-            int remainSeatCheck = remainSeat - reservation.SeatRequirement;
-
-            // 通過所有驗證即更新訂位資訊
-            if (reservation.SeatRequirement <= reservation.ChildSeat)
-                ViewBag.ChildSeatError = "兒童座椅數必須少於總訂位數!";
-            else if (remainSeatCheck < 0)
-                ViewBag.RemainSeatError = "剩餘座位數不夠!換個時段吧~";
-            else
+            if (reservation != null)
             {
-                // 更新訂位資訊, 更新後導向訂位成功頁面呈現訂位資訊
-                var selectedTime = results.Where(t => 
-                t.Id == reservation.arrivalTimeId)
-                    .Select(p => p.Display[0..13]).ToList()[0];
+                // 使用SESSION設定訂位資訊ID供資料傳遞給後端更新
                 reservation.Id = HttpContext.Session.GetInt32("ReservationCreator").Value;
-                await reservationApiConsuming.Update(reservation);
-                HttpContext.Session.SetString("selectedTime", selectedTime);
-                HttpContext.Session.Remove("ChangedDate");
-                return RedirectToAction("Success");
+
+                // 傳送今日開放時段至檢視中時段下拉式選單
+                var todayPeriods = await ShowPeriods(reservation.BookingDate);
+                ViewBag.Periods = todayPeriods.ToList();
+
+                // 訂位數超過剩餘空位數驗證
+                List<ReservationViewModel> reservations = [];
+                reservations = await reservationApiConsuming.AllReservations();
+                int remainSeat = 45 - reservations.Where(r =>
+                r.BookingDate == reservation.BookingDate &&
+                r.ArrivalTimeId == reservation.ArrivalTimeId)
+                .Sum(s => s.SeatRequirement);
+                int remainSeatCheck = remainSeat - reservation.SeatRequirement;
+
+                // 通過所有驗證即更新訂位資訊
+                if (reservation.SeatRequirement <= reservation.ChildSeat)
+                    ViewBag.ChildSeatError = "兒童座椅數必須少於總訂位數!";
+                else if (remainSeatCheck < 0)
+                    ViewBag.RemainSeatError = "剩餘座位數不夠!換個時段吧~";
+                else
+                {                    
+                    // 設定SESSION傳遞訂位時段資訊供成功頁面檢視呈現
+                    var selectedTime = await arrivalTimeApiConsuming.ArrivalTimeById(reservation.ArrivalTimeId);
+                    if (selectedTime != null)
+                        HttpContext.Session.SetString("selectedTime", selectedTime.Period);
+                    
+                    // 更新訂位資訊, 更新後導向訂位成功頁面呈現訂位資訊
+                    await reservationApiConsuming.Update(reservation);
+                    return RedirectToAction("Success");
+                }
             }
             return View(reservation);
         }
@@ -241,6 +214,7 @@ namespace Restaurant_Reservation_Client.Controllers
         // 取消訂位
         public async Task<IActionResult> Delete(int id)
         {
+            // 串接API SERVER執行取消
             await reservationApiConsuming.Delete(id);
             
             // 首頁檢視中Alert呈現取消訂位訊息
@@ -253,33 +227,14 @@ namespace Restaurant_Reservation_Client.Controllers
             return RedirectToAction("Index");
         }
 
-        // 在檢視中(MakeRes, 訂位頁面)的MODAL選定日期後,
-        // 產生日期SESSION字串
-        [HttpPost]   
-        public IActionResult SelectDate(DateTime bookingDate)
+        // 可選時段供檢視下拉式選單呈現
+        public async Task<List<DisplayViewModel>> ShowPeriods(DateTime bookingDate)
         {
-            HttpContext.Session.SetString("SelectedDate", bookingDate.ToString());
-            return RedirectToAction("MakeRes");
-        }
-
-
-        // 在檢視中(Edit, 修改訂位資訊)的MODAL選定日期後,
-        // 產生日期SESSION字串
-        [HttpPost]   
-        public IActionResult ChangeDate(DateTime bookingDate)
-        {
-            HttpContext.Session.SetString("ChangedDate", bookingDate.ToString());
-            return RedirectToAction("Edit");
-        }
-
-
-        // 在檢視中(Search, 查詢訂位頁面)的MODAL選定日期後,
-        // 產生日期SESSION字串
-        [HttpPost]   
-        public IActionResult DateForQuery(DateTime bookingDate)
-        {
-            HttpContext.Session.SetString("DateForQuery", bookingDate.ToString());
-            return RedirectToAction("Search");
+            List<DisplayViewModel> results = [];
+            List<ReservationViewModel> reservations = await reservationApiConsuming.AllReservations();
+            List<ArrivalTimeViewModel> arrivalTimes = await arrivalTimeApiConsuming.AllArrivalTimes();
+            results = showPeriods.ListOfPeriods(bookingDate, results, reservations, arrivalTimes);
+            return results;
         }
     }
 }

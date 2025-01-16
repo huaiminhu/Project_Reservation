@@ -42,10 +42,10 @@ namespace Restaurant_Reservation_API_Server.Controllers
         }
 
         [HttpPut("{id}")] // 更新訂位資訊
-        public async Task<IActionResult> Update(Reservation reservation)
+        public async Task<IActionResult> Update(int id, Reservation reservation)
         {
             // 使用CLIENT傳來的ID尋找原訂位資訊
-            var originalReservation = await reservationRepository.FindReservation(reservation.Id);
+            var originalReservation = await reservationRepository.FindReservation(id);
             if(originalReservation == null)
                 return NotFound();
 
