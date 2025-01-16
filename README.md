@@ -1,9 +1,9 @@
 # 家庭餐廳訂位
 
 ## 使用技術
-**Client端: ASP.NET CORE MVC、Bootstrap**  
+**Client端: ASP.NET Core MVC、Bootstrap、jQuery、Ajax**  
 
-**Server端: ASP.NET CORE Web API、Entity Framework、SQL SERVER**
+**Server端: ASP.NET Core Web API、Entity Framework、SQL SERVER**
 
 
 
@@ -13,27 +13,27 @@
 
 > 訂位首頁   
 
-![](https://github.com/huaiminhu/Project_Reservation/blob/main/Pics/0111/%E9%A6%96%E9%A0%811.png)  
+![](https://github.com/huaiminhu/Project_Reservation/blob/main/Pics/0116display/DP1.png)  
 <br/>  
   
 > 我要訂位頁  
 
-![](https://github.com/huaiminhu/Project_Reservation/blob/main/Pics/%E8%A8%82%E4%BD%8D%E9%A0%811.png)  
+![](https://github.com/huaiminhu/Project_Reservation/blob/main/Pics/0116display/DP2.png)  
 <br/>  
   
 > 訂位完成頁  
 
-![](https://github.com/huaiminhu/Project_Reservation/blob/main/Pics/0111/%E6%88%90%E5%8A%9F1.png)  
+![](https://github.com/huaiminhu/Project_Reservation/blob/main/Pics/0116display/DP3.png)  
 <br/>  
   
 > 訂位查詢頁  
 
-![](https://github.com/huaiminhu/Project_Reservation/blob/main/Pics/%E6%9F%A5%E8%A9%A2%E9%A0%811.png)  
+![](https://github.com/huaiminhu/Project_Reservation/blob/main/Pics/0116display/DP4.png)  
 <br/>  
   
 > 修改訂位頁  
 
-![](https://github.com/huaiminhu/Project_Reservation/blob/main/Pics/0111/%E4%BF%AE%E6%94%B92.png)  
+![](https://github.com/huaiminhu/Project_Reservation/blob/main/Pics/0116display/DP5.png)  
 <br/>  
 
   
@@ -41,15 +41,11 @@
   
 1. 訂位  
 
-- 以時段14:30-16:00為例，點選「我要訂位」
-![](https://github.com/huaiminhu/Project_Reservation/blob/main/Pics/0111/%E9%A6%96%E9%A0%817.png)  
+- 以時段13:00-14:30為例，點選「我要訂位」
+![](https://github.com/huaiminhu/Project_Reservation/blob/main/Pics/0116display/DP6.png)  
 <br/>
   
-- 點選「按我選擇日期」
-![](https://github.com/huaiminhu/Project_Reservation/blob/main/Pics/%E8%A8%82%E4%BD%8D%E9%A0%812.png)  
-<br/>
-  
-- 日期顯示已預設為當天
+- 進入「我要訂位頁」，從日期開始完成訂位，日期欄位顯示已預設為當天
 ![](https://github.com/huaiminhu/Project_Reservation/blob/main/Pics/0111/%E6%88%91%E8%A6%81%E8%A8%82%E4%BD%8D1.png)  
 <br/>
   
