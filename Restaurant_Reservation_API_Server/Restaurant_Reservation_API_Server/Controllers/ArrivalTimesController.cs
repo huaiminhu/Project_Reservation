@@ -22,9 +22,9 @@ namespace Restaurant_Reservation_API_Server.Controllers
         }
 
         [HttpGet("{id}")] // 使用時段ID讀取訂位時段
-        public async Task<ActionResult<ArrivalTime>> ArrivalTimeById(int id)
+        public async Task<ActionResult<ArrivalTime>> GetArrivalTime(int id)
         {
-            var data = await ArrivalTimeRepository.ArrivalTimeById(id);
+            var data = await ArrivalTimeRepository.GetArrivalTime(id);
             if (data == null)
                 return NotFound();
             return Ok(data);

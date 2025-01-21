@@ -8,7 +8,7 @@ namespace Restaurant_Reservation_Client.Modules.IServices
         Task<List<ReservationViewModel>> AllReservations();
 
         //使用ID尋找訂位資訊
-        Task<ReservationViewModel?> FindReservation(int id);
+        Task<ReservationViewModel?> GetReservation(int id);
 
         // 新增訂位
         Task<int> Create(ReservationViewModel reservation);

@@ -37,7 +37,7 @@ namespace Restaurant_Reservation_API_Server.Repositories.Services
         }
 
         // 使用ID尋找訂位資訊
-        public async Task<Reservation?> FindReservation(int id)
+        public async Task<Reservation?> GetReservation(int id)
         {
             return await _ctx.Reservations.FindAsync(id);
         }

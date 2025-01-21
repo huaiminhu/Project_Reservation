@@ -89,7 +89,7 @@ namespace Restaurant_Reservation_Client.Controllers
             else if (ModelState.IsValid)
             {
                 // 產生所選時段SESSION字串供Success(成功訂位頁面)在檢視中顯示資訊
-                var selectedTime = await arrivalTimeApiConsuming.ArrivalTimeById(reservation.ArrivalTimeId);
+                var selectedTime = await arrivalTimeApiConsuming.GetArrivalTime(reservation.ArrivalTimeId);
                 if(selectedTime!=null)
                     HttpContext.Session.SetString("selectedTime", selectedTime.Period);
 
@@ -109,7 +109,7 @@ namespace Restaurant_Reservation_Client.Controllers
             // 取得訂位資訊並顯示於檢視
             ReservationViewModel? reservation = new ReservationViewModel();
             int reservationId = HttpContext.Session.GetInt32("ReservationCreator").Value;
-            reservation = await reservationApiConsuming.FindReservation(reservationId);
+            reservation = await reservationApiConsuming.GetReservation(reservationId);
             ViewBag.Period = HttpContext.Session.GetString("selectedTime");
             return View(reservation);
         }
@@ -132,7 +132,7 @@ namespace Restaurant_Reservation_Client.Controllers
                 HttpContext.Session.SetInt32("ReservationCreator", reservation.Id);
 
                 // 使用時段ID讀取訂位時段, 用於檢視中呈現
-                var timeData = await arrivalTimeApiConsuming.ArrivalTimeById(reservation.ArrivalTimeId);
+                var timeData = await arrivalTimeApiConsuming.GetArrivalTime(reservation.ArrivalTimeId);
 
                 // 若該時段已過, 讓檢視不再呈現該訂位資訊
                 // (檢視中SeatRequirement, 座位需求若為0, 將呈現錯誤訊息)
@@ -158,7 +158,7 @@ namespace Restaurant_Reservation_Client.Controllers
             // 讀取原訂位資訊
             if (HttpContext.Session.GetInt32("ReservationCreator") != null)
                 reservationId = HttpContext.Session.GetInt32("ReservationCreator").Value;
-            ReservationViewModel? reservation = await reservationApiConsuming.FindReservation(reservationId);
+            ReservationViewModel? reservation = await reservationApiConsuming.GetReservation(reservationId);
 
             // 傳送所選訂位日期對應開放時段至檢視中時段下拉式選單
             if (reservation != null)
@@ -199,7 +199,7 @@ namespace Restaurant_Reservation_Client.Controllers
                 else
                 {                    
                     // 設定SESSION傳遞訂位時段資訊供成功頁面檢視呈現
-                    var selectedTime = await arrivalTimeApiConsuming.ArrivalTimeById(reservation.ArrivalTimeId);
+                    var selectedTime = await arrivalTimeApiConsuming.GetArrivalTime(reservation.ArrivalTimeId);
                     if (selectedTime != null)
                         HttpContext.Session.SetString("selectedTime", selectedTime.Period);
                     

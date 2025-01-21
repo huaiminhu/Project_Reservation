@@ -8,6 +8,6 @@ namespace Restaurant_Reservation_Client.Modules.IServices
         Task<List<ArrivalTimeViewModel>> AllArrivalTimes();
         
         // 使用時段ID讀取訂位時段
-        Task<ArrivalTimeViewModel?> ArrivalTimeById(int id);
+        Task<ArrivalTimeViewModel?> GetArrivalTime(int id);
     }
 }

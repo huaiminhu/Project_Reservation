@@ -22,7 +22,7 @@ namespace Restaurant_Reservation_API_Server.Repositories.Services
         }
 
         // 使用時段ID讀取訂位時段
-        public async Task<ArrivalTime?> ArrivalTimeById(int id)
+        public async Task<ArrivalTime?> GetArrivalTime(int id)
         {
             return await _ctx.ArrivalTimes.FindAsync(id);
         }

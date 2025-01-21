@@ -28,7 +28,7 @@ namespace Restaurant_Reservation_Client.Modules.Services
         }
 
         // 使用時段ID讀取訂位時段
-        public async Task<ArrivalTimeViewModel?> ArrivalTimeById(int id)
+        public async Task<ArrivalTimeViewModel?> GetArrivalTime(int id)
         {
             HttpResponseMessage responseForTime = await client.GetAsync(arrivalTimeApi + id);
             if (responseForTime.IsSuccessStatusCode)

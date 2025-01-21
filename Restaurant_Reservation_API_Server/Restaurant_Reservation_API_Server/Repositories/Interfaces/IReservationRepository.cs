@@ -8,7 +8,7 @@ namespace Restaurant_Reservation_API_Server.Repositories.Interfaces
         Task<IEnumerable<Reservation>> AllReservations();
 
         // 使用ID尋找訂位資訊
-        Task<Reservation?> FindReservation(int id);
+        Task<Reservation?> GetReservation(int id);
 
         // 新增訂位
         Task Create(Reservation reservation);

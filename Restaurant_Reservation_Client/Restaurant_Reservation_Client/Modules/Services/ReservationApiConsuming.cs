@@ -52,7 +52,7 @@ namespace Restaurant_Reservation_Client.Modules.Services
         }
 
         //使用ID尋找訂位資訊
-        public async Task<ReservationViewModel?> FindReservation(int id)
+        public async Task<ReservationViewModel?> GetReservation(int id)
         {
             HttpResponseMessage response = await client.GetAsync(reservationApi + id);
             if (response.IsSuccessStatusCode)

@@ -12,6 +12,9 @@ namespace Restaurant_Reservation_API_Server.Data
 
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<ArrivalTime> ArrivalTimes { get; set; }
+        public DbSet<Member> Members { get; set; }
+        public DbSet<Record> Records { get; set; }
+        public DbSet<Activity> activities { get; set; }
 
         // 每次啟動網站都預先產生所有訂位時段
         protected override void OnModelCreating(ModelBuilder modelBuilder)

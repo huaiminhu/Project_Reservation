@@ -8,6 +8,6 @@ namespace Restaurant_Reservation_API_Server.Repositories.Interfaces
         Task<IEnumerable<ArrivalTime>> AllArrivalTimes();
 
         // 使用時段ID讀取訂位時段
-        Task<ArrivalTime?> ArrivalTimeById(int id);
+        Task<ArrivalTime?> GetArrivalTime(int id);
     }
 }

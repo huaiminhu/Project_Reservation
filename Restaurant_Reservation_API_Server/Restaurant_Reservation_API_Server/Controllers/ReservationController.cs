@@ -24,9 +24,9 @@ namespace Restaurant_Reservation_API_Server.Controllers
         }
 
         [HttpGet("{id}")] //使用ID尋找訂位資訊
-        public async Task<ActionResult<Reservation>> FindReservation(int id)
+        public async Task<ActionResult<Reservation>> GetReservation(int id)
         {
-            var reservation = await reservationRepository.FindReservation(id);
+            var reservation = await reservationRepository.GetReservation(id);
             if (reservation == null)
                 return NotFound(); // 沒有找到則回傳404 HTTP RESPONSE
             return Ok(reservation);
