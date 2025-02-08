@@ -15,4 +15,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Restaurant_Reservation_API_Server.Domain\Restaurant_Reservation_API_Server.Domain.csproj" />
+    <ProjectReference Include="..\Restaurant_Reservation_API_Server.Infrastructure\Restaurant_Reservation_API_Server.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

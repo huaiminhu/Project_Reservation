@@ -1582,6 +1582,30 @@
             "rid": "win"
           }
         }
+      },
+      "Restaurant_Reservation_API_Server.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/Restaurant_Reservation_API_Server.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Restaurant_Reservation_API_Server.Domain.dll": {}
+        }
+      },
+      "Restaurant_Reservation_API_Server.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.10",
+          "Restaurant_Reservation_API_Server.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Restaurant_Reservation_API_Server.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Restaurant_Reservation_API_Server.Infrastructure.dll": {}
+        }
       }
     }
   },
@@ -4446,12 +4470,24 @@
         "system.windows.extensions.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "Restaurant_Reservation_API_Server.Domain/1.0.0": {
+      "type": "project",
+      "path": "../Restaurant_Reservation_API_Server.Domain/Restaurant_Reservation_API_Server.Domain.csproj",
+      "msbuildProject": "../Restaurant_Reservation_API_Server.Domain/Restaurant_Reservation_API_Server.Domain.csproj"
+    },
+    "Restaurant_Reservation_API_Server.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../Restaurant_Reservation_API_Server.Infrastructure/Restaurant_Reservation_API_Server.Infrastructure.csproj",
+      "msbuildProject": "../Restaurant_Reservation_API_Server.Infrastructure/Restaurant_Reservation_API_Server.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.10",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.10",
+      "Restaurant_Reservation_API_Server.Domain >= 1.0.0",
+      "Restaurant_Reservation_API_Server.Infrastructure >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.4.0"
     ]
   },
@@ -4481,7 +4517,14 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server.Domain\\Restaurant_Reservation_API_Server.Domain.csproj": {
+              "projectPath": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server.Domain\\Restaurant_Reservation_API_Server.Domain.csproj"
+            },
+            "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server.Infrastructure\\Restaurant_Reservation_API_Server.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server.Infrastructure\\Restaurant_Reservation_API_Server.Infrastructure.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

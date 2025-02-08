@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Restaurant_Reservation_API_Server.Models;
-using Restaurant_Reservation_API_Server.Repositories.Interfaces;
+using Restaurant_Reservation_API_Server.Domain.Entities;
+using Restaurant_Reservation_API_Server.Infrastructure.Repositories.Interfaces;
 
 namespace Restaurant_Reservation_API_Server.Controllers
 {
@@ -8,7 +8,7 @@ namespace Restaurant_Reservation_API_Server.Controllers
     [ApiController]
     public class ReservationController : ControllerBase
     {
-        // 使用分層服務
+        // 依賴注入
         private readonly IReservationRepository reservationRepository;
 
         public ReservationController(IReservationRepository reservationRepository)
@@ -38,14 +38,14 @@ namespace Restaurant_Reservation_API_Server.Controllers
             await reservationRepository.Create(reservation);
 
             // 新增成功將回傳201 HTTP RESPONSE
-            return CreatedAtAction(nameof(FindReservation), new { id = reservation.Id }, reservation);
+            return CreatedAtAction(nameof(GetReservation), new { id = reservation.Id }, reservation);
         }
 
         [HttpPut("{id}")] // 更新訂位資訊
         public async Task<IActionResult> Update(int id, Reservation reservation)
         {
             // 使用CLIENT傳來的ID尋找原訂位資訊
-            var originalReservation = await reservationRepository.FindReservation(id);
+            var originalReservation = await reservationRepository.GetReservation(id);
             if(originalReservation == null)
                 return NotFound();
 
@@ -57,7 +57,7 @@ namespace Restaurant_Reservation_API_Server.Controllers
         [HttpDelete("{id}")] // 取消訂位
         public async Task<IActionResult> Delete(int id)
         {
-            var reservation = await reservationRepository.FindReservation(id);
+            var reservation = await reservationRepository.GetReservation(id);
             if (reservation == null)
                 return NotFound();
             await reservationRepository.Delete(reservation);

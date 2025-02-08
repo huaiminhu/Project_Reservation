@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Restaurant_Reservation_API_Server.Data;
-using Restaurant_Reservation_API_Server.Repositories.Interfaces;
-using Restaurant_Reservation_API_Server.Repositories.Services;
+using Restaurant_Reservation_API_Server.Infrastructure.Data;
+using Restaurant_Reservation_API_Server.Infrastructure.Repositories;
+using Restaurant_Reservation_API_Server.Infrastructure.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +12,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ReservationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ReservationDbContext")));
 
-// 註冊分層服務
+// 依賴注入
 builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 builder.Services.AddScoped<IArrivalTimeRepository, ArrivalTimeRepository>();
 

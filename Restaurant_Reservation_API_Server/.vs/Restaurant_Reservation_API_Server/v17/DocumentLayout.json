@@ -1,20 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_API_Server\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{B32016A0-09B2-4547-AA82-0563A94ACED7}|Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server.csproj|c:\\users\\hankh\\desktop\\project_reservation\\restaurant_reservation_api_server\\restaurant_reservation_api_server\\repositories\\interfaces\\imemberrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B32016A0-09B2-4547-AA82-0563A94ACED7}|Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server.csproj|solutionrelative:restaurant_reservation_api_server\\repositories\\interfaces\\imemberrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B32016A0-09B2-4547-AA82-0563A94ACED7}|Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server.csproj|c:\\users\\hankh\\desktop\\project_reservation\\restaurant_reservation_api_server\\restaurant_reservation_api_server\\repositories\\interfaces\\irecordrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B32016A0-09B2-4547-AA82-0563A94ACED7}|Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server.csproj|solutionrelative:restaurant_reservation_api_server\\repositories\\interfaces\\irecordrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B32016A0-09B2-4547-AA82-0563A94ACED7}|Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server.csproj|c:\\users\\hankh\\desktop\\project_reservation\\restaurant_reservation_api_server\\restaurant_reservation_api_server\\repositories\\interfaces\\iactivityrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B32016A0-09B2-4547-AA82-0563A94ACED7}|Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server.csproj|solutionrelative:restaurant_reservation_api_server\\repositories\\interfaces\\iactivityrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -22,50 +9,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "IActivityRepository.cs",
-              "DocumentMoniker": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server\\Repositories\\Interfaces\\IActivityRepository.cs",
-              "RelativeDocumentMoniker": "Restaurant_Reservation_API_Server\\Repositories\\Interfaces\\IActivityRepository.cs",
-              "ToolTip": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server\\Repositories\\Interfaces\\IActivityRepository.cs",
-              "RelativeToolTip": "Restaurant_Reservation_API_Server\\Repositories\\Interfaces\\IActivityRepository.cs",
-              "ViewState": "AQIAAAUAAAAAAAAAAAAuwAoAAAAbAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-21T13:09:11.63Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "IRecordRepository.cs",
-              "DocumentMoniker": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server\\Repositories\\Interfaces\\IRecordRepository.cs",
-              "RelativeDocumentMoniker": "Restaurant_Reservation_API_Server\\Repositories\\Interfaces\\IRecordRepository.cs",
-              "ToolTip": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server\\Repositories\\Interfaces\\IRecordRepository.cs",
-              "RelativeToolTip": "Restaurant_Reservation_API_Server\\Repositories\\Interfaces\\IRecordRepository.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAoAAAAZAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-21T13:06:18.834Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "IMemberRepository.cs",
-              "DocumentMoniker": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server\\Repositories\\Interfaces\\IMemberRepository.cs",
-              "RelativeDocumentMoniker": "Restaurant_Reservation_API_Server\\Repositories\\Interfaces\\IMemberRepository.cs",
-              "ToolTip": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_API_Server\\Restaurant_Reservation_API_Server\\Repositories\\Interfaces\\IMemberRepository.cs",
-              "RelativeToolTip": "Restaurant_Reservation_API_Server\\Repositories\\Interfaces\\IMemberRepository.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAA0wAoAAAAZAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-21T12:08:16.365Z",
-              "EditorCaption": ""
             }
           ]
         }
