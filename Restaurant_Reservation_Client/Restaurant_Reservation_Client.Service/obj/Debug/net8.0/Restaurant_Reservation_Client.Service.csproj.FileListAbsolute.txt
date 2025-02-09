@@ -1,0 +1,16 @@
+C:\Users\hankh\Desktop\Project_Reservation\Restaurant_Reservation_Client\Restaurant_Reservation_Client.Service\bin\Debug\net8.0\Restaurant_Reservation_Client.Service.deps.json
+C:\Users\hankh\Desktop\Project_Reservation\Restaurant_Reservation_Client\Restaurant_Reservation_Client.Service\bin\Debug\net8.0\Restaurant_Reservation_Client.Service.dll
+C:\Users\hankh\Desktop\Project_Reservation\Restaurant_Reservation_Client\Restaurant_Reservation_Client.Service\bin\Debug\net8.0\Restaurant_Reservation_Client.Service.pdb
+C:\Users\hankh\Desktop\Project_Reservation\Restaurant_Reservation_Client\Restaurant_Reservation_Client.Service\bin\Debug\net8.0\Restaurant_Reservation_Client.Model.dll
+C:\Users\hankh\Desktop\Project_Reservation\Restaurant_Reservation_Client\Restaurant_Reservation_Client.Service\bin\Debug\net8.0\Restaurant_Reservation_Client.Model.pdb
+C:\Users\hankh\Desktop\Project_Reservation\Restaurant_Reservation_Client\Restaurant_Reservation_Client.Service\obj\Debug\net8.0\Restaurant_Reservation_Client.Service.csproj.AssemblyReference.cache
+C:\Users\hankh\Desktop\Project_Reservation\Restaurant_Reservation_Client\Restaurant_Reservation_Client.Service\obj\Debug\net8.0\Restaurant_Reservation_Client.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hankh\Desktop\Project_Reservation\Restaurant_Reservation_Client\Restaurant_Reservation_Client.Service\obj\Debug\net8.0\Restaurant_Reservation_Client.Service.AssemblyInfoInputs.cache
+C:\Users\hankh\Desktop\Project_Reservation\Restaurant_Reservation_Client\Restaurant_Reservation_Client.Service\obj\Debug\net8.0\Restaurant_Reservation_Client.Service.AssemblyInfo.cs
+C:\Users\hankh\Desktop\Project_Reservation\Restaurant_Reservation_Client\Restaurant_Reservation_Client.Service\obj\Debug\net8.0\Restaurant_Reservation_Client.Service.csproj.CoreCompileInputs.cache
+C:\Users\hankh\Desktop\Project_Reservation\Restaurant_Reservation_Client\Restaurant_Reservation_Client.Service\obj\Debug\net8.0\Restaurant_Reservation_Client.Service.sourcelink.json
+C:\Users\hankh\Desktop\Project_Reservation\Restaurant_Reservation_Client\Restaurant_Reservation_Client.Service\obj\Debug\net8.0\Restaura.B8C4D3AC.Up2Date
+C:\Users\hankh\Desktop\Project_Reservation\Restaurant_Reservation_Client\Restaurant_Reservation_Client.Service\obj\Debug\net8.0\Restaurant_Reservation_Client.Service.dll
+C:\Users\hankh\Desktop\Project_Reservation\Restaurant_Reservation_Client\Restaurant_Reservation_Client.Service\obj\Debug\net8.0\refint\Restaurant_Reservation_Client.Service.dll
+C:\Users\hankh\Desktop\Project_Reservation\Restaurant_Reservation_Client\Restaurant_Reservation_Client.Service\obj\Debug\net8.0\Restaurant_Reservation_Client.Service.pdb
+C:\Users\hankh\Desktop\Project_Reservation\Restaurant_Reservation_Client\Restaurant_Reservation_Client.Service\obj\Debug\net8.0\ref\Restaurant_Reservation_Client.Service.dll

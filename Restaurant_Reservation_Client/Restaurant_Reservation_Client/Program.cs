@@ -1,5 +1,5 @@
-using Restaurant_Reservation_Client.Modules.IServices;
-using Restaurant_Reservation_Client.Modules.Services;
+using Restaurant_Reservation_Client.Service.Services.IServices;
+using Restaurant_Reservation_Client.Service.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +12,7 @@ builder.Services.AddSession(options =>
 });
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-// 註冊分層服務
+// 依賴注入
 builder.Services.AddScoped<IReservationApiConsuming, ReservationApiConsuming>();
 builder.Services.AddScoped<IArrivalTimeApiConsuming, ArrivalTimeApiConsuming>();
 builder.Services.AddScoped<IShowPeriods, ShowPeriods>();

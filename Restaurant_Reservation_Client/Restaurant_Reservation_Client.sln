@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurant_Reservation_Client", "Restaurant_Reservation_Client\Restaurant_Reservation_Client.csproj", "{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restaurant_Reservation_Client", "Restaurant_Reservation_Client\Restaurant_Reservation_Client.csproj", "{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurant_Reservation_Client.Model", "Restaurant_Reservation_Client.Model\Restaurant_Reservation_Client.Model.csproj", "{3FCC7CA4-64DB-4C55-AC7D-76433B3F114E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaurant_Reservation_Client.Service", "Restaurant_Reservation_Client.Service\Restaurant_Reservation_Client.Service.csproj", "{A3A00314-C6DE-453F-825D-BDA70EFA2087}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E528CF3-2D67-49CC-A08B-7EF5262F9BB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FCC7CA4-64DB-4C55-AC7D-76433B3F114E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FCC7CA4-64DB-4C55-AC7D-76433B3F114E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FCC7CA4-64DB-4C55-AC7D-76433B3F114E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FCC7CA4-64DB-4C55-AC7D-76433B3F114E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3A00314-C6DE-453F-825D-BDA70EFA2087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3A00314-C6DE-453F-825D-BDA70EFA2087}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3A00314-C6DE-453F-825D-BDA70EFA2087}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3A00314-C6DE-453F-825D-BDA70EFA2087}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

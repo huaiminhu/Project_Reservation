@@ -227,3 +227,7 @@ C:\Users\hankh\Desktop\Project_Reservation\Restaurant_Reservation_Client\Restaur
 C:\Users\hankh\Desktop\Project_Reservation\Restaurant_Reservation_Client\Restaurant_Reservation_Client\obj\Debug\net8.0\Restaurant_Reservation_Client.pdb
 C:\Users\hankh\Desktop\Project_Reservation\Restaurant_Reservation_Client\Restaurant_Reservation_Client\obj\Debug\net8.0\Restaurant_Reservation_Client.genruntimeconfig.cache
 C:\Users\hankh\Desktop\Project_Reservation\Restaurant_Reservation_Client\Restaurant_Reservation_Client\obj\Debug\net8.0\ref\Restaurant_Reservation_Client.dll
+C:\Users\hankh\Desktop\Project_Reservation\Restaurant_Reservation_Client\Restaurant_Reservation_Client\bin\Debug\net8.0\Restaurant_Reservation_Client.Model.dll
+C:\Users\hankh\Desktop\Project_Reservation\Restaurant_Reservation_Client\Restaurant_Reservation_Client\bin\Debug\net8.0\Restaurant_Reservation_Client.Service.dll
+C:\Users\hankh\Desktop\Project_Reservation\Restaurant_Reservation_Client\Restaurant_Reservation_Client\bin\Debug\net8.0\Restaurant_Reservation_Client.Model.pdb
+C:\Users\hankh\Desktop\Project_Reservation\Restaurant_Reservation_Client\Restaurant_Reservation_Client\bin\Debug\net8.0\Restaurant_Reservation_Client.Service.pdb

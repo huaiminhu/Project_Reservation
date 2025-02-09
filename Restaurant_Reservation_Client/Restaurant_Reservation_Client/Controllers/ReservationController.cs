@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Restaurant_Reservation_Client.Models;
-using Restaurant_Reservation_Client.Modules.IServices;
+using Restaurant_Reservation_Client.Model.ViewModels;
+using Restaurant_Reservation_Client.Service.Services.IServices;
 using System.Text;
 
 namespace Restaurant_Reservation_Client.Controllers
 {
     public class ReservationController : Controller
     {
-        // 使用分層服務
+        // 依賴注入
         // 串接訂位資訊API
         private readonly IReservationApiConsuming reservationApiConsuming;
         // 串接訂位時段API
@@ -84,7 +84,7 @@ namespace Restaurant_Reservation_Client.Controllers
                 ViewBag.ChildSeatError = "兒童座椅數必須少於總訂位數!";
             else if (remainSeatCheck < 0)
                 ViewBag.RemainSeatError = "剩餘座位數不夠!換個時段吧~";
-            else if (repeatCheck !=null)
+            else if (repeatCheck != null)
                 ViewBag.RepeatError = "當日最多訂位一次!";
             else if (ModelState.IsValid)
             {

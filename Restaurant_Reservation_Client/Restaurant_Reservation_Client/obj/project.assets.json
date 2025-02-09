@@ -1991,6 +1991,30 @@
             "rid": "win"
           }
         }
+      },
+      "Restaurant_Reservation_Client.Model/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/Restaurant_Reservation_Client.Model.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Restaurant_Reservation_Client.Model.dll": {}
+        }
+      },
+      "Restaurant_Reservation_Client.Service/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3",
+          "Restaurant_Reservation_Client.Model": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Restaurant_Reservation_Client.Service.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Restaurant_Reservation_Client.Service.dll": {}
+        }
       }
     }
   },
@@ -5558,12 +5582,24 @@
         "system.windows.extensions.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "Restaurant_Reservation_Client.Model/1.0.0": {
+      "type": "project",
+      "path": "../Restaurant_Reservation_Client.Model/Restaurant_Reservation_Client.Model.csproj",
+      "msbuildProject": "../Restaurant_Reservation_Client.Model/Restaurant_Reservation_Client.Model.csproj"
+    },
+    "Restaurant_Reservation_Client.Service/1.0.0": {
+      "type": "project",
+      "path": "../Restaurant_Reservation_Client.Service/Restaurant_Reservation_Client.Service.csproj",
+      "msbuildProject": "../Restaurant_Reservation_Client.Service/Restaurant_Reservation_Client.Service.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 8.0.7",
-      "Newtonsoft.Json >= 13.0.3"
+      "Newtonsoft.Json >= 13.0.3",
+      "Restaurant_Reservation_Client.Model >= 1.0.0",
+      "Restaurant_Reservation_Client.Service >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -5592,7 +5628,14 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\Restaurant_Reservation_Client.Model\\Restaurant_Reservation_Client.Model.csproj": {
+              "projectPath": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\Restaurant_Reservation_Client.Model\\Restaurant_Reservation_Client.Model.csproj"
+            },
+            "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\Restaurant_Reservation_Client.Service\\Restaurant_Reservation_Client.Service.csproj": {
+              "projectPath": "C:\\Users\\hankh\\Desktop\\Project_Reservation\\Restaurant_Reservation_Client\\Restaurant_Reservation_Client.Service\\Restaurant_Reservation_Client.Service.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

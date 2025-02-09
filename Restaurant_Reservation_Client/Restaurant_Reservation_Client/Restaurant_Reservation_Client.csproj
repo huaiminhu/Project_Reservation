@@ -11,4 +11,9 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Restaurant_Reservation_Client.Model\Restaurant_Reservation_Client.Model.csproj" />
+    <ProjectReference Include="..\Restaurant_Reservation_Client.Service\Restaurant_Reservation_Client.Service.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -9,7 +9,9 @@
       "Restaurant_Reservation_Client/1.0.0": {
         "dependencies": {
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "8.0.7",
-          "Newtonsoft.Json": "13.0.3"
+          "Newtonsoft.Json": "13.0.3",
+          "Restaurant_Reservation_Client.Model": "1.0.0",
+          "Restaurant_Reservation_Client.Service": "1.0.0"
         },
         "runtime": {
           "Restaurant_Reservation_Client.dll": {}
@@ -1490,6 +1492,20 @@
             "fileVersion": "7.0.22.51805"
           }
         }
+      },
+      "Restaurant_Reservation_Client.Model/1.0.0": {
+        "runtime": {
+          "Restaurant_Reservation_Client.Model.dll": {}
+        }
+      },
+      "Restaurant_Reservation_Client.Service/1.0.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3",
+          "Restaurant_Reservation_Client.Model": "1.0.0"
+        },
+        "runtime": {
+          "Restaurant_Reservation_Client.Service.dll": {}
+        }
       }
     }
   },
@@ -2310,6 +2326,16 @@
       "sha512": "sha512-bR4qdCmssMMbo9Fatci49An5B1UaVJZHKNq70PRgzoLYIlitb8Tj7ns/Xt5Pz1CkERiTjcVBDU2y1AVrPBYkaw==",
       "path": "system.windows.extensions/7.0.0",
       "hashPath": "system.windows.extensions.7.0.0.nupkg.sha512"
+    },
+    "Restaurant_Reservation_Client.Model/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Restaurant_Reservation_Client.Service/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }
