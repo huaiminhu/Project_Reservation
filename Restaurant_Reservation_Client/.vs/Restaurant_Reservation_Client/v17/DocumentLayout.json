@@ -59,8 +59,7 @@
               "RelativeToolTip": "Restaurant_Reservation_Client\\Views\\Reservation\\Search.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-09T07:11:56.837Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-09T07:11:56.837Z"
             },
             {
               "$type": "Document",
@@ -72,8 +71,7 @@
               "RelativeToolTip": "Restaurant_Reservation_Client\\Views\\Reservation\\MakeRes.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-09T07:11:50.89Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-09T07:11:50.89Z"
             },
             {
               "$type": "Document",
@@ -85,8 +83,7 @@
               "RelativeToolTip": "Restaurant_Reservation_Client\\Views\\Reservation\\Index.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAABBAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-09T07:11:41.619Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-09T07:11:41.619Z"
             },
             {
               "$type": "Document",
@@ -98,8 +95,7 @@
               "RelativeToolTip": "Restaurant_Reservation_Client\\Views\\Reservation\\Edit.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-09T07:11:23.92Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-09T07:11:23.92Z"
             }
           ]
         }

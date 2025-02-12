@@ -8,8 +8,8 @@ namespace Restaurant_Reservation_API_Server.Infrastructure.Repositories
     public class ReservationRepository : IReservationRepository
     {
 
+        // 連接資料庫
         private readonly ReservationDbContext _ctx;
-
         public ReservationRepository(ReservationDbContext ctx)
         {
             _ctx = ctx;
