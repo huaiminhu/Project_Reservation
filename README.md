@@ -1,5 +1,12 @@
-# 家庭餐廳訂位
+# 家庭餐廳訂位  
+  
+## 專案簡介  
+此專案模擬家庭餐廳訂位流程, 使用者可訂位, 修改/取消訂位;  
+在技術層面, 前端的View使用Bootstrap製作網站外觀,  
+前端(MVC Client)使用HttpClient串接後端(Server)  
+以及在MVC的View使用AJAX呼叫API 
 
+  
 ## 使用技術
 **Client端: ASP.NET Core MVC、Bootstrap、jQuery、AJAX**  
 
